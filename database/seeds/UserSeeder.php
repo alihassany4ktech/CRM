@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'password' => Hash::make('12345678'),
                 // employee 
-                // 'employee_id' => '',
+                'employee_id' => 'NaN',
                 'designation_id' => '1',
                 'department_id' => '1',
                 'slack_username' => '',
@@ -46,6 +46,7 @@ class UserSeeder extends Seeder
                 'gender' => '',
                 'hourly_rate' => '',
                 'skills' => '',
+                'status' => 'Active'
             ],
             [
 
@@ -70,7 +71,7 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'password' => Hash::make('12345678'),
                 // employee 
-                // 'employee_id' => '',
+                'employee_id' => 'NaN1',
                 'designation_id' => '1',
                 'department_id' => '1',
                 'slack_username' => '',
@@ -79,10 +80,11 @@ class UserSeeder extends Seeder
                 'gender' => '',
                 'hourly_rate' => '',
                 'skills' => '',
+                'status' => 'Active'
             ],
             // employee
             [
-                // 'employee_id' => 'emp-1',
+                'employee_id' => 'emp-1',
                 'name' => 'Micheal Doe',
                 'email' => 'micheal@gmail.com',
                 'password' => Hash::make('12345678'),
@@ -109,7 +111,8 @@ class UserSeeder extends Seeder
                 'linkedin_url' => '',
                 'twitter_url' => '',
                 'facebook_url' => '',
-                'note' => ''
+                'note' => '',
+                'status' => 'Active'
 
             ]
         ]);

@@ -119,14 +119,14 @@
                 <h4 class="card-title">ADD EMPLOYEE INFO</h4>
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('admin.employee.save')}}">
+                        <form method="POST" action="{{route('admin.employee.save')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row mt-2">
                                 <div class="col-md-3 mb-3">
                                     <label for="validationDefault03">Employee ID <small
                                             class="text-danger">*</small> <i class="fa fa-info-circle" style="font-size: 12px" aria-hidden="true" data-toggle="tooltip" title="Employee ID id the unique ID distributed to emplyees"></i></label>
                                     <input type="number" min="1" name="employee_id" class="form-control" id="validationDefault03"
-                                        placeholder="2">
+                                        placeholder="1">
                                     @error('employee_id')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -302,9 +302,12 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
-                                    <label for="input-file-now">Profile Picture</label>
-                                    <input type="file" id="input-file-now" class="dropify"
-                                        data-default-file="{{asset('assets/plugins/dropify/src/images/test-image-1.jpg')}}" name="prifilePic" />
+                                    <label for="input-file-now-custom-3">Profile Picture</label>
+                                    <input type="file" name="image" id="input-file-now-custom-3" class="dropify" data-height="200"
+                                        data-default-file="{{asset('assets/plugins/dropify/src/images/test-image-1.jpg')}}"  />
+                                          @error('image')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="validationDefault01">Skills</label>

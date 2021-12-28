@@ -572,5 +572,6 @@
  @stack('lead-store-script')
  {{-- employe create page script --}}
  @stack('employee-create-page-script')
+ @stack('employee-edit-page-script')
 </body>
 </html>

@@ -101,6 +101,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/employees', 'Admin\EmployeeController@employees')->name('employees');
         Route::get('/create/employee', 'Admin\EmployeeController@createEmployee')->name('create.employee');
         Route::post('/save/employee', 'Admin\EmployeeController@saveEmployee')->name('employee.save');
+        Route::post('/update/employee', 'Admin\EmployeeController@updateEmployee')->name('employee.update');
         Route::get('/show/employee/{id}', 'Admin\EmployeeController@showEmployee')->name('employee.show');
         // Designation srore
         Route::post('/designation/srore', 'Admin\EmployeeController@designationStore')->name('employee.designation.store');

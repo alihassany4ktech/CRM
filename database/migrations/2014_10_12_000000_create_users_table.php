@@ -40,7 +40,7 @@ class CreateUsersTable extends Migration
             $table->string('facebook_url')->nullable();
             $table->text('note')->nullable();
             // employee feild
-            $table->string('employee_id')->nullable();
+            $table->string('employee_id')->unique();
             $table->integer('designation_id')->nullable();
             $table->integer('department_id')->nullable();
             $table->string('slack_username')->nullable();

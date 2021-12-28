@@ -31,8 +31,9 @@
                          @if (Auth::guard('admin')->user()->image == '0')
                             <img src="{{asset('assets/images/users/profile.png')}}" alt="user" /> 
                         @else
-                            <img src="{{asset(Auth::guard('admin')->user()->image)}}" alt="userp">
+                            <img src="{{asset(Auth::guard('admin')->user()->image)}}" width="50" height="50" alt="userp">
                         @endif
+                        
                         </div>
                     <!-- User profile text-->
                     <div class="profile-text"> <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{Auth::guard('admin')->user()->name}}</a>
