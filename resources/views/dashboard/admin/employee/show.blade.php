@@ -143,14 +143,20 @@
                     <ul class="nav nav-tabs profile-tab" role="tablist">
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile"
                                 role="tab">Profile</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#activity"
+                                role="tab">Activity</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#projects"
                                 role="tab">Projects</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#invoices"
-                                role="tab">Invoices</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Tasks</a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#leavs" role="tab">Leavs</a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#invoices" role="tab">Time
+                                Logs</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#payments"
-                                role="tab">Payments</a> </li>
-                        <li class="nav-item"> <a class="nav-link text-info" style="text-decoration: none"
-                                data-toggle="tab" href="#editProfile" role="tab">Edit Profile</a> </li>
+                                role="tab">Documents</a> </li>
+                        <li class="nav-item"> <a class="nav-link bg-light" data-toggle="tab" href="#editProfile"
+                                role="tab">Edit Profile</a> </li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -159,51 +165,59 @@
                         <div class="tab-pane active" id="profile" role="tabpanel">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-3 col-xs-6 b-r"> <strong>Total Projects</strong>
+                                    <div class="col-md-3 col-xs-6 b-r"> <strong>Tasks Done</strong>
                                         <br>
-                                        <p class="text-muted">0</p>
+                                        <br>
+                                        <i class="fa fa-check-square text-success" aria-hidden="true"></i>
+                                        <p class="text-muted float-right">0</p>
                                     </div>
-                                    <div class="col-md-3 col-xs-6 b-r"> <strong>Unpaid Invoices</strong>
+                                    <div class="col-md-3 col-xs-6 b-r "> <strong>Hours Logged</strong>
                                         <br>
-                                        <p class="text-muted">0</p>
+                                        <br>
+                                        <i class="fa fa-clock text-info"></i>
+                                        <p class="text-muted float-right">0 hrs</p>
                                     </div>
-                                    <div class="col-md-3 col-xs-6 b-r"> <strong>Earnings</strong>
+                                    <div class="col-md-3 col-xs-6 b-r"> <strong>Leaves Taken</strong>
                                         <br>
-                                        <p class="text-muted">0</p>
+                                        <br>
+                                        <i class="fa fa-arrow-left text-warning"></i>
+                                        <p class="text-muted float-right">0</p>
                                     </div>
-                                    <div class="col-md-3 col-xs-6"> <strong>Total Contracts</strong>
+                                    <div class="col-md-3 col-xs-6"> <strong>Remaining Leaves</strong>
                                         <br>
-                                        <p class="text-muted">0</p>
+                                        <br>
+                                        <i class="fa fa-arrow-left text-danger"></i>
+                                        <p class="text-muted float-right">0</p>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-3 col-xs-6 b-r"> <strong>Designation</strong>
                                         <br>
-                                        <p class="text-muted">{{$employee->designation->name}}</p>
+                                        <small class="text-muted">{{$employee->designation}}</small>
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r"> <strong>Department</strong>
                                         <br>
-                                        <p class="text-muted">{{$employee->department->name}}</p>
+                                        <small class="text-muted">{{$employee->department}}</small>
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r"> <strong>Joining Date</strong>
                                         <br>
-                                        <p class="text-muted">{{$employee->joining_date}}</p>
+                                        <small class="text-muted">{{$employee->joining_date}}</small>
                                     </div>
                                     <div class="col-md-3 col-xs-6"> <strong>Gender</strong>
                                         <br>
-                                        <p class="text-muted">{{$employee->gender}}</p>
+                                        <small class="text-muted">{{$employee->gender}}</small>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-3 col-xs-6 b-r"> <strong>Slack Username</strong>
                                         <br>
-                                        <p class="text-muted">{{$employee->gender}}</p>
+                                        <small class="text-muted">{{$employee->gender}}</small>
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r"> <strong>Hourly Rate</strong>
                                         <br>
-                                        <p class="text-muted">{{$employee->hourly_rate}}</p>
+                                        <small class="text-muted">{{$employee->hourly_rate}}</small>
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r"> <strong>Skills</strong>
                                         <br>
@@ -243,29 +257,80 @@
 
                             </div>
                         </div>
+                        {{-- Activity  --}}
+                        <div class="tab-pane" id="activity" role="tabpanel">
+                            <div class="card-body">
+                                <p>Activity</p>
+                            </div>
+                        </div>
                         {{-- projects  --}}
                         <div class="tab-pane" id="projects" role="tabpanel">
                             <div class="card-body">
                                 <p>projects</p>
                             </div>
                         </div>
+                        {{-- tasks  --}}
+                        <div class="tab-pane" id="tasks" role="tabpanel">
+                            <div class="card-body">
+                                <p>tasks</p>
+                            </div>
+                        </div>
+                        {{-- leavs  --}}
+                        <div class="tab-pane" id="leavs" role="tabpanel">
+                            <div class="card-body">
+                                <p>leavs</p>
+                            </div>
+                        </div>
                         {{-- invoices  --}}
                         <div class="tab-pane" id="invoices" role="tabpanel">
                             <div class="card-body">
-                                <p>invoices</p>
+                                <p>Time Logs</p>
                             </div>
                         </div>
                         {{-- payments  --}}
                         <div class="tab-pane" id="payments" role="tabpanel">
                             <div class="card-body">
-                                <p>payments</p>
+                                <a href="#" id="addLeadsource" data-toggle="modal" data-target="#responsive-modal5"
+                                    type="button" class="btn btn-sm btn-outline-success t-10 float-right"
+                                    style="margin-right: 10px"><i class="fa fa-plus"></i> Add </a>
+                                <div class="table-responsive m-t-40">
+
+                                    <table id="example23"
+                                        class="display nowrap table table-hover table-striped table-bordered"
+                                        cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th style="text-align:right;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($documents as $row)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$row->name}}</td>
+                                                <td style="text-align:right;">
+                                                    <button onclick="downloadDoc(this)" id="{{$row->id}}"  class="btn btn-sm btn-outline-primary"><i
+                                                            class="fa fa-download" data-toggle="tooltip" title="Download"></i></button>
+                                                    <a href="" type="button" class="btn btn-sm btn-outline-success"><i
+                                                            class="fa fa-search" data-toggle="tooltip" title="View"></i></a>
+                                                    <button onclick="deleteDoc(this)" id="{{$row->id}}" class="btn btn-sm btn-outline-danger"><i
+                                                            class="fa fa-times" data-toggle="tooltip" title="Delete"></i></button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         {{-- settings --}}
                         <div class="tab-pane" id="editProfile" role="tabpanel">
                             <div class="card-body">
                                 <h4 class="card-title">EDIT EMPLOYEE INFO</h4>
-                                <form method="POST" action="{{route('admin.employee.update')}}" enctype="multipart/form-data">
+                                <form method="POST" action="{{route('admin.employee.update')}}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$employee->id}}">
                                     <div class="form-row">
@@ -274,8 +339,9 @@
                                                     class="text-danger">*</small> <i class="fa fa-info-circle"
                                                     style="font-size: 12px" aria-hidden="true" data-toggle="tooltip"
                                                     title="Employee ID id the unique ID distributed to emplyees"></i></label>
-                                            <input type="number" min="1" name="employee_id"  class="form-control"
-                                                id="validationDefault03" placeholder="2" value="{{(int)trim($employee->employee_id,'emp-')}}">
+                                            <input type="number" min="1" name="employee_id" class="form-control"
+                                                id="validationDefault03" placeholder="2"
+                                                value="{{(int)trim($employee->employee_id,'emp-')}}">
                                             @error('employee_id')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
@@ -283,7 +349,8 @@
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefault04">Employee Name <small
                                                     class="text-danger">*</small></label>
-                                            <input type="text" name="name" value="{{$employee->name}}" class="form-control" id="validationDefault04"
+                                            <input type="text" name="name" value="{{$employee->name}}"
+                                                class="form-control" id="validationDefault04"
                                                 placeholder="employee name">
                                             @error('name')
                                             <small class="text-danger">{{ $message }}</small>
@@ -292,8 +359,9 @@
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefault04">Employee Email <small
                                                     class="text-danger">*</small></label>
-                                            <input type="email" name="email" value="{{$employee->email}}" class="form-control"
-                                                id="validationDefault04" placeholder="employee email">
+                                            <input type="email" name="email" value="{{$employee->email}}"
+                                                class="form-control" id="validationDefault04"
+                                                placeholder="employee email">
                                             <small>Employee will login using this email.</small><br>
                                             @error('email')
                                             <small class="text-danger">{{ $message }}</small>
@@ -330,7 +398,9 @@
                                             </label>
                                             <select class="select2 form-control" style="width: 100%" name="designation">
                                                 @foreach ($designations as $row)
-                                                <option value="{{$row->id}}" {{ $row->name == $employee->designation->name ? 'selected' : '' }} >{{$row->name}}</option>
+                                                <option value="{{$row->id}}"
+                                                    {{ $row->name == $employee->designation ? 'selected' : '' }}>
+                                                    {{$row->name}}</option>
                                                 @endforeach
                                             </select>
                                             @error('designation')
@@ -345,9 +415,11 @@
                                                     Manage Department</a> <small class="text-danger">*</small>
                                             </label>
                                             <select class="select2 form-control" style="width: 100%" name="department">
-        
+
                                                 @foreach ($departments as $row)
-                                                <option value="{{$row->id}}" {{ $row->name == $employee->department->name ? 'selected' : '' }}>{{$row->name}}</option>
+                                                <option value="{{$row->id}}"
+                                                    {{ $row->name == $employee->department ? 'selected' : '' }}>
+                                                    {{$row->name}}</option>
                                                 @endforeach
                                             </select>
                                             @error('department')
@@ -365,7 +437,8 @@
                                                     <span class="input-group-text"
                                                         id="validationTooltipUsernamePrepend">@</span>
                                                 </div>
-                                                <input type="text" value="{{$employee->slack_username}}" class="form-control" id="validationTooltipUsername"
+                                                <input type="text" value="{{$employee->slack_username}}"
+                                                    class="form-control" id="validationTooltipUsername"
                                                     name="slack_username" placeholder="example@example.com">
                                             </div>
                                             @error('slack_username')
@@ -374,16 +447,16 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefault04">Joining Date</label>
-                                            <input type="date"  value="{{$employee->joining_date}}" name="joining_date" class="form-control"
-                                                id="validationDefault04">
+                                            <input type="date" value="{{$employee->joining_date}}" name="joining_date"
+                                                class="form-control" id="validationDefault04">
                                             @error('joining_date')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefault05">Exit Date</label>
-                                            <input type="date" value="{{$employee->exit_date}}" name="exit_date" class="form-control"
-                                                id="validationDefault05">
+                                            <input type="date" value="{{$employee->exit_date}}" name="exit_date"
+                                                class="form-control" id="validationDefault05">
                                             @error('exit_date')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
@@ -394,13 +467,13 @@
                                                 @if ($employee->gender == 'Male')
                                                 <option value="Male" selected>Male</option>
                                                 @elseif($employee->gender == 'Female')
-                                                 <option value="Female" selected>Female</option>
-                                                    @else 
-                                                      <option value="Others" selected>Others</option>
+                                                <option value="Female" selected>Female</option>
+                                                @else
+                                                <option value="Others" selected>Others</option>
                                                 @endif
-                                                
-                                               
-                                              
+
+
+
                                             </select>
                                             @error('gender')
                                             <small class="text-danger">{{ $message }}</small>
@@ -421,7 +494,7 @@
                                     <?php
                                           $roles  = Spatie\Permission\Models\Role::all(); 
                                           $permissions = Spatie\Permission\Models\Permission::all();
-                                     ?> 
+                                     ?>
                                     <div class="form-row">
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefault01">Log In</label>
@@ -461,72 +534,71 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefault03">Mobile</label>
-                                            <input type="text" name="cell" value="{{$employee->phone}}" class="form-control" id="validationDefault03"
-                                                placeholder="+">
+                                            <input type="text" name="cell" value="{{$employee->phone}}"
+                                                class="form-control" id="validationDefault03" placeholder="+">
                                             @error('cell')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefault04">Hourly Rate (USD)</label>
-                                            <input type="text" name="hourly_rate"  value="{{$employee->hourly_rate}}" class="form-control"
-                                                id="validationDefault04">
+                                            <input type="text" name="hourly_rate" value="{{$employee->hourly_rate}}"
+                                                class="form-control" id="validationDefault04">
                                             @error('hourly_rate')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
-                                        </div><br>
-                                        <div class="form-row">
-                                            <div class="col-md-4 mb-3">
-                                                <label for="input-file-now">Profile Picture</label>
-                                                <input type="file" id="input-file-now" class="dropify"
-                                                    data-default-file="{{asset($employee->image)}}"
-                                                    name="image" />
+                                    </div><br>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input-file-now">Profile Picture</label>
+                                            <input type="file" id="input-file-now" class="dropify"
+                                                data-default-file="{{asset($employee->image)}}" name="image" />
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="validationDefault01">Skills</label>
+                                            <div class="tags-default">
+                                                <input type="text" class="form-control" value='{{$employee->skills}}'
+                                                    name="skills" data-role="tagsinput" placeholder="skills" />
+
                                             </div>
-                                            <div class="col-md-3 mb-3">
-                                                <label for="validationDefault01">Skills</label>
-                                                <div class="tags-default">
-                                                    <input type="text" class="form-control" value='{{$employee->skills}}' name="skills"
-                                                        data-role="tagsinput" placeholder="skills" />
-
-                                                </div>
-                                                @error('skills')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-md-4 mb-3">
-                                                <label for="validationDefault04">Email Notifications</label><br>
-                                                @if ($employee->notification_status == 'yes')
-                                                <input name="notification_status" value="Enable" type="radio"
-                                                    id="radio_30" class="with-gap radio-col-green" checked />
-                                                <label for="radio_30">Yes</label>
-                                                <input name="notification_status" value="Disable" type="radio"
-                                                    id="radio_31" class="with-gap radio-col-red" />
-
-                                                <label for="radio_31">No</label>
-                                                @error('notification_status')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                                @else
-                                                <input name="notification_status" value="yes" type="radio" id="radio_30"
-                                                    class="with-gap radio-col-green" />
-                                                <label for="radio_30">Yes</label>
-
-                                                <input name="notification_status" value="no" type="radio" id="radio_31"
-                                                    class="with-gap radio-col-red" checked />
-
-                                                <label for="radio_31">No</label>
-                                                @error('notification_status')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                                @endif
-                                            </div>
-
-
+                                            @error('skills')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
-                                    
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationDefault04">Email Notifications</label><br>
+                                            @if ($employee->notification_status == 'yes')
+                                            <input name="notification_status" value="Enable" type="radio" id="radio_30"
+                                                class="with-gap radio-col-green" checked />
+                                            <label for="radio_30">Yes</label>
+                                            <input name="notification_status" value="Disable" type="radio" id="radio_31"
+                                                class="with-gap radio-col-red" />
+
+                                            <label for="radio_31">No</label>
+                                            @error('notification_status')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            @else
+                                            <input name="notification_status" value="yes" type="radio" id="radio_30"
+                                                class="with-gap radio-col-green" />
+                                            <label for="radio_30">Yes</label>
+
+                                            <input name="notification_status" value="no" type="radio" id="radio_31"
+                                                class="with-gap radio-col-red" checked />
+
+                                            <label for="radio_31">No</label>
+                                            @error('notification_status')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            @endif
+                                        </div>
+
+
+                                    </div>
+
+
 
 
                                     <button class="btn btn-success" type="submit">Update Profile</button>
@@ -608,6 +680,57 @@
     </div>
 </div>
 <!-- /.modal -->
+<!-- Document modal -->
+<div id="responsive-modal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3"
+    aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h4 class="modal-title text-white" id="exampleModalLabel1"><i class="fa fa-plus"> Employee Documents</i>
+                </h4>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form id="documentForm" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <table class="table table-bordered table-striped" id="user_table_b"
+                            style="font-size: 13px;  text-align: center;">
+
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="align-middle" width="45%">Name</th>
+                                    <th class="align-middle" width="45%">File</th>
+                                    <th class="align-middle" style="text-align: end">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-row">
+                        <div class="bg-info p-2 rounded" style="width: 100%">
+                            <small class="text-white"><i class="fa fa-info-circle"></i> Allowed file formats: jpg, png,
+                                gif, doc, docx, xls, xlsx, pdf, txt.</small>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                    Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
 @endsection
 
 @push('employee-edit-page-script')
@@ -629,42 +752,165 @@
 
 </script>
 
+
+{{-- download doc --}}
+
+<script>
+    function downloadDoc(elem){
+         
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var docId = $(elem).attr("id");
+            $.ajax({
+                url: "{{ route('admin.employee.document.download') }}",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    docId: docId,
+                },
+                success: function (data) {
+                    toastr.error(data.success);
+                }
+            });
+      
+    }
+</script>
+
+{{-- delete doc --}}
+<script>
+    function deleteDoc(elem){
+         
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var docId = $(elem).attr("id");
+            $.ajax({
+                url: "{{ route('admin.employee.document.delete') }}",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    docId: docId,
+                },
+                success: function (data) {
+                    toastr.error(data.success);
+                }
+            });
+      
+    }
+</script>
 {{-- Save Designation --}}
 <script>
-    $(document).ready(function(){
-       $('#designationForm').on('submit', function(event){
+    $(document).ready(function () {
+        $('#designationForm').on('submit', function (event) {
             event.preventDefault();
             $.ajax({
-                url:'{{route("admin.employee.designation.store")}}',
-                method:'post',
-                data:$(this).serialize(),
-                dataType:'json',
-                 success: function (data) {
-                  if (data.success) {
+                url: '{{route("admin.employee.designation.store")}}',
+                method: 'post',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
                         toastr.success(data.success);
                     }
                 }
             });
-     });
+        });
     });
+
 </script>
 {{-- Save Department --}}
 <script>
-    $(document).ready(function(){
-       $('#departmentForm').on('submit', function(event){
+    $(document).ready(function () {
+        $('#departmentForm').on('submit', function (event) {
             event.preventDefault();
             $.ajax({
-                url:'{{route("admin.employee.department.store")}}',
-                method:'post',
-                data:$(this).serialize(),
-                dataType:'json',
-                 success: function (data) {
-                  if (data.success) {
+                url: '{{route("admin.employee.department.store")}}',
+                method: 'post',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
                         toastr.success(data.success);
                     }
                 }
             });
-     });
+        });
     });
+
 </script>
+{{-- save documen  --}}
+<script>
+    $(document).ready(function () {
+        $('#documentForm').on('submit', function (event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+
+                url: '{{route("admin.employee.document.store")}}',
+                method: 'post',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true
+                    }
+                    if (data.success) {
+                        toastr.success(data.success);
+                    } else {
+                        toastr.error(data.error[0]);
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        var count = 1;
+
+
+        dynamic_field2(count);
+
+        function dynamic_field2(number) {
+            html = '<tr>';
+            html += '<td><input type="hidden" name="id" value={{$employee->id}} /></td>';
+            html += '<td><input type="text" name="name[]" class="form-control"  placeholder="Required"/></td>';
+            html +=
+                '<td><input type="file" name="document[]" class="form-control"  placeholder="Required" /></td>';
+
+            if (number > 1) {
+                html +=
+                    '<td  style="text-align: end"><button type="button" name="remove" id="" class="btn btn-outline-danger remove2"><i class="fa fa-times"></button></td></tr>';
+                $('#user_table_b tbody').append(html);
+            } else {
+                html +=
+                    '<td  style="text-align: end"><button type="button" name="add" id="add2" class="btn btn-outline-success"><i class="fa fa-plus"></i></button></button></td></tr>';
+                $('#user_table_b tbody').html(html);
+            }
+        }
+
+        $(document).on('click', '#add2', function () {
+            count++;
+            dynamic_field2(count);
+        });
+
+        $(document).on('click', '.remove2', function () {
+            count--;
+            $(this).closest("tr").remove();
+        });
+    });
+
+</script>
+
+
 @endpush

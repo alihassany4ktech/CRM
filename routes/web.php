@@ -103,10 +103,29 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/save/employee', 'Admin\EmployeeController@saveEmployee')->name('employee.save');
         Route::post('/update/employee', 'Admin\EmployeeController@updateEmployee')->name('employee.update');
         Route::get('/show/employee/{id}', 'Admin\EmployeeController@showEmployee')->name('employee.show');
-        // Designation srore
-        Route::post('/designation/srore', 'Admin\EmployeeController@designationStore')->name('employee.designation.store');
+        // Designation store
+        Route::post('/designation/store', 'Admin\EmployeeController@designationStore')->name('employee.designation.store');
         // Department Store
-        Route::post('/department/srore', 'Admin\EmployeeController@departmentStore')->name('employee.department.store');
+        Route::post('/department/store', 'Admin\EmployeeController@departmentStore')->name('employee.department.store');
+        // export employyees in excel file
+        Route::get('/export-excel/empoyee', 'Admin\EmployeeController@exportInToExcel')->name('export.employee.excel');
+        // export employyees in csv file
+        Route::get('/export-csv/empoyee', 'Admin\EmployeeController@exportInToCSV')->name('export.employee.csv');
+        // document store
+        Route::post('/document/store', 'Admin\EmployeeController@documentStore')->name('employee.document.store');
+        // delete document 
+        Route::post('/document/delete', 'Admin\EmployeeController@deleteDocument')->name('employee.document.delete');
+        // download document 
+        Route::post('/download/delete', 'Admin\EmployeeController@downloadDocument')->name('employee.document.download');
+        // ========================================= Department Routes ============================================ \\
+        Route::get('/edit/department/{id}', 'Admin\DepartmenetController@edit')->name('department.edit');
+        Route::get('/departments', 'Admin\DepartmenetController@departments')->name('departments');
+        Route::get('/delete/department/{id}', 'Admin\DepartmenetController@delete')->name('department.delete');
+        Route::post('/department/update', 'Admin\DepartmenetController@update')->name('department.update');
+        // ========================================= Designation Routes ============================================ \\
+        Route::get('/edit/designation/{id}', 'Admin\DesignationController@edit')->name('designation.edit');
+        Route::get('/designations', 'Admin\DesignationController@designations')->name('designations');
+        Route::get('/delete/designation/{id}', 'Admin\DesignationController@delete')->name('designation.delete');
     });
 });
 

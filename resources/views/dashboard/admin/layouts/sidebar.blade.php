@@ -72,11 +72,11 @@
                                 <li><a href="{{route('admin.permissions')}}" class="{{ $link == route('admin.permissions') || $link == route('admin.create.permission') ? 'active':'' }}">Permissions</a></li>
                             </ul>
                         </li>
-                        <li class="{{$link == route('admin.employees')||$link == route('admin.create.employee')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">HR</span></a>
+                        <li class="{{$link == route('admin.employees')||route('admin.designations')|| $link == route('admin.departments')  ||$link == route('admin.create.employee')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">HR</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('admin.employees') }}" class="{{$link == route('admin.employees')  ||$link == route('admin.create.employee')? 'active':'' }}">Employee List</a></li>
-                                <li><a href="#">Department</a></li>
-                                <li><a href="#">Designation</a></li>
+                                <li><a href="{{route('admin.departments')}}" class="{{$link == route('admin.departments')? 'active':'' }}">Department</a></li>
+                                <li><a href="{{route('admin.designations')}}">Designation</a></li>
                                 <li><a href="#">Attendance</a></li>
                                 <li><a href="#">Holiday</a></li>
                                 <li><a href="#">Leaves</a></li>

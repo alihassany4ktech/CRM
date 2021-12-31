@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -52,5 +53,28 @@ class User extends Authenticatable
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    // get Excel 
+
+    public static function getEmployee()
+    {
+        $records = DB::table('users')->where('type', '=', 'Employee')->select(
+            'id',
+            'employee_id',
+            'name',
+            'email',
+            'designation',
+            'department',
+            'phone',
+            'slack_username',
+            'address',
+            'joining_date',
+            'exit_date',
+            'gender',
+            'hourly_rate',
+            'skills',
+        )->get()->toArray();
+        return $records;
     }
 }

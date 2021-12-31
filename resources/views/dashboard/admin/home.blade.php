@@ -41,6 +41,10 @@
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
+                <?php
+                    $clients = App\User::where('type','=','Customer')->get();
+                    $employees = App\User::where('type','=','Employee')->get();
+                 ?>
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -50,10 +54,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-info"><i class="ti-wallet"></i></div>
+                                    <div class="round round-lg align-self-center round-info"><i class="fa fa-users"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-light">$3249</h3>
-                                        <h5 class="text-muted m-b-0">Total Revenue</h5></div>
+                                        <h3 class="m-b-0 font-light">Total Clients</h3>
+                                        <h5 class="text-muted m-b-0">{{count($clients)}}</h3></div>
                                 </div>
                             </div>
                         </div>
@@ -64,10 +68,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
+                                    <div class="round round-lg align-self-center round-warning"><i class="fa fa-users"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">$2376</h3>
-                                        <h5 class="text-muted m-b-0">Online Revenue</h5></div>
+                                        <h3 class="m-b-0 font-lgiht">Total Employees</h3>
+                                        <h5 class="text-muted m-b-0">{{count($employees)}}</h5></div>
                                 </div>
                             </div>
                         </div>
@@ -78,10 +82,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-cart-outline"></i></div>
+                                    <div class="round round-lg align-self-center round-primary"><i class="fa fa-tasks" aria-hidden="true"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">$1795</h3>
-                                        <h5 class="text-muted m-b-0">Offline Revenue</h5></div>
+                                        <h3 class="m-b-0 font-lgiht">Total Projects</h3>
+                                        <h5 class="text-muted m-b-0">0</h5></div>
                                 </div>
                             </div>
                         </div>
@@ -92,10 +96,68 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
+                                    <div class="round round-lg align-self-center round-danger"><i class="fa fa-file"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">$687</h3>
-                                        <h5 class="text-muted m-b-0">Ad. Expense</h5></div>
+                                        <h3 class="m-b-0 font-lgiht">Unpaid Invoices</h3>
+                                        <h5 class="text-muted m-b-0">0</h5></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                 <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-row">
+                                    <div class="round round-lg align-self-center round-success"><i class="fa fa-clock"></i></div>
+                                    <div class="m-l-10 align-self-center">
+                                        <h3 class="m-b-0 font-light">Hours Logged</h3>
+                                        <h5 class="text-muted m-b-0">0 hrs</h3></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-row">
+                                    <div class="round round-lg align-self-center" style="background-color: #0ccef5"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
+                                    <div class="m-l-10 align-self-center">
+                                        <h3 class="m-b-0 font-lgiht">Pending Tasks</h3>
+                                        <h5 class="text-muted m-b-0">0</h5></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-row">
+                                    <div class="round round-lg align-self-center" style="background-color: #3aba49"><i class="fa fa-percent" aria-hidden="true"></i></div>
+                                    <div class="m-l-10 align-self-center">
+                                        <h3 class="m-b-0 font-lgiht">Today Attendance</h3>
+                                        <h5 class="text-muted m-b-0">0<small>% (0/1)</small> </h5></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-row">
+                                    <div class="round round-lg align-self-center" style="background-color: #f414f7"><i class="fa fa-ticket-alt"></i></div>
+                                    <div class="m-l-10 align-self-center">
+                                        <h3 class="m-b-0 font-lgiht">Unresolved Tickets</h3>
+                                        <h5 class="text-muted m-b-0">0</h5></div>
                                 </div>
                             </div>
                         </div>

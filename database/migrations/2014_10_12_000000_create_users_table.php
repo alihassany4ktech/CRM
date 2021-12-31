@@ -43,6 +43,8 @@ class CreateUsersTable extends Migration
             $table->string('employee_id')->unique();
             $table->integer('designation_id')->nullable();
             $table->integer('department_id')->nullable();
+            $table->string('designation')->nullable();
+            $table->string('department')->nullable();
             $table->string('slack_username')->nullable();
             $table->date('joining_date')->nullable();
             $table->date('exit_date')->nullable();

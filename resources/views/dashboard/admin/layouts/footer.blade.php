@@ -566,7 +566,44 @@
     });
 
 </script> 
-
+{{-- Save Department --}}
+<script>
+    $(document).ready(function(){
+       $('#departmentForm').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+                url:'{{route("admin.employee.department.store")}}',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                 success: function (data) {
+                  if (data.success) {
+                        toastr.success(data.success);
+                    }
+                }
+            });
+     });
+    });
+</script>
+{{-- Save Designation --}}
+<script>
+    $(document).ready(function(){
+       $('#designationForm').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+                url:'{{route("admin.employee.designation.store")}}',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                 success: function (data) {
+                  if (data.success) {
+                        toastr.success(data.success);
+                    }
+                }
+            });
+     });
+    });
+</script>
 @stack('lead-creat-page-script')
  {{-- lead store --}}
  @stack('lead-store-script')

@@ -38,8 +38,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('12345678'),
                 // employee 
                 'employee_id' => 'NaN',
-                'designation_id' => '1',
-                'department_id' => '1',
+                'designation_id' => null,
+                'department_id' => null,
                 'slack_username' => '',
                 'joining_date' => '12/10/20',
                 'exit_date' => '10/12/19',
@@ -72,8 +72,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('12345678'),
                 // employee 
                 'employee_id' => 'NaN1',
-                'designation_id' => '1',
-                'department_id' => '1',
+                'designation_id' => null,
+                'department_id' => null,
                 'slack_username' => '',
                 'joining_date' => '12/10/20',
                 'exit_date' => '10/12/19',

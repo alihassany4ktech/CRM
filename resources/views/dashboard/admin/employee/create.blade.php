@@ -401,7 +401,7 @@
                 <form id="departmentForm">
                     @csrf
                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">Name</label>
+                        <label for="recipient-name" class="control-label">Name <small class="text-danger">*</small></label>
                         <input type="text" name="name" class="form-control">
                     </div>
 
@@ -438,42 +438,6 @@
 
 </script>
 
-{{-- Save Designation --}}
-<script>
-    $(document).ready(function(){
-       $('#designationForm').on('submit', function(event){
-            event.preventDefault();
-            $.ajax({
-                url:'{{route("admin.employee.designation.store")}}',
-                method:'post',
-                data:$(this).serialize(),
-                dataType:'json',
-                 success: function (data) {
-                  if (data.success) {
-                        toastr.success(data.success);
-                    }
-                }
-            });
-     });
-    });
-</script>
-{{-- Save Department --}}
-<script>
-    $(document).ready(function(){
-       $('#departmentForm').on('submit', function(event){
-            event.preventDefault();
-            $.ajax({
-                url:'{{route("admin.employee.department.store")}}',
-                method:'post',
-                data:$(this).serialize(),
-                dataType:'json',
-                 success: function (data) {
-                  if (data.success) {
-                        toastr.success(data.success);
-                    }
-                }
-            });
-     });
-    });
-</script>
+
+
 @endpush

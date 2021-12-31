@@ -5,11 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use App\Department;
 use App\Designation;
+use App\EmployeeDocument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use App\Exports\EmployeeExport;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
@@ -57,6 +63,9 @@ class EmployeeController extends Controller
             );
             return redirect()->back()->with($notification);
         } else {
+            $departmentName = Department::find($request->department);
+            $designationName = Designation::find($request->designation);
+            // dd($designationName->name);
             $user = new User();
             $user->type = 'Employee';
             $user->status = 'Active';
@@ -65,8 +74,11 @@ class EmployeeController extends Controller
             $user->address = $request->address;
             $user->exit_date = $request->exit_date;
             $user->gender = $request->gender;
+            $user->designation = $designationName->name;
+            $user->department = $departmentName->name;
             $user->designation_id = $request->designation;
             $user->department_id = $request->department;
+
             $user->slack_username = $request->slack_username;
             $user->joining_date = $request->joining_date;
             $user->password = Hash::make($request->password);
@@ -113,7 +125,8 @@ class EmployeeController extends Controller
             'hourly_rate' => 'required',
             'cell' => 'required',
         ]);
-
+        $department = Department::find($request->department);
+        $designation = Designation::find($request->designation);
         $user = User::find($request->id);
         $user->type = 'Employee';
         $user->status = 'Active';
@@ -124,6 +137,8 @@ class EmployeeController extends Controller
         $user->gender = $request->gender;
         $user->designation_id = $request->designation;
         $user->department_id = $request->department;
+        $user->designation = $designation->name;
+        $user->department = $department->name;
         $user->slack_username = $request->slack_username;
         $user->joining_date = $request->joining_date;
         if ($request->password) {
@@ -170,7 +185,8 @@ class EmployeeController extends Controller
         $permissions = Permission::all();
         $departments = Department::all();
         $designations = Designation::all();
-        return view('dashboard.admin.employee.show', compact('employee', 'permissions', 'departments', 'designations'));
+        $documents = EmployeeDocument::where('user_id', '=', $id)->get();
+        return view('dashboard.admin.employee.show', compact('employee', 'permissions', 'departments', 'designations', 'documents'));
     }
 
     // Designation Store
@@ -194,6 +210,68 @@ class EmployeeController extends Controller
             $department->name = $request->name;
             $department->save();
             return response()->json(['success' => 'Department Add Successfully!']);
+        }
+    }
+
+    public function documentStore(Request $request)
+    {
+        if ($request->ajax()) {
+            $rules = array('document.*' => 'required|max:10000|mimes:jpg,png,gif,doc,docx,xls,xlsx,pdf,text');
+            $error = Validator::make($request->all(), $rules);
+            if ($error->fails()) {
+                return response()->json([
+                    'error'  => $error->errors()->all()
+                ]);
+            }
+            $nameList = $request->name;
+            for ($i = 0; $i < count($nameList); $i++) {
+                $document  = new EmployeeDocument();
+                $document->user_id = $request->id;
+                $document->name = $nameList[$i];
+                if ($request->hasFile('document')) {
+                    $doc = $request->file('document');
+                    $name = $doc[$i]->getClientOriginalName();
+                    $destinationPath = 'employee_doc/';
+                    $doc[$i]->move($destinationPath, $name);
+                    $document->filename = $name;
+                }
+                $document->save();
+            }
+            return response()->json(['success' => 'Documenet Add Successfully!']);
+        }
+    }
+
+    // download leads in excel file
+
+    public function exportInToExcel()
+    {
+        return Excel::download(new EmployeeExport, 'employeeList.xlsx');
+    }
+
+    public function exportInToCSV()
+    {
+        return Excel::download(new EmployeeExport, 'leadEmployee.csv');
+    }
+
+    public function deleteDocument(Request $request)
+    {
+        if ($request->ajax()) {
+            $file = EmployeeDocument::find($request->docId);
+            $file_name = $file->filename;
+            $file_path = public_path('employee_doc/' . $file_name);
+            unlink($file_path);
+            $file->delete();
+            return response()->json(['success' => 'Documenet Deleted Successfully!']);
+        }
+    }
+
+    public function downloadDocument(Request $request)
+    {
+        if ($request->ajax()) {
+            $file = EmployeeDocument::find($request->docId);
+            $file_name = $file->filename;
+            $file_path = public_path('employee_doc/' . $file_name);
+            return response()->download($file_path);
         }
     }
 }
