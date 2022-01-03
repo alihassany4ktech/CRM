@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        Schema::defaultStringLength(256);
         Schema::create('users', function (Blueprint $table) {
             // common feilds
             $table->id();
