@@ -37,17 +37,19 @@ class Lead extends Model
     public static function getLead()
     {
         $records = DB::table('leads')->select(
-            'id',
-            'client_name',
-            'client_email',
-            'cell',
-            'office',
-            'address',
-            'company_name',
-            'city',
-            'state',
-            'country',
-            'postal_code'
+            [
+                'id',
+                'client_name',
+                'client_email',
+                'cell',
+                'office',
+                'address',
+                'company_name',
+                'city',
+                'state',
+                'country',
+                'postal_code'
+            ]
         )->get()->toArray();
         return $records;
     }
