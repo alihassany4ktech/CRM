@@ -138,7 +138,7 @@ input[type=number] {
                             @csrf
                             <hr> <br>
                             <div class="form-row">
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3 mt-1">
                                     <label for="validationDefault03">Project Name <small class="text-danger">*</small></label>
                                     <input type="text" name="project_name" class="form-control" id="validationDefault03"
                                         placeholder="Name" required>
@@ -154,9 +154,9 @@ input[type=number] {
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="project_category" required>
                                     <option>Select Category</option>
-                                    {{-- @foreach ($sources as $row)
-                                        <option value="{{$row->id}}">{{$row->type}}</option>
-                                    @endforeach --}}
+                                    @foreach ($projectsCategories as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                    @endforeach
                                 </select>
                                     @error('source')
                                     <span class="text-danger">{{ $message }}</span>

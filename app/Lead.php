@@ -47,7 +47,7 @@ class Lead extends Model
             'city',
             'state',
             'country',
-            'postal_code',
+            'postal_code'
         )->get()->toArray();
         return $records;
     }

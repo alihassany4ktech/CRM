@@ -73,7 +73,7 @@ class User extends Authenticatable
             'exit_date',
             'gender',
             'hourly_rate',
-            'skills',
+            'skills'
         )->get()->toArray();
         return $records;
     }

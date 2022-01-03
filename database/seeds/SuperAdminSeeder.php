@@ -18,7 +18,7 @@ class SuperAdminSeeder extends Seeder
             'name'  => 'Super Admin',
             'email' => 'superadmin@gmail.com',
             'password' => Hash::make('password'),     //password
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(10)
         ]);
     }
 }
