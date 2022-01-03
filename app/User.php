@@ -60,20 +60,22 @@ class User extends Authenticatable
     public static function getEmployee()
     {
         $records = DB::table('users')->where('type', '=', 'Employee')->select(
-            'id',
-            'employee_id',
-            'name',
-            'email',
-            'designation',
-            'department',
-            'phone',
-            'slack_username',
-            'address',
-            'joining_date',
-            'exit_date',
-            'gender',
-            'hourly_rate',
-            'skills'
+            [
+                'id',
+                'employee_id',
+                'name',
+                'email',
+                'designation',
+                'department',
+                'phone',
+                'slack_username',
+                'address',
+                'joining_date',
+                'exit_date',
+                'gender',
+                'hourly_rate',
+                'skills'
+            ]
         )->get()->toArray();
         return $records;
     }
