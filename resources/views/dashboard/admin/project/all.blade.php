@@ -1,5 +1,11 @@
 @extends('dashboard.admin.layouts.includes')
 @section('content')
+<style>
+    .dropdown-menu {
+        min-width: 5.4rem !important;
+    }
+
+</style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
     <!-- Container fluid  -->
@@ -10,8 +16,8 @@
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#">HR</a></li>
-                    <li class="breadcrumb-item active">Designations</li>
+                    <li class="breadcrumb-item"><a href="#">Work</a></li>
+                    <li class="breadcrumb-item active">Projects</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -116,11 +122,64 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Designations</h4>
-                        <a href="" type="button" data-toggle="modal"
-                                            data-target="#responsive-modal2"
+                        <h4 class="card-title">Projects</h4>
+                        <div class="dropdown">
+                            <a href="#" type="button" class="btn btn-info t-10 float-right" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-arrow-down"></i> Export</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
+                                <a class="dropdown-item text-dark" href=""
+                                    style="font-size: 14px"><i class="fa fa-file-excel" style="font-size: 14px"></i>
+                                    Excel</a>
+                                <a class="dropdown-item  text-dark" href=""
+                                    style="font-size: 14px"><i class="fa fa-file-excel" style="font-size: 14px"></i>
+                                    CSV</a>
+
+                            </div>
+                        </div>
+                        <a href="{{route('admin.project.create')}}" type="button"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px"><i
-                                class="fa fa-plus"></i> Add New Designation</a>
+                                class="mdi mdi-plus"></i> New</a>
+                        <a href="" type="button"
+                            class="btn btn-outline-primary t-10 float-right" style="margin-right: 10px"><i
+                                class="mdi mdi-plus"></i> Project Templates</a>
+                                <a href="" type="button"
+                            class="btn btn-outline-warning t-10 float-right" style="margin-right: 10px"><i
+                                class="mdi mdi-delete"></i> View Archive</a>
+                           <a href="" type="button"
+                            class="btn btn-outline-info t-10 float-right" style="margin-right: 10px"><i class="mdi mdi-pin" style="font-size: 14px"></i> Pinned Project</a>
+
+                        <div class="row justify-content-center" style="margin-top: 6%">
+                            <div class="col-md-3 col-xs-6 b-r"> <span
+                                    class="btn btn-circle  btn-info text-white">0</span> <strong>Total Projects</strong>
+
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"><span
+                                    class="btn btn-circle  btn-warning text-white">0</span>
+                                <strong>Overdue Projects</strong>
+
+                            </div>
+                            <div class="col-md-3 col-xs-6"><span
+                                    class="btn btn-circle  btn-success text-white">0</span>
+                                <strong>Not Started Projects</strong>
+
+                            </div>
+                        </div>
+                            <div class="row justify-content-center" style="margin-top: 2%">
+                            <div class="col-md-3 col-xs-6 b-r"> <span
+                                    class="btn btn-circle text-white" style="background-color: #12c4f1">0</span> <strong>Completed Projects</strong>
+
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"><span
+                                    class="btn btn-circle text-white" style="background-color: #33cea8">0</span>
+                                <strong>In Progress Projects</strong>
+
+                            </div>
+                            <div class="col-md-3 col-xs-6"><span
+                                    class="btn btn-circle  btn-primary text-white">0</span>
+                                <strong>Canceled Projects</strong>
+
+                            </div>
+                        </div>
                         <div class="table-responsive m-t-40">
 
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
@@ -128,48 +187,85 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Designation</th>
-                                        <th>Employees</th>
-                                        <th  style="text-align: end">Action</th>
+                                        <th>Project Name</th>
+                                        <th>Members</th>
+                                        <th>Dedline</th>
+                                        <th>Client</th>
+                                        <th>Completions</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($designations as $key=>$value)
+                                    {{-- @foreach ($leads as $row) --}}
                                     <tr>
-                                        <td style="width:1%">{{$loop->iteration}}</td>
-                                        <td style="width:30%">{{$value->name}} <small
-                                                class="label" style="background-color: #edf9f7;color:#33cea8">{{ sizeof($value->members) }}
-                                                members</small>
-                                          </td>
+                                          <td>1</td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                        {{-- <td>{{$loop->iteration}}</td>
+                                        <td>{{$row->client_name}}</td>
+                                        <td>{{$row->client_email}}</td>
+                                        <td>{{$row->company_name}}</td>
+                                        <td>{{$row->value}}</td>
+                                        <td>{{$row->created_at->format('d-m-y')}}</td>
+                                        <td>{{$row->next_follow_up}}</td>
                                         <td>
-                                            @forelse($value->members as $item)
-                                            <img data-toggle="tooltip" data-original-title="{{ ucwords($item->name) }}"
-                                                src="{{asset($item->image) }}" alt="user" class="img-circle" width="30"
-                                                height="30">
-                                            @empty
-                                            No record found
-                                            @endforelse
+                                            <img src="{{asset($row->client->image)}}" class="img-circle elevation-2"
+                                                alt="admin Image" style="height: 35px;width:35px">
+                                            {{ucwords($row->client->name)}}
                                         </td>
-                                        <td class="" style="text-align: end">
+                                        <td style="width:10%">
+                                            <select id="{{$row->id}}" class="form-control bg-light changeStatus">
+                                                @foreach ($leadStstus as $item)
+                                                <option value="{{$item->id}}"
+                                                    {{$item->type == $row->lead_status->type ? 'selected':''}}>
+                                                    {{$item->type}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td class="">
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-cogs"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-dark" href="{{route('admin.designation.edit',['id'=>$value->id])}}" type="button"
-                                                        style="font-size: 14px;cursor: pointer"><i class="fa fa-cogs"
-                                                            style="font-size: 14px"></i> Manage</a>
-                                                    <a class="dropdown-item text-dark" type="button" id="delete"
-                                                        style="font-size: 14px; cursor: pointer;" href="{{route('admin.designation.delete' , ['id'=>$value->id])}}"><i
-                                                            class="fa fa-trash"  style="font-size: 14px"></i> Delete</a>
+                                                    <a class="dropdown-item text-dark"
+                                                        href="{{route('admin.lead.show' , ['id'=>$row->id])}}"
+                                                        type="button" style="font-size: 14px;cursor: pointer"><i
+                                                            class="fa fa-eye" style="font-size: 14px"></i> View</a>
+                                                    <a class="dropdown-item text-dark" type="button"
+                                                        style="font-size: 14px; cursor: pointer;"
+                                                        href="{{route('admin.lead.show' , ['id'=>$row->id])}}"><i
+                                                            class="fa fa-edit" style="font-size: 14px"></i> Edit</a>
+                                                    <a class="dropdown-item text-dark" type="button"
+                                                        href="{{route('admin.lead.delete' , ['id'=>$row->id])}}"
+                                                        id="delete" style="font-size: 14px;"><i class="fa fa-trash"
+                                                            style="font-size: 14px"></i> Delete</a>
+                                                    <a class="dropdown-item text-dark"
+                                                        href="{{route('admin.change.leadToCliet' , ['id'=>$row->id])}}"
+                                                        type="button" style="font-size: 14px"><i class="fa fa-user"
+                                                            style="font-size: 14px"></i> Change To
+                                                        Client</a>
+                                                    <button class="dropdown-item text-dark" onclick="getLeadId(this)"
+                                                        id="{{$row->id}}" data-toggle="modal"
+                                                        data-target="#responsive-modallead"
+                                                        style="font-size: 14px;  cursor: pointer;"><i
+                                                            class="fa fa-thumbs-up" style="font-size: 14px"></i> Add
+                                                        Follow Up</button>
+
+
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
-
-                                    @endforeach
+                                    </tr> --}}
+                                    {{-- @endforeach --}}
 
                                 </tbody>
                             </table>
@@ -187,32 +283,7 @@
     <!-- End footer -->
 </div>
 <!-- End Page wrapper  -->
-<div id="responsive-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3"
-    aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title text-white" id="exampleModalLabel1">Designations</h4>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
 
-            <div class="modal-body">
+<!-- leaD Category modal -->
 
-                <form id="designationForm">
-                    @csrf
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Name <small class="text-danger">*</small></label>
-                        <input type="text" name="name" class="form-control">
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
-                    Save</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection

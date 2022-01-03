@@ -118,7 +118,7 @@
                 <h4 class="card-title">UPDATE DESIGNATIONS</h4>
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="{{route('admin.designation.update')}}">
                             @csrf
                             <input type="hidden" name="id" value="{{$designation->id}}">
                             <div class="form-row mt-2">

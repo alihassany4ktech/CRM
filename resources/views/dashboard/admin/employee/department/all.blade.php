@@ -138,9 +138,9 @@
                                     @foreach ($departments as $key=>$value)
                                     <tr>
                                         <td style="width:1%">{{$loop->iteration}}</td>
-                                        <td style="width:30%">{{$value->name}} <label
+                                        <td style="width:30%">{{$value->name}} <small
                                                 class="label" style="background-color: #edf9f7;color:#33cea8">{{ sizeof($value->members) }}
-                                                members</label>
+                                                members</small>
                                           </td>
                                         <td>
                                             @forelse($value->members as $item)

@@ -28,7 +28,7 @@ class AdminController extends Controller
             'email' => 'required|email|exists:admins,email',
             'password' => 'required|min:5|max:30'
         ], [
-            'email.exists' => 'This email is not exists in admins table'
+            'email.exists' => 'This email is not exists'
         ]);
 
         $creds = $request->only('email', 'password');
@@ -113,7 +113,6 @@ class AdminController extends Controller
 
     public function saveClient(Request $request)
     {
-
         $request->validate([
             'company' => 'required',
             'address' => 'required',
@@ -141,17 +140,12 @@ class AdminController extends Controller
                 'zip' => $request->zip,
                 'name' => $request->client_name,
                 'email' => $request->email,
-                'website_url' => $request->website_url,
-                'skyp_url' => $request->skyp_url,
-                'linkedin_url' => $request->linkedin_url,
-                'twitter_url' => $request->twitter_url,
-                'facebook_url' => $request->facebook_url,
                 'note' => $request->note,
                 'notification_status' => $request->notification_status,
                 'login' => $request->login_status,
                 'password' => Hash::make($request->client_password),
 
-            ],
+            ]
         );
         // $role = Role::where('name', '=', $request->role_name)->first();
         // $role->syncPermissions($request->permissions);

@@ -361,7 +361,7 @@ input[type=number] {
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$row->name}}</td>
                                   <td style="text-align: end">
-                                    <button onclick="deleteCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sms btn-danger"><i class="fa fa-trash"
+                                    <button onclick="deleteCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"
                                             aria-hidden="true"></i></i></button>
                                 </td>
                                 </tr>

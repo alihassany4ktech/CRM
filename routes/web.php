@@ -118,14 +118,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // download document 
         Route::post('/download/delete', 'Admin\EmployeeController@downloadDocument')->name('employee.document.download');
         // ========================================= Department Routes ============================================ \\
-        Route::get('/edit/department/{id}', 'Admin\DepartmenetController@edit')->name('department.edit');
         Route::get('/departments', 'Admin\DepartmenetController@departments')->name('departments');
-        Route::get('/delete/department/{id}', 'Admin\DepartmenetController@delete')->name('department.delete');
         Route::post('/department/update', 'Admin\DepartmenetController@update')->name('department.update');
+        Route::get('/edit/department/{id}', 'Admin\DepartmenetController@edit')->name('department.edit');
+        Route::get('/delete/department/{id}', 'Admin\DepartmenetController@delete')->name('department.delete');
         // ========================================= Designation Routes ============================================ \\
-        Route::get('/edit/designation/{id}', 'Admin\DesignationController@edit')->name('designation.edit');
         Route::get('/designations', 'Admin\DesignationController@designations')->name('designations');
+        Route::get('/edit/designation/{id}', 'Admin\DesignationController@edit')->name('designation.edit');
+        Route::post('/designation/update', 'Admin\DesignationController@update')->name('designation.update');
         Route::get('/delete/designation/{id}', 'Admin\DesignationController@delete')->name('designation.delete');
+        // ========================================= Holiday Routes ============================================ \\
+        Route::get('/holiday/index', 'Admin\HolidayController@index')->name('holiday.index');
+        // ========================================= Projects Routes ============================================ \\
+        Route::get('/projects', 'Admin\ProjectController@allProjects')->name('projects');
+        Route::get('/create/project/', 'Admin\ProjectController@create')->name('project.create');
+        Route::post('/project/category/store', 'Admin\ProjectController@categoryStore')->name('project.category.store');
+        Route::post('/project/category/delete', 'Admin\ProjectController@deleteCategory')->name('project.category.delete');
     });
 });
 

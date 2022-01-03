@@ -259,7 +259,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                           <label for="validationDefault02">Website</label>
-                                          <input type="url"  name="website_url" class="form-control" id="validationDefault02" value="{{$client->website_url}}" required>
+                                          <input type="url"  name="website_url" class="form-control" id="validationDefault02" value="{{$client->website_url}}">
                                         </div>
                                     </div>
                                       <div class="form-row">
@@ -333,19 +333,19 @@
                                        <div class="form-row">
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault03">Skype</label>
-                                          <input type="url"  name="skyp_url" class="form-control" id="validationDefault03" value="{{$client->skyp_url}}" required>
+                                          <input type="url"  name="skyp_url" class="form-control" id="validationDefault03" value="{{$client->skyp_url}}">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault04">Linkedin</label>
-                                          <input type="url" name="linkedin_url" class="form-control" id="validationDefault04" value="{{$client->linkedin_url}}" required>
+                                          <input type="url" name="linkedin_url" class="form-control" id="validationDefault04" value="{{$client->linkedin_url}}">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault05">Twitter</label>
-                                          <input type="url"  name="twitter_url" class="form-control" id="validationDefault05" value="{{$client->twitter_url}}" required>
+                                          <input type="url"  name="twitter_url" class="form-control" id="validationDefault05" value="{{$client->twitter_url}}">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault05">Facebook</label>
-                                          <input name="facebook_url"  type="url" class="form-control" id="validationDefault05" value="{{$client->facebook_url}}" required>
+                                          <input name="facebook_url"  type="url" class="form-control" id="validationDefault05" value="{{$client->facebook_url}}">
                                         </div>
                                     </div> 
                                     

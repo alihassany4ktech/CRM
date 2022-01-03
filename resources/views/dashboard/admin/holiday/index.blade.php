@@ -11,7 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="#">HR</a></li>
-                    <li class="breadcrumb-item active">Designations</li>
+                    <li class="breadcrumb-item active">Holiday</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -112,68 +112,20 @@
         </div>
         <!-- End Right sidebar -->
         <!-- Start Page Content -->
-        <div class="row">
+                <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Designations</h4>
-                        <a href="" type="button" data-toggle="modal"
-                                            data-target="#responsive-modal2"
+                      <div>
+                              <h4 class="card-title">Holiday List</h4>
+                         <a href="" type="button"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px"><i
-                                class="fa fa-plus"></i> Add New Designation</a>
-                        <div class="table-responsive m-t-40">
-
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
-                                cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Designation</th>
-                                        <th>Employees</th>
-                                        <th  style="text-align: end">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($designations as $key=>$value)
-                                    <tr>
-                                        <td style="width:1%">{{$loop->iteration}}</td>
-                                        <td style="width:30%">{{$value->name}} <small
-                                                class="label" style="background-color: #edf9f7;color:#33cea8">{{ sizeof($value->members) }}
-                                                members</small>
-                                          </td>
-                                        <td>
-                                            @forelse($value->members as $item)
-                                            <img data-toggle="tooltip" data-original-title="{{ ucwords($item->name) }}"
-                                                src="{{asset($item->image) }}" alt="user" class="img-circle" width="30"
-                                                height="30">
-                                            @empty
-                                            No record found
-                                            @endforelse
-                                        </td>
-                                        <td class="" style="text-align: end">
-                                            <div class="dropdown">
-                                                <button class="btn btn-light" type="button" id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-dark" href="{{route('admin.designation.edit',['id'=>$value->id])}}" type="button"
-                                                        style="font-size: 14px;cursor: pointer"><i class="fa fa-cogs"
-                                                            style="font-size: 14px"></i> Manage</a>
-                                                    <a class="dropdown-item text-dark" type="button" id="delete"
-                                                        style="font-size: 14px; cursor: pointer;" href="{{route('admin.designation.delete' , ['id'=>$value->id])}}"><i
-                                                            class="fa fa-trash"  style="font-size: 14px"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
+                                class="fa fa-plus"></i> Add Holiday</a>
+                                <a href="" type="button"
+                            class="btn btn-outline-info t-10 float-right" style="margin-right: 10px"><i class="fa fa-check"></i> Mark Default Holidays</a>
+                        <a href="" type="button"
+                            class="btn btn-outline-primary t-10 float-right" style="margin-right: 10px"><i class="fa fa-calendar-alt"></i> View On Calender</a>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -185,34 +137,5 @@
         © 2021 Webfabricant
     </footer>
     <!-- End footer -->
-</div>
-<!-- End Page wrapper  -->
-<div id="responsive-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3"
-    aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title text-white" id="exampleModalLabel1">Designations</h4>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
-
-            <div class="modal-body">
-
-                <form id="designationForm">
-                    @csrf
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Name <small class="text-danger">*</small></label>
-                        <input type="text" name="name" class="form-control">
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
-                    Save</button>
-            </div>
-            </form>
-        </div>
-    </div>
 </div>
 @endsection
