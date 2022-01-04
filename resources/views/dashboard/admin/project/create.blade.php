@@ -12,6 +12,101 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+  #multistep_form fieldset:not(:first-of-type) {
+            display: none;
+        }
+
+        .inputWrapper {
+            height: 25px;
+            line-height: 26px;
+            text-align: center;
+            margin-top: 10px;
+            width: 100px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border-radius: 3px;
+            /*Using a background color, but you can use a background image to represent a button*/
+            background-color: #f1c967;
+            background: -webkit-linear-gradient(to right, #bd7f0a, #f1c967);
+            background: linear-gradient(to right, #bd7f0a, #f1c967);
+        }
+
+        .fileInput {
+            cursor: pointer;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 99;
+            /*This makes the button huge. If you want a bigger button, increase the font size*/
+            font-size: 50px;
+            /*Opacity settings for all browsers*/
+            opacity: 0;
+            -moz-opacity: 0;
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+        }
+
+        /* input[type="file"] {
+  display: block;
+} */
+        .imageThumb {
+            height: 100px;
+            width: 150px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+
+        }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+
+        }
+
+        .remove {
+            display: block;
+            background: rgb(129, 197, 224);
+            /* border: 1px solid rgb(243, 133, 133); */
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .remove:hover {
+             background: rgb(231, 83, 83);
+
+        }
+
+        .labels {
+            background-color: indigo;
+            color: white;
+            padding: 0.5rem;
+            font-family: sans-serif;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        #kuchbe {
+            height: 25px;
+            line-height: 26px;
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            width: 100px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 13px;
+            /*Using a background color, but you can use a background image to represent a button*/
+            
+           
+        }
 </style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
@@ -134,14 +229,14 @@ input[type=number] {
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">PROJECT INFO</h4>
-                        <form>
+                        <form action="{{route('admin.project.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <hr> <br>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3 mt-1">
                                     <label for="validationDefault03">Project Name <small class="text-danger">*</small></label>
                                     <input type="text" name="project_name" class="form-control" id="validationDefault03"
-                                        placeholder="Name" required>
+                                        placeholder="Name" >
                                     @error('project_name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -152,13 +247,13 @@ input[type=number] {
                                             data-target="#responsive-modal2" id="addLeadsource"
                                             class="btn btn-sm  btn-outline-success"><i class="fa fa-plus"></i></a>
                                     </label>
-                                     <select class="select2 form-control" style="width: 100%" name="project_category" required>
+                                     <select class="select2 form-control" style="width: 100%" name="project_category" >
                                     <option>Select Category</option>
                                     @foreach ($projectsCategories as $row)
                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
-                                    @error('source')
+                                    @error('project_category')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -171,13 +266,13 @@ input[type=number] {
                                             id="addLeadsource" class="btn btn-sm  btn-outline-success"><i
                                                 class="fa fa-plus"></i></a>
                                     </label>
-                                     <select class="select2 form-control" style="width: 100%" name="department" required>
+                                     <select class="select2 form-control" style="width: 100%" name="department" >
                                     <option>--</option>
                                     @foreach ($departments as $row)
-                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        <option value="{{$row->name}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
-                                    @error('category_id')
+                                    @error('department')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -187,17 +282,20 @@ input[type=number] {
                                     <label for="validationDefault03">Start Date <small
                                             class="text-danger">*</small></label>
                                       <input type="date" name="start_date" class="form-control" id="validationDefault03"
-                                        placeholder="" required>
+                                        placeholder="" >
                                 </div>
+                                 @error('start_date')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 <div class="col-md-4 mb-3" id="deadline_div">
                                     <label for="validationDefault03">Deadline <small
                                             class="text-danger">*</small></label>
                                     <input type="date" name="deadline" class="form-control" id="validationDefault03"
-                                        placeholder="" required>
+                                        placeholder="">
                                 </div>
                                 <div class="col-md-4 mb-3" style="margin-top: 38px">
-                                    <input type="checkbox"  name="d_line" id="d_line" class="filled-in chk-col-light-blue" />
+                                    <input type="checkbox"  name="without_deadline" value="true" id="d_line" class="filled-in chk-col-light-blue" />
                                     <label for="d_line">Add project without deadline?</label>
                                 </div>
                             </div>
@@ -211,12 +309,15 @@ input[type=number] {
                                     <label for="validationDefault05">Add Project Members
                                            <small class="text-danger">*</small>
                                     </label>
-                                    <select class="select2 m-b-10 select2-multiple" name="employee[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" required>
+                                    <select class="select2 m-b-10 select2-multiple" name="employee[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" >
                                                         @foreach ($employees as $row)
                                                             <option value="{{$row->id}}">{{$row->name}}</option>
                                                         @endforeach
                                                   
                                                 </select>
+                                                 @error('employee')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                         
                                 </div>
                             </div>
@@ -245,15 +346,18 @@ input[type=number] {
                                     <div class="col-md-4 mb-3">
                                     <label for="validationDefault05">Select Client
                                     </label>
-                                    <select class="select2 m-b-10 select2-multiple" name="customer[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" required>
-                                          @foreach ($customers as $row)
-                                                <option value="{{$row->id}}">{{$row->name}}</option>
-                                          @endforeach
-                                                  
-                                    </select>
+                                      <select class="select2 form-control" style="width: 100%" name="customer" >
+                                    <option selected>--</option>
+                                    @foreach ($customers as $row)
+                                        <option value="{{$row->id}}">{{$row->name}} ({{$row->company}})</option>
+                                    @endforeach
+                                </select>
+                                            @error('customer')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                       <div class="col-md-4 mb-3" style="margin-top: 38px">
-                                    <input type="checkbox"  name="manage_task" id="manage_task" class="filled-in chk-col-light-blue" />
+                                    <input type="checkbox"  name="manage_task" id="manage_task" value="true" class="filled-in chk-col-light-blue" />
                                     <label for="manage_task">Client can manage tasks of this project</label>
                                 </div>
                                 <div class="col-md-4 mb-3" style="margin-top: 38px;display:none" id="task_notification" >
@@ -266,24 +370,33 @@ input[type=number] {
                                         <div class="col-md-4 mb-3">
                                     <label for="validationDefault05">Project Budget
                                     </label>
-                                       <input type="text" name="project_budget" class="form-control" id="validationDefault03"
-                                        placeholder="" required>
+                                       <input type="number" min="1" name="project_budget" class="form-control" id="validationDefault03"
+                                        placeholder="enter">
+                                               @error('project_budget')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                      
                                     <div class="col-md-4 mb-3">
                                     <label for="validationDefault05">Currency
                                     </label>
                                        <select class="form-control" name="currency" id="">
-                                        <option value="No Started">Dollers (USD)</option>
-                                        <option value="In Progress">Pounds (GBS)</option>
-                                        <option value="On Hold">Euros (EUR)</option>
-                                        <option value="Canceled">Rupee (INR)</option>
+                                        <option value="1">Dollers (USD)</option>
+                                        <option value="2">Pounds (GBS)</option>
+                                        <option value="3">Euros (EUR)</option>
+                                        <option value="4">Rupee (INR)</option>
                                     </select>
+                                            @error('currency')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                     <div class="col-md-4 mb-3">
                                     <label for="validationDefault05"> Hours Allocated</label>
-                                       <input type="text" name="hours_allocated" class="form-control" id="validationDefault03"
-                                        placeholder="" required>
+                                       <input type="number"  min="1" name="hours_allocated" class="form-control" id="validationDefault03"
+                                        placeholder="enter">
+                                              @error('hours_allocated')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                  
                             </div>
@@ -298,13 +411,24 @@ input[type=number] {
                                         <option value="Finished">Finished</option>
                                         <option value="Under Review">Under Review</option>
                                     </select>
+                                                 @error('project_status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
-                                  <div class="col-md-12">
-                                        <input type="file" id="input-file-now" class="dropify" />
-                                  </div>
-                            </div><br>
+                                <div class="col-md-12">             
+                                    <div class="col-12" style="margin-left: 14px">
+                                            <label class="bg-success" id="kuchbe" for="files">Choose files</label>
+                                            <hr />
+                                            <input type="file" id="files" name="files[]" multiple
+                                                autocomplete="off" style="display: none" />
+
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            <br>
                             <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
@@ -482,5 +606,36 @@ input[type=number] {
         });
     };
 </script>
+
+
+      <script>
+        $(document).ready(function () {
+            if (window.File && window.FileList && window.FileReader) {
+                $("#files").on("change", function (e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function (e) {
+                            var file = e.target;
+                            $("<span class=\"pip\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result +
+                                "\" title=\"" + file.name + "\"/>" +
+                                "<br/><span class=\"remove\">Remove</span>" +
+                                "</span>").insertAfter("#files");
+                            $(".remove").click(function () {
+                                $(this).parent(".pip").remove();
+                            });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
+        });
+
+    </script>
 @endpush
 

@@ -132,8 +132,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // ========================================= Projects Routes ============================================ \\
         Route::get('/projects', 'Admin\ProjectController@allProjects')->name('projects');
         Route::get('/create/project/', 'Admin\ProjectController@create')->name('project.create');
+        Route::post('/project/store', 'Admin\ProjectController@projectStore')->name('project.store');
         Route::post('/project/category/store', 'Admin\ProjectController@categoryStore')->name('project.category.store');
         Route::post('/project/category/delete', 'Admin\ProjectController@deleteCategory')->name('project.category.delete');
+        Route::get('/delete/project/{id}', 'Admin\ProjectController@delete')->name('project.delete');
+        Route::get('/archive/project/{id}', 'Admin\ProjectController@archiveDestroy')->name('project.archive');
+        Route::get('/archive/projects/', 'Admin\ProjectController@archiveProjects')->name('projects.archive');
+        Route::get('/restore/project/{id}', 'Admin\ProjectController@restoreProject')->name('project.restore');
+        Route::get('/show/project/{id}', 'Admin\ProjectController@showProject')->name('project.show');
     });
 });
 

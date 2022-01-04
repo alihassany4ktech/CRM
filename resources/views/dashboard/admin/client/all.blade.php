@@ -118,7 +118,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Clients</h4>
                         <a href="{{route('admin.create.client')}}" type="button"
-                            class="btn btn-outline-success m-t-10 float-right"><i class="fa fa-plus"></i> Add New
+                            class="btn btn-outline-success m-t-10 float-right" style="font-size: 12px"><i class="fa fa-plus" style="font-size: 12px"></i> Add New
                             Client</a>
                         <div class="table-responsive m-t-40">
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
@@ -163,7 +163,7 @@
                                         </td>
                                         <td>{{$row->created_at->format('d-m-Y')}}</td>
                                         <td class="">
-                                            <a href="{{route('admin.client.show' , ['id'=>$row->id])}}" type="button" class="btn btn-sm btn-info text-white"
+                                            <a href="{{route('admin.client.show' , ['id'=>$row->id])}}"  type="button" class="btn btn-sm btn-info text-white"
                                                 data-toggle="tooltip" title="View Details">
                                                 <i class="fa fa-eye"></i>
                                             </a>
@@ -172,7 +172,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <a href="{{route('admin.client.delete' , ['id'=>$row->id])}}"class="btn btn-sm btn-danger" data-toggle="tooltip" id="delete" title="Delete Client">
-                                                <i class="fa fa-trash"></i>
+                                                <i class="fa fa-times"></i>
                                         </a>
                                         </td>
                                     </tr>

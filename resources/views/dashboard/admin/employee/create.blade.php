@@ -123,8 +123,9 @@
                             @csrf
                             <div class="form-row mt-2">
                                 <div class="col-md-3 mb-3">
+                                    {{-- data-toggle="tooltip" title="Employee ID id the unique ID distributed to emplyees" --}}
                                     <label for="validationDefault03">Employee ID <small
-                                            class="text-danger">*</small> <i class="fa fa-info-circle" style="font-size: 12px" aria-hidden="true" data-toggle="tooltip" title="Employee ID id the unique ID distributed to emplyees"></i></label>
+                                            class="text-danger">*</small><span class="mytooltip"> <i class="fa fa-info-circle" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:100px;"><span class="tooltip-inner2" style="font-size: 12px">Employee ID id the unique ID distributed to emplyees</span></span></span></span></label>
                                     <input type="number" min="1" name="employee_id" class="form-control" id="validationDefault03"
                                         placeholder="1">
                                     @error('employee_id')

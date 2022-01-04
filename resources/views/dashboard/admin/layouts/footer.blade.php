@@ -344,6 +344,48 @@
             });
     </script>
 
+    <script>
+         $(document).on("click", "#archivep", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "Do you want to archive this project.",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, archive it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+
+     <script>
+         $(document).on("click", "#restore", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "Do you want to revert this project.",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, revert it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+
 
 {{-- all leads page script --}}
 

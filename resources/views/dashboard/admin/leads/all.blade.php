@@ -124,23 +124,24 @@
                     <div class="card-body">
                         <h4 class="card-title">Leads</h4>
                         <div class="dropdown">
-                            <a href="#" type="button" class="btn btn-info t-10 float-right" data-toggle="dropdown"
+                            <a href="#" type="button" class="btn btn-info t-10 float-right" style="font-size: 12px" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false"><i class="fa fa-download"></i> Export</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
                                 <a class="dropdown-item text-dark" href="{{route('admin.export.lead.excel')}}"
-                                    style="font-size: 14px"><i class="fa fa-file-excel" style="font-size: 14px"></i>
+                                    style="font-size: 12px"><i class="fa fa-file-excel"></i>
                                     Excel</a>
                                 <a class="dropdown-item  text-dark" href="{{route('admin.export.lead.csv')}}"
-                                    style="font-size: 14px"><i class="fa fa-file-excel" style="font-size: 14px"></i>
+                                    style="font-size: 12px"><i class="fa fa-file-excel"></i>
                                     CSV</a>
 
                             </div>
                         </div>
-                        <a href="{{route('admin.lead.kanbanBoard')}}" type="button"
-                            class="btn btn-outline-primary t-10 float-right" style="margin-right: 10px">Kanban Board</a>
+                        <a href="{{route('admin.lead.kanbanBoard')}}" type="button" 
+                            class="btn btn-outline-primary t-10 float-right" style="margin-right: 10px;font-size: 12px"><i class="fa fa-clipboard" aria-hidden="true"></i>
+ Kanban Board</a>
                         <a href="{{route('admin.create.lead')}}" type="button"
-                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px"><i
-                                class="fa fa-plus"></i> Add New
+                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
+                                class="fa fa-plus" ></i> Add New
                             Lead</a>
 
                         <?php
@@ -213,31 +214,31 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs"></i>
+                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.lead.show' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 14px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 14px"></i> View</a>
+                                                        type="button" style="font-size: 12px;cursor: pointer"><i
+                                                            class="fa fa-eye" style="font-size: 12px"></i> View</a>
                                                     <a class="dropdown-item text-dark" type="button"
-                                                        style="font-size: 14px; cursor: pointer;"
+                                                        style="font-size: 12px; cursor: pointer;"
                                                         href="{{route('admin.lead.show' , ['id'=>$row->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 14px"></i> Edit</a>
+                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         href="{{route('admin.lead.delete' , ['id'=>$row->id])}}"
-                                                        id="delete" style="font-size: 14px;"><i class="fa fa-trash"
-                                                            style="font-size: 14px"></i> Delete</a>
+                                                        id="delete"><i class="fa fa-times"
+                                                            style="font-size: 12px"></i> Delete</a>
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.change.leadToCliet' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 14px"><i class="fa fa-user"
-                                                            style="font-size: 14px"></i> Change To
+                                                        type="button" style="font-size: 12px"><i class="fa fa-user"
+                                                            style="font-size: 12px"></i> Change To
                                                         Client</a>
                                                     <button class="dropdown-item text-dark" onclick="getLeadId(this)"
                                                         id="{{$row->id}}" data-toggle="modal"
                                                         data-target="#responsive-modallead"
-                                                        style="font-size: 14px;  cursor: pointer;"><i
-                                                            class="fa fa-thumbs-up" style="font-size: 14px"></i> Add
+                                                        style="font-size: 12px;  cursor: pointer;"><i
+                                                            class="fa fa-thumbs-up" style="font-size: 12px"></i> Add
                                                         Follow Up</button>
 
 

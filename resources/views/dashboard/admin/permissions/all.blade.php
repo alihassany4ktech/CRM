@@ -123,7 +123,7 @@
                     <div class="card-body">
 
                         <h4 class="card-title">Permissions</h4>
-                        <a href="{{route('admin.create.permission')}}" type="button" class="btn btn-outline-success  m-t-10 float-right"><i class="fa fa-plus"></i> Add New Permission</a>
+                        <a href="{{route('admin.create.permission')}}" style="font-size:12px" type="button" class="btn btn-outline-success  m-t-10 float-right"><i class="fa fa-plus"></i> Add New Permission</a>
                         <div class="table-responsive m-t-40">
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
                                 cellspacing="0" width="100%">
@@ -144,9 +144,9 @@
                                                 data-toggle="tooltip" title="Edit Permission">
                                                 <i class="fas fa-edit"></i>
                                             </a> --}}
-                                            <a type="button" href="{{route('admin.permission.delete' , ['id'=>$row->id])}}" id="delete" class="btn btn-sm btn-danger" data-toggle="tooltip"
+                                            <a type="button"  href="{{route('admin.permission.delete' , ['id'=>$row->id])}}" id="delete" class="btn btn-sm btn-danger" data-toggle="tooltip"
                                                 id="trash" title="Delete Permission">
-                                                <i class="fa fa-trash"></i>
+                                                <i class="fa fa-times"></i>
                                             </a>
                                         </td>
                                     </tr>

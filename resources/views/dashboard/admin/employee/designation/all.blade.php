@@ -119,7 +119,7 @@
                         <h4 class="card-title">Designations</h4>
                         <a href="" type="button" data-toggle="modal"
                                             data-target="#responsive-modal2"
-                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px"><i
+                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size:12px"><i
                                 class="fa fa-plus"></i> Add New Designation</a>
                         <div class="table-responsive m-t-40">
 
@@ -155,15 +155,15 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs"></i>
+                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark" href="{{route('admin.designation.edit',['id'=>$value->id])}}" type="button"
-                                                        style="font-size: 14px;cursor: pointer"><i class="fa fa-cogs"
-                                                            style="font-size: 14px"></i> Manage</a>
+                                                        style="font-size: 12px;cursor: pointer"><i class="fa fa-cogs"
+                                                            style="font-size: 12px"></i> Manage</a>
                                                     <a class="dropdown-item text-dark" type="button" id="delete"
-                                                        style="font-size: 14px; cursor: pointer;" href="{{route('admin.designation.delete' , ['id'=>$value->id])}}"><i
-                                                            class="fa fa-trash"  style="font-size: 14px"></i> Delete</a>
+                                                        style="font-size: 12px; cursor: pointer;" href="{{route('admin.designation.delete' , ['id'=>$value->id])}}"><i
+                                                            class="fa fa-trash"  style="font-size: 12px"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>

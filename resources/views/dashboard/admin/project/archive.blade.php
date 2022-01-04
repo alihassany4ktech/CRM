@@ -1,5 +1,11 @@
 @extends('dashboard.admin.layouts.includes')
 @section('content')
+<style>
+    .dropdown-menu {
+        min-width: 5.4rem !important;
+    }
+
+</style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
     <!-- Container fluid  -->
@@ -10,8 +16,8 @@
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#">HR</a></li>
-                    <li class="breadcrumb-item active">Departments</li>
+                    <li class="breadcrumb-item"><a href="#">Work</a></li>
+                    <li class="breadcrumb-item active">Projects</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -116,11 +122,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Departments</h4>
-                        <a href="" type="button" data-toggle="modal"
-                                            data-target="#responsive-modal2"
-                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size:12px"><i
-                                class="fa fa-plus"></i> Add New Departmenet</a>
+                        <h4 class="card-title">Projects</h4>
+                        <a href="{{route('admin.projects')}}" type="button"
+                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size:12px"> <i class="fa fa-search"></i> All Projects</a>
+                         <div class="row justify-content-center" style="margin-top: 6%">
+                            <div class="col-md-3 col-xs-6 b-r"> <span
+                                    class="btn btn-circle  btn-info text-white">{{count($projects)}}</span> <strong>Total Archived Projects</strong>
+
+                            </div>
+                           
+                        </div>
                         <div class="table-responsive m-t-40">
 
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
@@ -128,47 +139,48 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Department</th>
-                                        <th>Employees</th>
-                                        <th  style="text-align: end">Action</th>
+                                        <th>Project Name</th>
+                                        <th>Members</th>
+                                        <th>Dedline</th>
+                                        <th>Client</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($departments as $key=>$value)
+                                    @foreach ($projects as $key=>$value)
                                     <tr>
-                                        <td style="width:1%">{{$loop->iteration}}</td>
-                                        <td style="width:30%">{{$value->name}} <small
-                                                class="label" style="background-color: #edf9f7;color:#33cea8">{{ sizeof($value->members) }}
-                                                members</small>
-                                          </td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$value->project_name}}</td>
                                         <td>
                                             @forelse($value->members as $item)
-                                            <img data-toggle="tooltip" data-original-title="{{ ucwords($item->name) }}"
-                                                src="{{asset($item->image) }}" alt="user" class="img-circle" width="30"
+                                            <img data-toggle="tooltip" data-original-title="{{ ucwords($item->user->name) }}"
+                                                src="{{asset($item->user->image) }}" alt="user" class="img-circle" width="30"
                                                 height="30">
+                                                
                                             @empty
                                             No record found
                                             @endforelse
                                         </td>
-                                        <td class="" style="text-align: end">
-                                            <div class="dropdown">
-                                                <button class="btn btn-light" type="button" id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-dark" href="{{route('admin.department.edit',['id'=>$value->id])}}" type="button"
-                                                        style="font-size: 12px;cursor: pointer"><i class="fa fa-cogs"
-                                                            style="font-size: 12px"></i> Manage</a>
-                                                    <a class="dropdown-item text-dark" type="button" id="delete"
-                                                        style="font-size: 12px; cursor: pointer;" href="{{route('admin.department.delete' , ['id'=>$value->id])}}"><i
-                                                            class="fa fa-trash"  style="font-size: 12px"></i> Delete</a>
-                                                </div>
-                                            </div>
+                                        <td>{{$value->deadline != null?  date_format($value->deadline,"d/m/Y") : 'No Deadline'}}</td>
+                                        <td>{{$value->client->name}}</td>
+                                        <td>{{$value->category->name}}</td>
+                                        <td><small
+                                                class="label" style="background-color: #edf9f7;color:#33cea8">{{$value->project_status}}</small></td>
+                                      
+                                        <td class="">
+                                         <a href="{{route('admin.project.restore' , ['id'=>$value->id])}}" id="restore" type="button" class="btn btn-sm btn-success"
+                                                data-toggle="tooltip" title="Restore">
+                                                <i class="fa fa-undo"></i>
+                                            </a>
+                                            <a href="{{route('admin.project.delete' , ['id'=>$value->id])}}" type="button" class="btn btn-sm btn-danger"
+                                                data-toggle="tooltip" title="Delete">
+                                                <i class="fa fa-times" ></i>
+                                            </a>
                                         </td>
                                     </tr>
-
                                     @endforeach
 
                                 </tbody>
@@ -187,32 +199,7 @@
     <!-- End footer -->
 </div>
 <!-- End Page wrapper  -->
-<div id="responsive-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3"
-    aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title text-white" id="exampleModalLabel1">Department</h4>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
 
-            <div class="modal-body">
+<!-- leaD Category modal -->
 
-                <form id="departmentForm">
-                    @csrf
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Name <small class="text-danger">*</small></label>
-                        <input type="text" name="name" class="form-control">
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
-                    Save</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection

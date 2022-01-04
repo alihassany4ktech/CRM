@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::defaultStringLength(256);
         Schema::create('users', function (Blueprint $table) {
             // common feilds
-            $table->id();
+            $table->increments('id');
             $table->string('provider_id')->nullable();
             $table->string('provider_name')->nullable();
             $table->string('login')->default('Enable');

@@ -124,58 +124,57 @@
                     <div class="card-body">
                         <h4 class="card-title">Projects</h4>
                         <div class="dropdown">
-                            <a href="#" type="button" class="btn btn-info t-10 float-right" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-arrow-down"></i> Export</a>
+                            <a href="#" type="button" class="btn btn-info t-10 float-right" data-toggle="dropdown" style="font-size: 12px"
+                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-download" style="font-size: 12px"></i> Export</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
                                 <a class="dropdown-item text-dark" href=""
-                                    style="font-size: 14px"><i class="fa fa-file-excel" style="font-size: 14px"></i>
+                                    style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
                                     Excel</a>
                                 <a class="dropdown-item  text-dark" href=""
-                                    style="font-size: 14px"><i class="fa fa-file-excel" style="font-size: 14px"></i>
+                                    style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
                                     CSV</a>
 
                             </div>
                         </div>
                         <a href="{{route('admin.project.create')}}" type="button"
-                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px"><i
-                                class="mdi mdi-plus"></i> New</a>
-                        <a href="" type="button"
+                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
+                                class="fa fa-plus" style="font-size: 12px"></i> New</a>
+                        {{-- <a href="" type="button"
                             class="btn btn-outline-primary t-10 float-right" style="margin-right: 10px"><i
-                                class="mdi mdi-plus"></i> Project Templates</a>
-                                <a href="" type="button"
-                            class="btn btn-outline-warning t-10 float-right" style="margin-right: 10px"><i
-                                class="mdi mdi-delete"></i> View Archive</a>
-                           <a href="" type="button"
-                            class="btn btn-outline-info t-10 float-right" style="margin-right: 10px"><i class="mdi mdi-pin" style="font-size: 14px"></i> Pinned Project</a>
-
+                                class="mdi mdi-plus"></i> Project Templates</a> --}}
+                                <a href="{{route('admin.projects.archive')}}" type="button"
+                            class="btn btn-outline-warning t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
+                                class="fa fa-trash" style="font-size: 12px"></i> View Archive</a>
+                           {{-- <a href="" type="button"
+                            class="btn btn-outline-info t-10 float-right" style="margin-right: 10px"><i class="mdi mdi-pin" style="font-size: 14px"></i> Pinned Project</a> --}}
                         <div class="row justify-content-center" style="margin-top: 6%">
                             <div class="col-md-3 col-xs-6 b-r"> <span
-                                    class="btn btn-circle  btn-info text-white">0</span> <strong>Total Projects</strong>
+                                    class="btn btn-circle  btn-info text-white">{{count($projects)}}</span> <strong>Total Projects</strong>
 
                             </div>
                             <div class="col-md-3 col-xs-6 b-r"><span
-                                    class="btn btn-circle  btn-warning text-white">0</span>
+                                    class="btn btn-circle  btn-warning text-white">{{count($underReviewProjects)}}</span>
                                 <strong>Overdue Projects</strong>
 
                             </div>
                             <div class="col-md-3 col-xs-6"><span
-                                    class="btn btn-circle  btn-success text-white">0</span>
+                                    class="btn btn-circle  btn-success text-white">{{count($noStartedProjects)}}</span>
                                 <strong>Not Started Projects</strong>
 
                             </div>
                         </div>
                             <div class="row justify-content-center" style="margin-top: 2%">
                             <div class="col-md-3 col-xs-6 b-r"> <span
-                                    class="btn btn-circle text-white" style="background-color: #12c4f1">0</span> <strong>Completed Projects</strong>
+                                    class="btn btn-circle text-white" style="background-color: #12c4f1">{{count($completedProjects)}}</span> <strong>Completed Projects</strong>
 
                             </div>
                             <div class="col-md-3 col-xs-6 b-r"><span
-                                    class="btn btn-circle text-white" style="background-color: #33cea8">0</span>
+                                    class="btn btn-circle text-white" style="background-color: #33cea8">{{count($inProgressProjects)}}</span>
                                 <strong>In Progress Projects</strong>
 
                             </div>
                             <div class="col-md-3 col-xs-6"><span
-                                    class="btn btn-circle  btn-primary text-white">0</span>
+                                    class="btn btn-circle  btn-primary text-white">{{count($canceledProjects)}}</span>
                                 <strong>Canceled Projects</strong>
 
                             </div>
@@ -191,81 +190,66 @@
                                         <th>Members</th>
                                         <th>Dedline</th>
                                         <th>Client</th>
-                                        <th>Completions</th>
+                                        <th>Category</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    {{-- @foreach ($leads as $row) --}}
+                                    @foreach ($projects as $key=>$value)
                                     <tr>
-                                          <td>1</td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                        {{-- <td>{{$loop->iteration}}</td>
-                                        <td>{{$row->client_name}}</td>
-                                        <td>{{$row->client_email}}</td>
-                                        <td>{{$row->company_name}}</td>
-                                        <td>{{$row->value}}</td>
-                                        <td>{{$row->created_at->format('d-m-y')}}</td>
-                                        <td>{{$row->next_follow_up}}</td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$value->project_name}}</td>
                                         <td>
-                                            <img src="{{asset($row->client->image)}}" class="img-circle elevation-2"
-                                                alt="admin Image" style="height: 35px;width:35px">
-                                            {{ucwords($row->client->name)}}
+                                            @forelse($value->members as $item)
+                                            <img data-toggle="tooltip" data-original-title="{{ ucwords($item->user->name) }}"
+                                                src="{{asset($item->user->image) }}" alt="user" class="img-circle" width="30"
+                                                height="30">
+                                                
+                                            @empty
+                                            No record found
+                                            @endforelse
                                         </td>
-                                        <td style="width:10%">
-                                            <select id="{{$row->id}}" class="form-control bg-light changeStatus">
-                                                @foreach ($leadStstus as $item)
-                                                <option value="{{$item->id}}"
-                                                    {{$item->type == $row->lead_status->type ? 'selected':''}}>
-                                                    {{$item->type}}</option>
-                                                @endforeach
-                                            </select>
-                                        </td>
+                                        <td>{{$value->deadline != null?  date_format($value->deadline,"d/m/Y") : 'No Deadline'}}</td>
+                                        <td>{{$value->client->name}}</td>
+                                        <td>{{$value->category->name}}</td>
+                                        <td><small
+                                                class="label" style="background-color: #edf9f7;color:#33cea8">{{$value->project_status}}</small></td>
+                                      
                                         <td class="">
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs"></i>
+                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.lead.show' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 14px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 14px"></i> View</a>
+                                                        href="{{route('admin.project.show' , ['id'=>$value->id])}}"
+                                                        type="button" style="font-size: 12px;cursor: pointer"><i
+                                                            class="fa fa-eye" style="font-size: 12px"></i> View Details</a>
                                                     <a class="dropdown-item text-dark" type="button"
-                                                        style="font-size: 14px; cursor: pointer;"
-                                                        href="{{route('admin.lead.show' , ['id'=>$row->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 14px"></i> Edit</a>
-                                                    <a class="dropdown-item text-dark" type="button"
-                                                        href="{{route('admin.lead.delete' , ['id'=>$row->id])}}"
-                                                        id="delete" style="font-size: 14px;"><i class="fa fa-trash"
-                                                            style="font-size: 14px"></i> Delete</a>
-                                                    <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.change.leadToCliet' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 14px"><i class="fa fa-user"
-                                                            style="font-size: 14px"></i> Change To
-                                                        Client</a>
-                                                    <button class="dropdown-item text-dark" onclick="getLeadId(this)"
-                                                        id="{{$row->id}}" data-toggle="modal"
+                                                        style="font-size: 12px; cursor: pointer;"
+                                                        href="{{route('admin.lead.show' , ['id'=>$value->id])}}"><i
+                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
+                                                            <button class="dropdown-item text-dark" onclick="getLeadId(this)"
+                                                        id="{{$value->id}}" data-toggle="modal"
                                                         data-target="#responsive-modallead"
-                                                        style="font-size: 14px;  cursor: pointer;"><i
-                                                            class="fa fa-thumbs-up" style="font-size: 14px"></i> Add
-                                                        Follow Up</button>
-
-
+                                                        style="font-size: 12px;  cursor: pointer;"><i
+                                                            class="fa fa-user" style="font-size: 12px"></i> Add Member</button>
+                                                    <a class="dropdown-item text-dark" type="button"
+                                                        href="{{route('admin.project.archive' , ['id'=>$value->id])}}"
+                                                        id="archivep" style="font-size: 12px;"><i class="fa fa-trash"
+                                                            style="font-size: 12px"></i> Archive</a>
+                                                    <a class="dropdown-item text-dark"
+                                                        href="{{route('admin.project.delete' , ['id'=>$value->id])}}"
+                                                        type="button" style="font-size: 12px" id="delete"><i class="fa fa-times"
+                                                            style="font-size: 12px"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr> --}}
-                                    {{-- @endforeach --}}
+                                    </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>

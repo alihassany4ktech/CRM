@@ -55,6 +55,15 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class, 'department_id');
     }
 
+    public function member()
+    {
+        return $this->hasMany(ProjectMember::class, 'user_id');
+    }
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'user_id');
+    }
+
     // get Excel 
 
     public static function getEmployee()

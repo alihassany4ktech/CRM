@@ -123,7 +123,7 @@
                     <div class="card-body">
 
                         <h4 class="card-title">Roles</h4>
-                        <a href="{{route('admin.create.role_permission')}}" type="button"
+                        <a href="{{route('admin.create.role_permission')}}" type="button"  style="font-size:12px"
                             class="btn btn-outline-success  m-t-10 float-right"><i class="fa fa-plus"></i> Add New
                             Role</a>
                         <div class="table-responsive m-t-40">
@@ -162,7 +162,7 @@
                                             <a type="button" href="{{route('admin.role.delete' , ['id'=>$row->id])}}"
                                                 class="btn btn-sm btn-danger" id="delete" data-toggle="tooltip"
                                                 id="trash" title="Delete Role">
-                                                <i class="fa fa-trash"></i>
+                                                <i class="fa fa-times"></i>
                                             </a>
                                         </td>
 
