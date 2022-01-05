@@ -32,6 +32,19 @@ class ProjectController extends Controller
 
     public function projectStore(Request $request)
     {
+        // dd($request);
+        $request->validate([
+            'project_name' => 'required',
+            'address' => 'required',
+            'project_category' => 'required',
+            'department' => 'required',
+            'start_date' => 'required',
+            'project_summary' => 'required',
+            'note' => 'required',
+            'client' => 'required',
+            'project_budget' => 'required',
+            'hours_allocated' => 'required',
+        ]);
         $membersList = $request->employee;
         $project = new Project();
         $project->project_name = $request->project_name;
@@ -43,7 +56,7 @@ class ProjectController extends Controller
         }
         $project->project_summary = $request->project_summary;
         $project->notes = $request->note;
-        $project->user_id = $request->customer;
+        $project->user_id = $request->client;
 
 
         if (($request->manage_task != null)) {
@@ -87,7 +100,35 @@ class ProjectController extends Controller
 
     public function projectUpdate(Request $request)
     {
-        dd($request);
+        $project =  Project::findOrFail($request->project_id);
+        $project->project_name = $request->project_name;
+        $project->category_id = $request->project_category;
+        $project->department = $request->department;
+        $project->start_date = $request->start_date;
+        if ($request->without_deadline == null) {
+            $project->deadline = $request->deadline;
+        }
+        $project->project_summary = $request->project_summary;
+        $project->notes = $request->note;
+        $project->user_id = $request->customer;
+
+
+        if (($request->manage_task != null)) {
+            $project->task_notification = 'enable';
+        } else {
+            $project->task_notification = 'disable';
+        }
+        $project->currency_id = $request->currency;
+        $project->hours_allocated = $request->hours_allocated;
+        $project->project_budget = $request->project_budget;
+        $project->project_status = $request->project_status;
+        $project->feedback = $request->project_status;
+        $project->update();
+        $notification = array(
+            'messege' => 'Project Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 
     public function categoryStore(Request $request)

@@ -194,7 +194,7 @@ input[type=number] {
                                     <label for="validationDefault03">Start Date <small
                                             class="text-danger">*</small></label>
                                       <input type="date" name="start_date" class="form-control" id="validationDefault03"
-                                       value="{{$project->start_date}}">
+                                       value="{{Carbon\Carbon::parse($project->start_date)->format('Y-m-d')}}">
                                 </div>
                                  @error('start_date')
                                     <span class="text-danger">{{ $message }}</span>
@@ -204,7 +204,7 @@ input[type=number] {
                                     <label for="validationDefault03">Deadline <small
                                             class="text-danger">*</small></label>
                                     <input type="date" name="deadline" class="form-control" id="validationDefault03"
-                                         value="@if($project->deadline){{date_format($project->deadline,"d/m/Y")}} @endif">
+                                         value="{{$project->deadline == null ? : Carbon\Carbon::parse($project->deadline)->format('Y-m-d')}}">
                                 </div>
                                 <div class="col-md-4 mb-3" style="margin-top: 38px">
                                     <input type="checkbox"  name="without_deadline" value="true" id="d_line" class="filled-in chk-col-light-blue" />
@@ -263,7 +263,7 @@ input[type=number] {
                             <div class="form-row">
                                   <div class="col-md-12">
                                          <label for="validationDefault05">Client Feedback</label>
-                                        <textarea name="" class="form-control" id="" cols="30" rows="3">{{$project->feedback}}</textarea>
+                                        <textarea name="feedback" class="form-control" id="" cols="30" rows="3">{{$project->feedback}}</textarea>
                                   </div>
                             </div><br>
                             <h4 class="card-title">BUDGET INFO</h4>

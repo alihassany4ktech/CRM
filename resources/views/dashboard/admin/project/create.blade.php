@@ -238,7 +238,7 @@ input[type=number] {
                                     <input type="text" name="project_name" class="form-control" id="validationDefault03"
                                         placeholder="Name" >
                                     @error('project_name')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -248,13 +248,13 @@ input[type=number] {
                                             class="btn btn-sm  btn-outline-success"><i class="fa fa-plus"></i></a>
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="project_category" >
-                                    <option>Select Category</option>
+                                    <option value="">Select Category</option>
                                     @foreach ($projectsCategories as $row)
                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                     @error('project_category')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <?php 
@@ -267,13 +267,13 @@ input[type=number] {
                                                 class="fa fa-plus"></i></a>
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="department" >
-                                    <option>--</option>
+                                    <option value="">--</option>
                                     @foreach ($departments as $row)
                                         <option value="{{$row->name}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                     @error('department')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -283,10 +283,11 @@ input[type=number] {
                                             class="text-danger">*</small></label>
                                       <input type="date" name="start_date" class="form-control" id="validationDefault03"
                                         placeholder="" >
-                                </div>
-                                 @error('start_date')
-                                    <span class="text-danger">{{ $message }}</span>
+                                         @error('start_date')
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
+                                </div>
+                                
 
                                 <div class="col-md-4 mb-3" id="deadline_div">
                                     <label for="validationDefault03">Deadline <small
@@ -316,7 +317,7 @@ input[type=number] {
                                                   
                                                 </select>
                                                  @error('employee')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                         
                                 </div>
@@ -326,7 +327,7 @@ input[type=number] {
                                     <label for="validationDefault03">Project Summary</label>
                                     <textarea class="summernote" name="project_summary"></textarea>
                                     @error('project_summary')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
@@ -336,7 +337,7 @@ input[type=number] {
                                     <label for="validationDefault03">Note</label>
                                     <textarea class="summernote" name="note"></textarea>
                                     @error('note')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
@@ -346,14 +347,14 @@ input[type=number] {
                                     <div class="col-md-4 mb-3">
                                     <label for="validationDefault05">Select Client
                                     </label>
-                                      <select class="select2 form-control" style="width: 100%" name="customer" >
-                                    <option selected>--</option>
+                                      <select class="select2 form-control" style="width: 100%" name="client" >
+                                    <option value="" selected>--</option>
                                     @foreach ($customers as $row)
                                         <option value="{{$row->id}}">{{$row->name}} ({{$row->company}})</option>
                                     @endforeach
                                 </select>
-                                            @error('customer')
-                                    <span class="text-danger">{{ $message }}</span>
+                                            @error('client')
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                       <div class="col-md-4 mb-3" style="margin-top: 38px">
@@ -373,7 +374,7 @@ input[type=number] {
                                        <input type="number" min="1" name="project_budget" class="form-control" id="validationDefault03"
                                         placeholder="enter">
                                                @error('project_budget')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                      
@@ -387,7 +388,7 @@ input[type=number] {
                                         <option value="4">Rupee (INR)</option>
                                     </select>
                                             @error('currency')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                     <div class="col-md-4 mb-3">
@@ -395,7 +396,7 @@ input[type=number] {
                                        <input type="number"  min="1" name="hours_allocated" class="form-control" id="validationDefault03"
                                         placeholder="enter">
                                               @error('hours_allocated')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                  
@@ -412,7 +413,7 @@ input[type=number] {
                                         <option value="Under Review">Under Review</option>
                                     </select>
                                                  @error('project_status')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>

@@ -127,7 +127,7 @@
                                           <label for="validationDefault01">Company Name</label>
                                           <input type="text" name="company" class="form-control" id="validationDefault01" placeholder="y4ktec" >
                                               @error('company')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -140,7 +140,7 @@
                                           <label for="validationDefault01">Address</label>
                                           <textarea name="address" class="form-control" id="" cols="1" rows="2" placeholder="write..."></textarea>
                                              @error('address')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                           
                                         </div>
@@ -151,21 +151,21 @@
                                           <label for="validationDefault03">City</label>
                                           <input type="text" name="city" class="form-control" id="validationDefault03" placeholder="City">
                                           @error('city')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault04">State</label>
                                           <input type="text" name="state" class="form-control" id="validationDefault04" placeholder="State">
                                           @error('state')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault05">Zip</label>
                                           <input type="text" name="zip" class="form-control" id="validationDefault05" placeholder="Zip">
                                           @error('zip')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                     </div> <br>
@@ -177,7 +177,7 @@
                                             class="text-danger">*</small></label>
                                           <input type="text" name="client_name" class="form-control" id="validationDefault03" placeholder="client name">
                                           @error('client_name')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -185,14 +185,14 @@
                                             class="text-danger">*</small></label>
                                           <input type="text" name="email" class="form-control" id="validationDefault04" placeholder="client email">
                                              @error('email')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault04">Client Phone</label>
                                           <input type="text" name="phone" class="form-control" id="validationDefault04" placeholder="client phone">
                                              @error('phone')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -210,7 +210,7 @@
                               
                     
                                              @error('client_password')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                     </div> 
@@ -244,7 +244,7 @@
                                             @endforeach
                                         </select>
                                           @error('role_name')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -254,7 +254,7 @@
                                             <option class="Disable">Disable</option>
                                         </select>
                                           @error('login_status')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                            <div class="col-md-3 mb-3">
@@ -264,7 +264,7 @@
                                                 <input name="send_credentials_status" type="radio" id="radio_31" class="with-gap radio-col-red" checked />
                                                 <label for="radio_31">No</label>
                                                     @error('send_credentials_status')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -274,7 +274,7 @@
                                                 <input name="notification_status" type="radio" id="radio_31" class="with-gap radio-col-red" checked />
                                                 <label for="radio_31">No</label>
                                                     @error('notification_status')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
 
@@ -286,7 +286,7 @@
                                           <label for="validationDefault01">Shipping Address</label>
                                           <textarea name="shipping_address" class="form-control" id="" cols="1" rows="3" placeholder="write..."></textarea>
                                              @error('shipping_address')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                           
                                         </div>
@@ -297,7 +297,7 @@
                                           <label for="validationDefault03">Note</label>
                                            <textarea class="summernote" name="note"></textarea>
                                              @error('note')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                               
