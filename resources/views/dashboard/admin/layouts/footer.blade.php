@@ -386,6 +386,27 @@
             });
     </script>
 
+     <script>
+         $(document).on("click", "#deleteMember", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "This will remove the member from the project.",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, delete it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+
 
 {{-- all leads page script --}}
 

@@ -17,96 +17,7 @@ input[type=number] {
             display: none;
         }
 
-        .inputWrapper {
-            height: 25px;
-            line-height: 26px;
-            text-align: center;
-            margin-top: 10px;
-            width: 100px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            border-radius: 3px;
-            /*Using a background color, but you can use a background image to represent a button*/
-            background-color: #f1c967;
-            background: -webkit-linear-gradient(to right, #bd7f0a, #f1c967);
-            background: linear-gradient(to right, #bd7f0a, #f1c967);
-        }
 
-        .fileInput {
-            cursor: pointer;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            right: 0;
-            z-index: 99;
-            /*This makes the button huge. If you want a bigger button, increase the font size*/
-            font-size: 50px;
-            /*Opacity settings for all browsers*/
-            opacity: 0;
-            -moz-opacity: 0;
-            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
-        }
-
-        /* input[type="file"] {
-  display: block;
-} */
-        .imageThumb {
-            height: 100px;
-            width: 150px;
-            border: 2px solid;
-            padding: 1px;
-            cursor: pointer;
-
-        }
-
-        .pip {
-            display: inline-block;
-            margin: 10px 10px 0 0;
-
-        }
-
-        .remove {
-            display: block;
-            background: rgb(129, 197, 224);
-            /* border: 1px solid rgb(243, 133, 133); */
-            color: white;
-            text-align: center;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .remove:hover {
-             background: rgb(231, 83, 83);
-
-        }
-
-        .labels {
-            background-color: indigo;
-            color: white;
-            padding: 0.5rem;
-            font-family: sans-serif;
-            border-radius: 0.3rem;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-
-        #kuchbe {
-            height: 25px;
-            line-height: 26px;
-            color: white;
-            text-align: center;
-            margin-top: 10px;
-            width: 100px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            border-radius: 3px;
-            font-size: 13px;
-            /*Using a background color, but you can use a background image to represent a button*/
-            
-           
-        }
 </style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
@@ -121,7 +32,7 @@ input[type=number] {
                 <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Work</a></li>
                     <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Projects</a></li>
-                    <li class="breadcrumb-item active">Add New Project</li>
+                    <li class="breadcrumb-item active">Update Project</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -225,18 +136,19 @@ input[type=number] {
         <!-- End Right sidebar -->
         <div class="row">
             <div class="col-12">
-                <h4 class="card-title">ADD PROJECT</h4>
+                <h4 class="card-title">UPDATE PROJECT DETAILS</h4>
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">PROJECT INFO</h4>
-                        <form action="{{route('admin.project.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.project.update')}}" method="POST">
                             @csrf
+                            <input type="hidden" name="project_id" value="{{$project->id}}">
                             <hr> <br>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3 mt-1">
                                     <label for="validationDefault03">Project Name <small class="text-danger">*</small></label>
                                     <input type="text" name="project_name" class="form-control" id="validationDefault03"
-                                        placeholder="Name" >
+                                       value="{{$project->project_name}}">
                                     @error('project_name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -248,9 +160,9 @@ input[type=number] {
                                             class="btn btn-sm  btn-outline-success"><i class="fa fa-plus"></i></a>
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="project_category" >
-                                    <option>Select Category</option>
+                                          <option>--</option>
                                     @foreach ($projectsCategories as $row)
-                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        <option value="{{$row->id}}" {{$project->category->name == $row->name ? 'selected':''}}>{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                     @error('project_category')
@@ -269,7 +181,7 @@ input[type=number] {
                                      <select class="select2 form-control" style="width: 100%" name="department" >
                                     <option>--</option>
                                     @foreach ($departments as $row)
-                                        <option value="{{$row->name}}">{{$row->name}}</option>
+                                        <option value="{{$row->name}}" {{$project->department = $row->name?'selected':''}}>{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                     @error('department')
@@ -282,7 +194,7 @@ input[type=number] {
                                     <label for="validationDefault03">Start Date <small
                                             class="text-danger">*</small></label>
                                       <input type="date" name="start_date" class="form-control" id="validationDefault03"
-                                        placeholder="" >
+                                       value="{{$project->start_date}}">
                                 </div>
                                  @error('start_date')
                                     <span class="text-danger">{{ $message }}</span>
@@ -292,7 +204,7 @@ input[type=number] {
                                     <label for="validationDefault03">Deadline <small
                                             class="text-danger">*</small></label>
                                     <input type="date" name="deadline" class="form-control" id="validationDefault03"
-                                        placeholder="">
+                                         value="@if($project->deadline){{date_format($project->deadline,"d/m/Y")}} @endif">
                                 </div>
                                 <div class="col-md-4 mb-3" style="margin-top: 38px">
                                     <input type="checkbox"  name="without_deadline" value="true" id="d_line" class="filled-in chk-col-light-blue" />
@@ -300,31 +212,14 @@ input[type=number] {
                                 </div>
                             </div>
                             <?php
-                              $employees = App\User::where('type','=','Employee')->get();
                               $customers = App\User::where('type','=','Customer')->get();
                               $departments = App\Department::all();
                              ?>
-                            <div class="form-row">
-                                    <div class="col-md-12 mb-3">
-                                    <label for="validationDefault05">Add Project Members
-                                           <small class="text-danger">*</small>
-                                    </label>
-                                    <select class="select2 m-b-10 select2-multiple" name="employee[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" >
-                                                        @foreach ($employees as $row)
-                                                            <option value="{{$row->id}}">{{$row->name}}</option>
-                                                        @endforeach
-                                                  
-                                                </select>
-                                                 @error('employee')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                        
-                                </div>
-                            </div>
+                       
                                                <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label for="validationDefault03">Project Summary</label>
-                                    <textarea class="summernote" name="project_summary"></textarea>
+                                    <textarea class="summernote" name="project_summary">{{$project->project_summary}}</textarea>
                                     @error('project_summary')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -334,7 +229,7 @@ input[type=number] {
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label for="validationDefault03">Note</label>
-                                    <textarea class="summernote" name="note"></textarea>
+                                    <textarea class="summernote" name="note"> {{$project->notes}}</textarea>
                                     @error('note')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -349,7 +244,7 @@ input[type=number] {
                                       <select class="select2 form-control" style="width: 100%" name="customer" >
                                     <option selected>--</option>
                                     @foreach ($customers as $row)
-                                        <option value="{{$row->id}}">{{$row->name}} ({{$row->company}})</option>
+                                        <option value="{{$row->id}}" {{$project->client->name = $row->name?'selected':''}}>{{$row->name}} ({{$row->company}})</option>
                                     @endforeach
                                 </select>
                                             @error('customer')
@@ -365,13 +260,19 @@ input[type=number] {
                                     <label for="t_noti">Send task notification to client?</label>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                  <div class="col-md-12">
+                                         <label for="validationDefault05">Client Feedback</label>
+                                        <textarea name="" class="form-control" id="" cols="30" rows="3">{{$project->feedback}}</textarea>
+                                  </div>
+                            </div><br>
                             <h4 class="card-title">BUDGET INFO</h4>
                                 <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                     <label for="validationDefault05">Project Budget
                                     </label>
                                        <input type="number" min="1" name="project_budget" class="form-control" id="validationDefault03"
-                                        placeholder="enter">
+                                        value="{{$project->project_budget}}">
                                                @error('project_budget')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -393,7 +294,7 @@ input[type=number] {
                                     <div class="col-md-4 mb-3">
                                     <label for="validationDefault05"> Hours Allocated</label>
                                        <input type="number"  min="1" name="hours_allocated" class="form-control" id="validationDefault03"
-                                        placeholder="enter">
+                                        value="{{$project->hours_allocated}}">
                                               @error('hours_allocated')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -404,32 +305,22 @@ input[type=number] {
                                   <div class="col-md-4 mb-3">
                                     <label for="validationDefault04">Project Status</label>
                                     <select class="form-control" name="project_status" id="">
-                                        <option value="No Started">No Started</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="On Hold">On Hold</option>
-                                        <option value="Canceled">Canceled</option>
-                                        <option value="Finished">Finished</option>
-                                        <option value="Under Review">Under Review</option>
+                                        <option value="No Started" {{$project->project_status == 'No Started' ?'selected':''}}>No Started</option>
+                                        <option value="In Progress" {{$project->project_status == 'In Progress' ?'selected':''}}>In Progress</option>
+                                        <option value="On Hold" {{$project->project_status == 'On Hold' ?'selected':''}}>On Hold</option>
+                                        <option value="Canceled" {{$project->project_status == 'Canceled' ?'selected':''}}>Canceled</option>
+                                        <option value="Finished" {{$project->project_status == 'Finished' ?'selected':''}}>Finished</option>
+                                        <option value="Under Review" {{$project->project_status == 'Under Review' ?'selected':''}}>Under Review</option>
                                     </select>
                                                  @error('project_status')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col-md-12">             
-                                    <div class="col-12" style="margin-left: 14px">
-                                            <label class="bg-success" id="kuchbe" for="files">Choose files</label>
-                                            <hr />
-                                            <input type="file" id="files" name="files[]" multiple
-                                                autocomplete="off" style="display: none" />
-
-                                    </div>
-                                </div>
-                            </div>
+                           
                          
                             <br>
-                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
                     </div>
@@ -610,34 +501,6 @@ input[type=number] {
 </script>
 
 
-      <script>
-        $(document).ready(function () {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function (e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function (e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img class=\"imageThumb\" src=\"" + e.target.result +
-                                "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\">Remove</span>" +
-                                "</span>").insertAfter("#files");
-                            $(".remove").click(function () {
-                                $(this).parent(".pip").remove();
-                            });
-                        });
-                        fileReader.readAsDataURL(f);
-                    }
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
-            }
-        });
-
-    </script>
+    
 @endpush
 

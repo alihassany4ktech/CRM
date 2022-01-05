@@ -23,6 +23,7 @@ class CreateProjectsTable extends Migration
             $table->string('department')->nullable();
             $table->longText('notes')->nullable();
             $table->mediumText('project_summary')->nullable();
+            $table->mediumText('feedback')->nullable();
 
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('project_categories')->onDelete('cascade');
@@ -30,6 +31,8 @@ class CreateProjectsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
+            $table->integer('completion_percent')->default(0);
+            $table->boolean('calculate_task_progress')->default(true);
             $table->string('task_notification')->nullable();
             $table->string('project_budget')->nullable();
             $table->string('currency_id')->nullable();

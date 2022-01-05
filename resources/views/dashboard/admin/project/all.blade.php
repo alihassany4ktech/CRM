@@ -127,7 +127,7 @@
                             <a href="#" type="button" class="btn btn-info t-10 float-right" data-toggle="dropdown" style="font-size: 12px"
                                 aria-haspopup="true" aria-expanded="false"><i class="fa fa-download" style="font-size: 12px"></i> Export</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
-                                <a class="dropdown-item text-dark" href=""
+                                <a class="dropdown-item text-dark" href="{{route('admin.project.export')}}"
                                     style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
                                     Excel</a>
                                 <a class="dropdown-item  text-dark" href=""
@@ -213,7 +213,13 @@
                                         </td>
                                         <td>{{$value->deadline != null?  date_format($value->deadline,"d/m/Y") : 'No Deadline'}}</td>
                                         <td>{{$value->client->name}}</td>
-                                        <td>{{$value->category->name}}</td>
+                                        <td>
+                                            {{$value->category->name}}
+                                            {{-- <p>Progress &nbsp;<small class="pull-right">{{$value->completion_percent}}%</small></p>
+                                        <div class="progress ">
+                                            <div class="progress-bar bg-danger wow animated progress-animated" style="width: {{$value->completion_percent}}%; height:6px;" role="progressbar"> </div>
+                                        </div> --}}
+                                        </td>
                                         <td><small
                                                 class="label" style="background-color: #edf9f7;color:#33cea8">{{$value->project_status}}</small></td>
                                       
@@ -230,13 +236,12 @@
                                                             class="fa fa-eye" style="font-size: 12px"></i> View Details</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
-                                                        href="{{route('admin.lead.show' , ['id'=>$value->id])}}"><i
+                                                        href="{{route('admin.project.edit' , ['id'=>$value->id])}}"><i
                                                             class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
-                                                            <button class="dropdown-item text-dark" onclick="getLeadId(this)"
-                                                        id="{{$value->id}}" data-toggle="modal"
-                                                        data-target="#responsive-modallead"
-                                                        style="font-size: 12px;  cursor: pointer;"><i
-                                                            class="fa fa-user" style="font-size: 12px"></i> Add Member</button>
+                                                        <a class="dropdown-item text-dark"
+                                                        href="{{route('admin.project.show' , ['id'=>$value->id])}}"
+                                                        type="button" style="font-size: 12px;cursor: pointer"><i
+                                                            class="fa fa-user-plus" style="font-size: 12px"></i> Add Member</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         href="{{route('admin.project.archive' , ['id'=>$value->id])}}"
                                                         id="archivep" style="font-size: 12px;"><i class="fa fa-trash"

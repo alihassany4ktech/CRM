@@ -140,6 +140,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/archive/projects/', 'Admin\ProjectController@archiveProjects')->name('projects.archive');
         Route::get('/restore/project/{id}', 'Admin\ProjectController@restoreProject')->name('project.restore');
         Route::get('/show/project/{id}', 'Admin\ProjectController@showProject')->name('project.show');
+        Route::get('/project/member/delete/{id}', 'Admin\ProjectController@deleteProjectMember')->name('project.delete.member');
+        Route::post('/project/member/add', 'Admin\ProjectController@projectMembersAdd')->name('project.member.add');
+        Route::get('/project/export', 'Admin\ProjectController@export')->name('project.export');
+        Route::get('/edit/project/{id}', 'Admin\ProjectController@editProject')->name('project.edit');
+        Route::post('/project/update', 'Admin\ProjectController@projectUpdate')->name('project.update');
     });
 });
 

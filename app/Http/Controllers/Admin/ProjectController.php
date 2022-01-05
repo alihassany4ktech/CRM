@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Project;
 use App\ProjectMember;
 use App\ProjectCategory;
 use Illuminate\Http\Request;
+use App\Exports\ProjectExport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
 {
@@ -54,7 +57,7 @@ class ProjectController extends Controller
         $project->project_status = $request->project_status;
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
-                $name = time() . 'file' . '.' . $file->getClientOriginalName();
+                $name = $file->getClientOriginalName();
                 $destinationPath = 'project_files/';
                 $file->move($destinationPath, $name);
                 $data[] = $name;
@@ -73,6 +76,18 @@ class ProjectController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
+    }
+
+    public function editProject($id)
+    {
+        $project = Project::findOrFail($id);
+        $projectsCategories = ProjectCategory::all();
+        return view('dashboard.admin.project.edit', compact('project', 'projectsCategories'));
+    }
+
+    public function projectUpdate(Request $request)
+    {
+        dd($request);
     }
 
     public function categoryStore(Request $request)
@@ -136,6 +151,41 @@ class ProjectController extends Controller
     public function showProject($id)
     {
         $project = Project::findOrFail($id);
-        return view('dashboard.admin.project.show', compact('project'));
+        // $employees = User::where('type', '=', 'Employee')->get();
+        $employees = User::doesntHave('member', 'and', function ($query) use ($id) {
+            $query->where('project_id', $id);
+        })->where('type', '=', 'Employee')->get();
+        return view('dashboard.admin.project.show', compact('project', 'employees'));
+    }
+
+    public function deleteProjectMember($id)
+    {
+        $projectMember = ProjectMember::findOrFail($id);
+        $projectMember->delete();
+        $notification = array(
+            'messege' => 'Project Member Deleted Successfully',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function projectMembersAdd(Request $request)
+    {
+        if ($request->ajax()) {
+            $membersList = $request->employee;
+            for ($i = 0; $i < count($membersList); $i++) {
+                $member = new ProjectMember();
+                $member->user_id = $membersList[$i];
+                $member->project_id = $request->project_id;
+                $member->save();
+            }
+
+            return response()->json(['success' => 'Project Member Add Successfully!']);
+        }
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProjectExport, 'projectList.xlsx');
     }
 }

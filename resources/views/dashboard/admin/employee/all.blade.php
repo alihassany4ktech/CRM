@@ -178,7 +178,8 @@
                                             @if ($row->getRoleNames()->isEmpty())
                                             No Role
                                             @else
-                                            {{$row->getRoleNames()[0]}}
+                                            
+                                            <span class="badge badge-success">{{$row->getRoleNames()[0]}}</span>
                                             @endif
 
                                         </td>
@@ -193,7 +194,7 @@
                                             @endif
 
                                         </td>
-                                        <td><span class="badge badge-success">{{$row->status}}</span></td>
+                                        <td><span class="badge" style="background-color: #edf9f7;color:#33cea8">{{$row->status}}</span></td>
                                         <td>{{$row->created_at->format('d-m-Y')}}</td>
                                         <td class="">
                                             <div class="dropdown">

@@ -24,4 +24,19 @@ class Project extends Model
     {
         return $this->hasMany(ProjectMember::class, 'project_id');
     }
+
+    public static function getProject()
+    {
+        $projects = Project::leftJoin('users', 'users.id', '=', 'projects.user_id')
+            ->leftJoin('project_categories', 'project_categories.id', '=', 'projects.category_id')
+            ->select(
+                'projects.id',
+                'projects.project_name',
+                'users.name',
+                'project_categories.name',
+                'projects.start_date',
+                'projects.deadline',
+            )->get()->toArray();
+        return $projects;
+    }
 }
