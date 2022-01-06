@@ -25,6 +25,11 @@ class Project extends Model
         return $this->hasMany(ProjectMember::class, 'project_id');
     }
 
+    public function files()
+    {
+        return $this->hasMany(ProjectFile::class, 'project_id')->orderBy('id', 'desc');
+    }
+
     public static function getProject()
     {
         $projects = Project::leftJoin('users', 'users.id', '=', 'projects.user_id')

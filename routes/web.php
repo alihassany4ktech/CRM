@@ -145,6 +145,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/project/export', 'Admin\ProjectController@export')->name('project.export');
         Route::get('/edit/project/{id}', 'Admin\ProjectController@editProject')->name('project.edit');
         Route::post('/project/update', 'Admin\ProjectController@projectUpdate')->name('project.update');
+        Route::post('/project/file/delete', 'Admin\ProjectController@deleteFile')->name('project.file.delete');
+        Route::post('/project/file/download', 'Admin\ProjectController@downloadFile')->name('project.file.download');
+        Route::get('/add/project/file/{id}', 'Admin\ProjectController@addProjectFile')->name('project.add.file');
+        Route::post('/project/file/store', 'Admin\ProjectController@projectFileStore')->name('project.file.store');
     });
 });
 

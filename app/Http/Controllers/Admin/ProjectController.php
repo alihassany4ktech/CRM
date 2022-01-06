@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Project;
+use App\ProjectFile;
 use App\ProjectMember;
 use App\ProjectCategory;
 use Illuminate\Http\Request;
 use App\Exports\ProjectExport;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class ProjectController extends Controller
 {
@@ -35,7 +38,6 @@ class ProjectController extends Controller
         // dd($request);
         $request->validate([
             'project_name' => 'required',
-            'address' => 'required',
             'project_category' => 'required',
             'department' => 'required',
             'start_date' => 'required',
@@ -68,16 +70,20 @@ class ProjectController extends Controller
         $project->hours_allocated = $request->hours_allocated;
         $project->project_budget = $request->project_budget;
         $project->project_status = $request->project_status;
+        $project->save();
         if ($request->hasFile('files')) {
-            foreach ($request->file('files') as $file) {
-                $name = $file->getClientOriginalName();
+            foreach ($request->file('files') as $fileData) {
+                $file = new ProjectFile();
+                // $file->user_id = $this->user->id;
+                $file->project_id = $project->id;
+                $name = $fileData->getClientOriginalName();
+                $file->filename = $name;
                 $destinationPath = 'project_files/';
-                $file->move($destinationPath, $name);
-                $data[] = $name;
-                $project->file = json_encode($data);
+                $fileData->move($destinationPath, $name);
+                $file->save();
             }
         }
-        $project->save();
+
         for ($i = 0; $i < count($membersList); $i++) {
             $member = new ProjectMember();
             $member->user_id = $membersList[$i];
@@ -192,7 +198,6 @@ class ProjectController extends Controller
     public function showProject($id)
     {
         $project = Project::findOrFail($id);
-        // $employees = User::where('type', '=', 'Employee')->get();
         $employees = User::doesntHave('member', 'and', function ($query) use ($id) {
             $query->where('project_id', $id);
         })->where('type', '=', 'Employee')->get();
@@ -228,5 +233,58 @@ class ProjectController extends Controller
     public function export()
     {
         return Excel::download(new ProjectExport, 'projectList.xlsx');
+    }
+
+
+    public function deleteFile(Request $request)
+    {
+        $file = ProjectFile::findOrFail($request->file_id);
+        if (File::exists(public_path('project_files/' . $file->filename))) {
+            File::delete(public_path('project_files/' . $file->filename));
+            /*
+                Delete Multiple File like this way
+                Storage::delete(['project_files/test.png', 'project_files/test2.png']);
+            */
+            $file->delete();
+            return response()->json(['success' => 'File Deleted Successfully!']);
+        } else {
+            return response()->json(['success' => 'File does not exists.']);
+        }
+    }
+
+    public function downloadFile(Request $request)
+    {
+        $file = ProjectFile::findOrFail($request->file_id);
+        if (File::exists(public_path('project_files/' . $file->filename))) {
+            return Response::download(public_path('project_files/' . $file->filename));
+        } else {
+            return response()->json(['success' => 'File does not exists.']);
+        }
+    }
+
+    public function addProjectFile($id)
+    {
+        return view('dashboard.admin.project.addfile', compact('id'));
+    }
+
+    public function projectFileStore(Request $request)
+    {
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $fileData) {
+                $file = new ProjectFile();
+                // $file->user_id = $this->user->id;
+                $file->project_id = $request->project_id;
+                $name = $fileData->getClientOriginalName();
+                $file->filename = $name;
+                $destinationPath = 'project_files/';
+                $fileData->move($destinationPath, $name);
+                $file->save();
+            }
+            $notification = array(
+                'messege' => 'File Uploaded Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

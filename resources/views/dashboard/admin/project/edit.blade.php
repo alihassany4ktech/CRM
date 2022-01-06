@@ -17,7 +17,96 @@ input[type=number] {
             display: none;
         }
 
+.inputWrapper {
+            height: 25px;
+            line-height: 26px;
+            text-align: center;
+            margin-top: 10px;
+            width: 100px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border-radius: 3px;
+            /*Using a background color, but you can use a background image to represent a button*/
+            background-color: #f1c967;
+            background: -webkit-linear-gradient(to right, #bd7f0a, #f1c967);
+            background: linear-gradient(to right, #bd7f0a, #f1c967);
+        }
 
+        .fileInput {
+            cursor: pointer;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 99;
+            /*This makes the button huge. If you want a bigger button, increase the font size*/
+            font-size: 50px;
+            /*Opacity settings for all browsers*/
+            opacity: 0;
+            -moz-opacity: 0;
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+        }
+
+        /* input[type="file"] {
+  display: block;
+} */
+        .imageThumb {
+            height: 100px;
+            width: 150px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+
+        }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+
+        }
+
+        .remove {
+            display: block;
+            background: rgb(129, 197, 224);
+            /* border: 1px solid rgb(243, 133, 133); */
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .remove:hover {
+             background: rgb(231, 83, 83);
+
+        }
+
+        .labels {
+            background-color: indigo;
+            color: white;
+            padding: 0.5rem;
+            font-family: sans-serif;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        #kuchbe {
+            height: 25px;
+            line-height: 26px;
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            width: 100px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 13px;
+            /*Using a background color, but you can use a background image to represent a button*/
+            
+           
+        }
 </style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
@@ -318,7 +407,17 @@ input[type=number] {
                                 </div>
                             </div>
                            
-                         
+                          {{-- <div class="form-row">
+                                <div class="col-md-12">             
+                                    <div class="col-12" style="margin-left: 14px">
+                                            <label class="bg-success" id="kuchbe" for="files">Choose files</label>
+                                            <hr />
+                                            <input type="file" id="files" name="files[]" multiple
+                                                autocomplete="off" style="display: none" />
+
+                                    </div>
+                                </div>
+                            </div> --}}
                             <br>
                             <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
                             <button type="reset" class="btn btn-info">Rest</button>
@@ -500,7 +599,35 @@ input[type=number] {
     };
 </script>
 
+<script>
+        $(document).ready(function () {
+            if (window.File && window.FileList && window.FileReader) {
+                $("#files").on("change", function (e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function (e) {
+                            var file = e.target;
+                            $("<span class=\"pip\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result +
+                                "\" title=\"" + file.name + "\"/>" +
+                                "<br/><span class=\"remove\">Remove</span>" +
+                                "</span>").insertAfter("#files");
+                            $(".remove").click(function () {
+                                $(this).parent(".pip").remove();
+                            });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
+        });
 
+    </script>
     
 @endpush
 

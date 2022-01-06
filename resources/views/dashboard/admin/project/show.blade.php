@@ -1,5 +1,98 @@
 @extends('dashboard.admin.layouts.includes')
 @section('content')
+<style>
+    .inputWrapper {
+        height: 25px;
+        line-height: 26px;
+        text-align: center;
+        margin-top: 10px;
+        width: 100px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        border-radius: 3px;
+        /*Using a background color, but you can use a background image to represent a button*/
+        background-color: #f1c967;
+        background: -webkit-linear-gradient(to right, #bd7f0a, #f1c967);
+        background: linear-gradient(to right, #bd7f0a, #f1c967);
+    }
+
+    .fileInput {
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 99;
+        /*This makes the button huge. If you want a bigger button, increase the font size*/
+        font-size: 50px;
+        /*Opacity settings for all browsers*/
+        opacity: 0;
+        -moz-opacity: 0;
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    }
+
+    /* input[type="file"] {
+  display: block;
+} */
+    .imageThumb {
+        height: 100px;
+        width: 150px;
+        border: 2px solid;
+        padding: 1px;
+        cursor: pointer;
+
+    }
+
+    .pip {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+
+    }
+
+    .remove {
+        display: block;
+        background: rgb(129, 197, 224);
+        /* border: 1px solid rgb(243, 133, 133); */
+        color: white;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .remove:hover {
+        background: rgb(231, 83, 83);
+
+    }
+
+    .labels {
+        background-color: indigo;
+        color: white;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+
+    #kuchbe {
+        height: 25px;
+        line-height: 26px;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        width: 100px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 13px;
+        /*Using a background color, but you can use a background image to represent a button*/
+
+
+    }
+
+</style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
     <!-- Container fluid  -->
@@ -146,36 +239,25 @@
                 <div class="card">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs profile-tab" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile"
-                                role="tab">Overview</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#members"
-                                role="tab">Members</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#files"
-                                role="tab">Files</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Tasks</a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#leavs" role="tab">Leavs</a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#invoices" role="tab">Time
-                                Logs</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#payments"
-                                role="tab">Documents</a> </li>
-                        <li class="nav-item"> <a class="nav-link bg-light" data-toggle="tab" href="#editProfile"
-                                role="tab">Edit Profile</a> </li>
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Overview</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#members" role="tab">Members</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#files" role="tab">Files</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Tasks</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#leavs" role="tab">Leavs</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#invoices" role="tab">Time Logs</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#payments" role="tab">Documents</a> </li>
+                        <li class="nav-item"> <a class="nav-link bg-light" data-toggle="tab" href="#editProfile" role="tab">Edit Profile</a> </li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-
                         <!--profile -->
                         <div class="tab-pane active" id="profile" role="tabpanel">
                             <h3 class="mt-3" style="text-align: center">Name: {{$project->project_name}}</h3>
                             <p style="text-align: center">Category: {{$project->category->name}}</p>
                             <div class="card-body">
-
                                 <div class="row">
                                     <div class="col-md-3 col-xs-6 b-r"> <strong>Project Budget</strong> <small
                                             style="color:#05a0fa">${{$project->project_budget}}</small>
-
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r ">
                                         <strong>Earnings</strong> <small class="text-success">$0</small>
@@ -219,107 +301,104 @@
                         {{-- members  --}}
                         <div class="tab-pane" id="members" role="tabpanel">
                             <div class="card-body">
-                                
-
-                                
                                 <div class="form-row">
-                                      
                                     <div class="col-md-6 mb-3">
-                                          <h4 class="card-title">ADD PROJECT MEMBERS</h4>
-                                        <form id="pmform"
-                                            enctype="multipart/form-data">
+                                        <h4 class="card-title">ADD PROJECT MEMBERS</h4>
+                                        <form id="pmform" enctype="multipart/form-data">
                                             <input type="hidden" name="project_id" value="{{$project->id}}">
                                             @csrf
-                                             <label for="validationDefault05">Add Project Members
-                                           <small class="text-danger">*</small>
-                                    </label>
-                                    <select class="select2 m-b-10 select2-multiple" name="employee[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" required>
-                                                        @foreach ($employees as $row)
-                                                            <option value="{{$row->id}}">{{$row->name}}</option>
-                                                        @endforeach
-                                                  
-                                    </select>
-                                                 @error('employee')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                            <label for="validationDefault05">Add Project Members
+                                                <small class="text-danger">*</small>
+                                            </label>
+                                            <select class="select2 m-b-10 select2-multiple" name="employee[]"
+                                                class="form-control" style="width: 100%" multiple="multiple"
+                                                data-placeholder="Choose" required>
+                                                @foreach ($employees as $row)
+                                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('employee')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                             <br> <br>
                                             <button class="btn btn-success" type="submit">Save</button>
                                         </form>
                                     </div>
                                 </div>
- <div class="table-responsive m-t-40">
-
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
-                                cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Hourly Rate</th>
-                                        <th>User Role</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($project->members as $row)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td><img src="{{asset($row->user->image) }}" alt="user" class="img-circle" width="30" height="30"> {{$row->user->name}}</td>
-                                        <td>{{$row->user->hourly_rate}}</td>
-                                           <td>
-                                            @if ($row->user->getRoleNames()->isEmpty())
-                                            No Role
-                                            @else
-                                            {{$row->user->getRoleNames()[0]}}
-                                            @endif
-
-                                        </td>
-                                          <td class="">
-                                        
-                                            <a href="{{route('admin.project.delete.member' , ['id'=>$row->id])}}" id="deleteMember" type="button" class="btn btn-sm btn-danger"
-                                                data-toggle="tooltip" title="Delete">
-                                                <i class="fa fa-times" ></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-
+                                <div class="table-responsive m-t-40">
+                                    <table id="example23"
+                                        class="display nowrap table table-hover table-striped table-bordered"
+                                        cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Hourly Rate</th>
+                                                <th>User Role</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($project->members as $row)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td><img src="{{asset($row->user->image) }}" alt="user"
+                                                        class="img-circle" width="30" height="30"> {{$row->user->name}}
+                                                </td>
+                                                <td>{{$row->user->hourly_rate}}</td>
+                                                <td>
+                                                    @if ($row->user->getRoleNames()->isEmpty())
+                                                    No Role
+                                                    @else
+                                                    {{$row->user->getRoleNames()[0]}}
+                                                    @endif
+                                                </td>
+                                                <td class="">
+                                                    <a href="{{route('admin.project.delete.member' , ['id'=>$row->id])}}"
+                                                        id="deleteMember" type="button" class="btn btn-sm btn-danger"
+                                                        data-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         {{-- files  --}}
                         <div class="tab-pane" id="files" role="tabpanel">
                             <div class="card-body">
+                                <a href="{{route('admin.project.add.file',['id'=>$project->id])}}" type="button"
+                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
+                                class="fa fa-plus" style="font-size: 12px"></i> Add More File</a>
                                 <h4 class="card-title">Files</h4>
-                                <?php 
-                                $files = count(json_decode($project->file));
-                                ?>
-                                {{-- {{dd($files)}} --}}
-                        <div class="row">
-                              @if ($files > 0)
-                                  @foreach (json_decode($project->file) as $row)
+                                <div class="row">
+                                    @if (count($project->files) > 0)
+                                    @foreach ($project->files as $row)
                                     <div class="col-md-3 ml-4">
-                                    <div class="d-flex flex-row">
-                                    <span class="btn btn-circle text-white mt-2 bg-success"><i class="fa fa-file"></i></span>
-                                    <div class="comment-text active w-100">
-                                        <small> {{pathinfo($row, PATHINFO_FILENAME) }}</small>
+                                        <div class="d-flex flex-row">
+                                            <button onclick="downloadFile(this)" id="{{$row->id}}"
+                                                class="btn btn-sm btn-circle text-white mt-2 bg-success"
+                                                data-toggle="tooltip" title="Download"><i class="fa fa-download"
+                                                    style="font-size: 12px"></i></button>
+                                            <button onclick="deleteFile(this)" id="{{$row->id}}"
+                                                class="btn btn-sm btn-circle text-white mt-2 bg-danger ml-2"
+                                                data-toggle="tooltip" title="Delete"><i class="fa fa-times"
+                                                    style="font-size: 12px"></i></button>
+                                            <div class="comment-text active w-100">
+                                                <p> {{pathinfo($row->filename, PATHINFO_FILENAME) }}</p>
+                                            </div>
+                                        </div>
                                     </div>
-      
-                                </div> 
-                              </div>
-                              @endforeach
-                              @else
-                                    
-                               <div class="col-md-3 ml-4">
-                              <small>No record found</small>
+                                    @endforeach
+                                    @else
+                                    <div class="col-md-3 ml-4">
+                                        <small>No record found</small>
+                                    </div>
+                                    @endif
                                 </div>
-                              @endif
-                           
-                        </div>
                             </div>
                         </div>
                         {{-- tasks  --}}
@@ -343,30 +422,29 @@
                         {{-- payments  --}}
                         <div class="tab-pane" id="payments" role="tabpanel">
                             <div class="card-body">
-                               sa
-                        </div>
+                                sa
+                            </div>
                         </div>
                         {{-- settings --}}
-                              <div class="tab-pane" id="editProfile" role="tabpanel">
-                                        <div class="card-body">
+                        <div class="tab-pane" id="editProfile" role="tabpanel">
+                            <div class="card-body">
                                 <p>edit</p>
-                            </div>  
-                  </div>
-</div>
-</div>
-</div>
-<!-- Column -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+        </div>
+    </div>
+    <!-- footer -->
+    <footer class="footer">
+        © 2021 Webfabricant
+    </footer>
+    <!-- End footer -->
 </div>
 
-</div>
-<!-- footer -->
-<footer class="footer">
-    © 2021 Webfabricant
-</footer>
-<!-- End footer -->
-</div>
 @endsection
-
 @push('employee-edit-page-script')
 {{-- Save Designation --}}
 <script>
@@ -381,12 +459,50 @@
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.success);
-                         window.location.reload();
+                        window.location.reload();
                     }
                 }
             });
         });
     });
+
+</script>
+<script>
+    function downloadFile(elem) {
+        var file_id = $(elem).attr("id");
+        $.ajax({
+            url: "{{ route('admin.project.file.download') }}",
+            method: "POST",
+            dataType: "json",
+            data: {
+                _token: "{{ csrf_token() }}",
+                file_id: file_id,
+            },
+            success: function (data) {
+                toastr.error(data.success);
+                window.location.reload();
+            }
+        });
+    };
+
+</script>
+<script>
+    function deleteFile(elem) {
+        var file_id = $(elem).attr("id");
+        $.ajax({
+            url: "{{ route('admin.project.file.delete') }}",
+            method: "POST",
+            dataType: "json",
+            data: {
+                _token: "{{ csrf_token() }}",
+                file_id: file_id,
+            },
+            success: function (data) {
+                toastr.error(data.success);
+                window.location.reload();
+            }
+        });
+    };
 
 </script>
 @endpush
