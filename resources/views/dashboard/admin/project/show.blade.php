@@ -379,8 +379,9 @@
                                     @foreach ($project->files as $row)
                                     <div class="col-md-3 ml-4">
                                         <div class="d-flex flex-row">
+                                           
                                             <button onclick="downloadFile(this)" id="{{$row->id}}"
-                                                class="btn btn-sm btn-circle text-white mt-2 bg-success"
+                                                class="btn btn-sm btn-circle text-white mt-2 bg-success ml-2"
                                                 data-toggle="tooltip" title="Download"><i class="fa fa-download"
                                                     style="font-size: 12px"></i></button>
                                             <button onclick="deleteFile(this)" id="{{$row->id}}"
@@ -388,7 +389,13 @@
                                                 data-toggle="tooltip" title="Delete"><i class="fa fa-times"
                                                     style="font-size: 12px"></i></button>
                                             <div class="comment-text active w-100">
-                                                <p> {{pathinfo($row->filename, PATHINFO_FILENAME) }}</p>
+                                                <p> {{pathinfo($row->filename, PATHINFO_FILENAME) }}
+                                                     @if ($row->link != null) &nbsp;
+                                                <a href="{{$row->link}}" data-toggle="tooltip" title="File Link"  target="_blank"><i class="fa fa-link"
+                                                    style="font-size: 12px"></i></a> 
+                                            @endif
+                                             
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

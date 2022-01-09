@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(Project::class, 'user_id');
     }
 
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class, 'user_id', 'id');
+    }
+
     // get Excel 
 
     public static function getEmployee()

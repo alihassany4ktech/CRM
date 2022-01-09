@@ -121,7 +121,6 @@ input[type=number] {
                 <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Work</a></li>
                     <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Projects</a></li>
-                    <li class="breadcrumb-item"><a href="{{ URL::previous() }}">Project Details</a></li>
                     <li class="breadcrumb-item active">Add File</li>
                 </ol>
             </div>
@@ -228,18 +227,52 @@ input[type=number] {
             <div class="col-12">
                 <h4 class="card-title">ADD PROJECT FILES</h4>
                 <div class="card">
+                      
                     <div class="card-body">
                         <form action="{{route('admin.project.file.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="project_id"value="{{$id}}">
-                            <div class="form-row">
-                                <div class="col-md-12">             
-                                    <div class="col-12" style="margin-left: 14px">
+                            <div class="form-row" id="filerow">
+                                  
+                                <div class="col-md-12">    
+                                          <a  id="fbtn" type="button" class="btn btn-sm btn-success m-t-10 float-right text-white ml-2" 
+                                          style="font-size: 12px"><i class="fa fa-link" style="font-size: 12px"></i> Add File Link</a>
+                                          
+                                   
                                           <label class="bg-success" id="kuchbe" for="files">Choose files</label>
                                           <hr />
                                           <input type="file" id="files" name="files[]" multiple autocomplete="off" style="display: none" />
-                                    </div>
+                                   
                                 </div>
+                            </div><br>
+                            <div class="form-row" id="fileLink1">
+                                         <div class="col-md-12">
+                                               <a  id="faddbtn" type="button" class="btn btn-sm btn-success m-t-10 float-right text-white" 
+                                          style="font-size: 12px"><i class="fa fa-link" style="font-size: 12px"></i> Add File</a>
+                                         </div>
+                                   </div>
+                                   
+                             <div class="form-row" id="fileLink">
+                                   
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault03">File Name<small
+                                            class="text-danger">*</small></label>
+                                      <input type="text" name="filename" class="form-control" id="validationDefault03"
+                                        placeholder="required">
+                                         @error('filename')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                
+
+                                <div class="col-md-6 mb-3" id="deadline_div">
+                                      
+                                    <label for="validationDefault03">Add file link <small
+                                            class="text-danger">*</small></label>
+                                    <input type="url"  placeholder="https://example.com" pattern="https://.*" size="30" name="link" class="form-control">
+                                        
+                                </div>
+                                
                             </div>
                             <br>
                             <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Upload</button>
@@ -262,6 +295,24 @@ input[type=number] {
 <!-- End Page wrapper  -->
 @endsection
 @push('lead-store-script')
+
+
+<script>
+  $(document).ready(function () {
+           $('#fileLink').hide();
+           $('#fileLink1').hide()
+           $('#fbtn').on('click',function(){
+                 $('#fileLink').toggle();
+                 $('#filerow').hide();
+                  $('#fileLink1').show()
+           });
+           $('#faddbtn').on('click',function(){
+            $('#fileLink').hide();
+            $('#filerow').show();
+            $('#fileLink1').hide()
+           });
+        });
+</script>
 <script>
      
          function deleteProjectCategory(elem) {

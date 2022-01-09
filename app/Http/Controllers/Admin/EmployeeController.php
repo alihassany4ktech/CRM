@@ -7,13 +7,11 @@ use App\Department;
 use App\Designation;
 use App\EmployeeDocument;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use App\Exports\EmployeeExport;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 

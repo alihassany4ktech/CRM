@@ -129,6 +129,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/delete/designation/{id}', 'Admin\DesignationController@delete')->name('designation.delete');
         // ========================================= Holiday Routes ============================================ \\
         Route::get('/holiday/index', 'Admin\HolidayController@index')->name('holiday.index');
+        // ========================================= Contracts Routes ============================================ \\
+        Route::get('/contracts', 'Admin\ContractController@allContracts')->name('contracts');
+        Route::get('/create/contract/', 'Admin\ContractController@create')->name('contract.create');
+        Route::post('/contract/store', 'Admin\ContractController@contractStore')->name('contract.store');
+        Route::get('/contract/edit/{id}', 'Admin\ContractController@contractEdit')->name('contract.edit');
+        Route::post('/contract/update', 'Admin\ContractController@contractUpdate')->name('contract.update');
+        Route::post('/contract/renew', 'Admin\ContractController@contractRenew')->name('contract.renew');
+        Route::get('/contract/show/{id}', 'Admin\ContractController@contractShow')->name('contract.show');
+        Route::get('/contract/delete/{id}', 'Admin\ContractController@contractDelete')->name('contract.delete');
+        Route::post('/contract/type/store', 'Admin\ContractController@typeStore')->name('contract.type.store');
+        Route::post('/contract/type/delete', 'Admin\ContractController@deleteType')->name('contract.type.delete');
+        Route::post('/renew-contract/delete', 'Admin\ContractController@deleteRenewContract')->name('contract.renewcontract.delete');
+        Route::get('/contract/download/{id}', 'Admin\ContractController@contractDownload')->name('contract.download');
+        Route::get('/export-excel/contract', 'Admin\ContractController@exportInToExcel')->name('export.contract.excel');
+        Route::get('/export-csv/contract', 'Admin\ContractController@exportInToCSV')->name('export.contract.csv');
         // ========================================= Projects Routes ============================================ \\
         Route::get('/projects', 'Admin\ProjectController@allProjects')->name('projects');
         Route::get('/create/project/', 'Admin\ProjectController@create')->name('project.create');

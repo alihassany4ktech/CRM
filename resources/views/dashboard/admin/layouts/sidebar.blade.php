@@ -82,9 +82,9 @@
                                 <li><a href="#"><i class="fa fa-clock" aria-hidden="true"></i> Leaves</a></li>
                             </ul>
                         </li>
-                        <li  class="{{$link == route('admin.projects') || $link == route('admin.project.create')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hide-menu">Work</span></a>
+                        <li  class="{{$link == route('admin.projects')|| $link == route('admin.contracts')|| $link == route('admin.project.create')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hide-menu">Work</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">Contracts</a></li>
+                                <li><a href="{{route('admin.contracts')}}" class="{{$link == route('admin.contracts') ? 'active':''}}">Contracts</a></li>
                                 <li><a href="{{route('admin.projects')}}"  class="{{$link == route('admin.projects') || $link == route('admin.project.create') ? 'active':'' }}">Projects</a></li>
                                 <li><a href="#">Tasks</a></li>
                                 <li><a href="#">Task Board</a></li>

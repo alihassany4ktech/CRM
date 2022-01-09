@@ -406,18 +406,6 @@ input[type=number] {
                                     @enderror
                                 </div>
                             </div>
-                           
-                          {{-- <div class="form-row">
-                                <div class="col-md-12">             
-                                    <div class="col-12" style="margin-left: 14px">
-                                            <label class="bg-success" id="kuchbe" for="files">Choose files</label>
-                                            <hr />
-                                            <input type="file" id="files" name="files[]" multiple
-                                                autocomplete="off" style="display: none" />
-
-                                    </div>
-                                </div>
-                            </div> --}}
                             <br>
                             <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
                             <button type="reset" class="btn btn-info">Rest</button>

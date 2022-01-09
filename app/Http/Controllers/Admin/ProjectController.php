@@ -269,6 +269,9 @@ class ProjectController extends Controller
 
     public function projectFileStore(Request $request)
     {
+
+
+
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $fileData) {
                 $file = new ProjectFile();
@@ -285,6 +288,25 @@ class ProjectController extends Controller
                 'alert-type' => 'success'
             );
             return redirect()->back()->with($notification);
+        } else {
+            if ($request->filename == null) {
+                $notification = array(
+                    'messege' => 'Choose Atleast One File or Enter File Name',
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            } else {
+                $file = new ProjectFile();
+                $file->filename = $request->filename ? $request->filename : null;
+                $file->link = $request->link;
+                $file->project_id = $request->project_id;
+                $file->save();
+                $notification = array(
+                    'messege' => 'File Link Add Successfully',
+                    'alert-type' => 'success'
+                );
+                return redirect()->back()->with($notification);
+            }
         }
     }
 }
