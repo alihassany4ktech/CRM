@@ -164,6 +164,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/project/file/download', 'Admin\ProjectController@downloadFile')->name('project.file.download');
         Route::get('/add/project/file/{id}', 'Admin\ProjectController@addProjectFile')->name('project.add.file');
         Route::post('/project/file/store', 'Admin\ProjectController@projectFileStore')->name('project.file.store');
+        // ========================================= Tasks Routes ============================================ \\
+        Route::get('/tasks', 'Admin\TaskController@allTasks')->name('tasks');
+        Route::get('/create/task', 'Admin\TaskController@create')->name('task.create');
+        Route::post('/task/category/store', 'Admin\TaskController@categoryStore')->name('task.category.store');
+        Route::post('/task/category/delete', 'Admin\TaskController@deleteCategory')->name('task.category.delete');
+        Route::post('/task/label/store', 'Admin\TaskController@labelStore')->name('task.label.store');
     });
 });
 
