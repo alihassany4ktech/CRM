@@ -1,17 +1,128 @@
 @extends('dashboard.admin.layouts.includes')
 @section('content')
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    #multistep_form fieldset:not(:first-of-type) {
+        display: none;
+    }
+
+    .inputWrapper {
+        height: 25px;
+        line-height: 26px;
+        text-align: center;
+        margin-top: 10px;
+        width: 100px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        border-radius: 3px;
+        /*Using a background color, but you can use a background image to represent a button*/
+        background-color: #f1c967;
+        background: -webkit-linear-gradient(to right, #bd7f0a, #f1c967);
+        background: linear-gradient(to right, #bd7f0a, #f1c967);
+    }
+
+    .fileInput {
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 99;
+        /*This makes the button huge. If you want a bigger button, increase the font size*/
+        font-size: 50px;
+        /*Opacity settings for all browsers*/
+        opacity: 0;
+        -moz-opacity: 0;
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    }
+
+    /* input[type="file"] {
+  display: block;
+} */
+    .imageThumb {
+        height: 100px;
+        width: 150px;
+        border: 2px solid;
+        padding: 1px;
+        cursor: pointer;
+
+    }
+
+    .pip {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+
+    }
+
+    .remove {
+        display: block;
+        background: rgb(129, 197, 224);
+        /* border: 1px solid rgb(243, 133, 133); */
+        color: white;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .remove:hover {
+        background: rgb(231, 83, 83);
+
+    }
+
+    .labels {
+        background-color: indigo;
+        color: white;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+
+    #kuchbe {
+        height: 25px;
+        line-height: 26px;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        width: 100px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 13px;
+        /*Using a background color, but you can use a background image to represent a button*/
+
+
+    }
+
+</style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
     <!-- Container fluid  -->
     <div class="container-fluid">
+
         <!-- Bread crumb and right sidebar toggle -->
+
         <div class="row page-titles">
             <div class="col-md-5 col-8 align-self-center">
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                      <li class="breadcrumb-item"><a href="#">Works</a></li>
-                    <li class="breadcrumb-item active">Tasks</li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Work</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.task.label.list')}}">Task Labels</a></li>
+                    <li class="breadcrumb-item active">Update Task Label</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -42,6 +153,7 @@
                 </div>
             </div>
         </div>
+
         <!-- End Bread crumb and right sidebar toggle -->
         <!-- .right-sidebar -->
         <div class="right-sidebar">
@@ -110,101 +222,104 @@
                 </div>
             </div>
         </div>
+        <!-- ============================================================== -->
         <!-- End Right sidebar -->
-        <!-- Start Page Content -->
         <div class="row">
             <div class="col-12">
+                <h4 class="card-title">ADD TASK LABELS</h4>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tasks</h4>
-                           <div class="dropdown">
-                            <a href="#" type="button" class="btn btn-info t-10 float-right" style="font-size: 12px" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-download" style="font-size: 12px"></i> Export</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:0px">
-                                <a class="dropdown-item text-dark" href="{{route('admin.export.task.excel')}}"
-                                    style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
-                                    Excel</a>
-                                <a class="dropdown-item  text-dark" href="{{route('admin.export.task.csv')}}"
-                                    style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
-                                    CSV</a>
+                        <form id="formTaskLabel">
+                            @csrf
+                            <input type="hidden" name="lable_id" value="{{$lable->id}}">
+                            <br>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationDefault03">Label Name <small
+                                            class="text-danger">*</small></label>
+                                    <input type="text" name="name" class="form-control" id="validationDefault03"
+                                        value="{{$lable->label_name}}" required>
 
+                                </div>
                             </div>
-                        </div>
-                         <a href="{{route('admin.task.label.list')}}" type="button"
-                            class="btn btn-outline-primary m-t-8 float-right" style="margin-right: 10px;font-size: 12px">Task Labels</a>
-                        <a href="{{route('admin.task.create')}}" type="button"
-                            class="btn btn-outline-success m-t-8 float-right" style="margin-right: 10px;font-size: 12px">
-                            <i class="fa fa-plus" style="font-size: 12px"></i> Add New Task</a>
-                         
-                        <div class="table-responsive m-t-40">
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
-                                cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Task</th>
-                                        <th>Project</th>
-                                        <th>Assigned To</th>
-                                        <th>Due Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($tasks as $key=>$value)
-                                    <tr>
-                                          <td>{{$loop->iteration}}</td>
-                                          <td>{{$value->title}}</td>
-                                          <td>{{$value->project->project_name}}</td>
-                                          <td>
-                                            @forelse($value->users as $item)
-                                            <img src="{{asset($item->image) }}" alt="user" class="img-circle" width="30" height="30"> {{$item->name}}
-                                            @empty
-                                            No record found
-                                            @endforelse
-                                        </td>
-                                          <td>{{$value->due_date}}</td>
-                                          <td>{{$value->status}}</td>
-                                        
-                                                  <td class="">
-                                            <div class="dropdown">
-                                                <button class="btn btn-light" type="button" id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.task.show',['id'=>$value->id])}}"
-                                                        type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 12px"></i> View</a>
-                                                    <a class="dropdown-item text-dark" type="button"
-                                                        style="font-size: 12px; cursor: pointer;"
-                                                        href="{{route('admin.task.edit',['id'=>$value->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
-                                                    <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.task.delete',['id'=>$value->id])}}"
-                                                        type="button" style="font-size: 12px" id="delete"><i class="fa fa-times"
-                                                            style="font-size: 12px"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationDefault03">Description</label>
+                                    <textarea class="summernote" name="description" required>{{$lable->description}}</textarea>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">Color <small class="text-danger">*
+                                        Choose any color</small></label>
+
+                                <div class="col-md-3">
+                                    <input type="color" class="form-control" id="recipient-name" name="color" value="{{$lable->color}}" required>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
+                            <button type="reset" class="btn btn-info">Rest</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End PAge Content -->
     </div>
     <!-- footer -->
+
     <footer class="footer">
         © 2021 Webfabricant
     </footer>
+
     <!-- End footer -->
+
 </div>
-<!-- End Page wrapper  -->
+
+
 @endsection
 
+@push('lead-store-script')
+<script>
+    $(document).ready(function () {
+        $('#formTaskLabel').on('submit', function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '{{route("admin.task.label.update")}}',
+                method: 'post',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.success);
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+<script>
+    function deleteTaskLabel(elem) {
+        var category_id = $(elem).attr("id");
+        $.ajax({
+            url: "{{ route('admin.task.category.delete') }}",
+            method: "POST",
+            dataType: "json",
+
+            data: {
+                _token: "{{ csrf_token() }}",
+                category_id: category_id,
+            },
+
+            success: function (data) {
+                toastr.error(data.success);
+                window.location.reload();
+            }
+        });
+    };
+
+</script>
+@endpush

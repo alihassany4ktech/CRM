@@ -407,7 +407,47 @@
             });
     </script>
 
+  <script>
+         $(document).on("click", "#deleteAssignee", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "This will remove the Assignee from the Task.",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, delete it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
 
+      <script>
+         $(document).on("click", "#deleteLabel", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "This will remove the Label from the Task.",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, delete it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
 {{-- all leads page script --}}
 
 {{-- get leadc id --}}

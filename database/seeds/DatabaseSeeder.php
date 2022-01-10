@@ -1,6 +1,7 @@
 <?php
 
-use App\LeadStatus;
+
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             LeadStatusSeeder::class,
             DesignationDepartmentSeeder::class,
-            RolePermissionSeeder::class
+            RolePermissionSeeder::class,
+            ProjectSeeder::class
         ]);
     }
 }

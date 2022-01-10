@@ -29,6 +29,10 @@ class Project extends Model
     {
         return $this->hasMany(ProjectFile::class, 'project_id')->orderBy('id', 'desc');
     }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'project_id')->orderBy('id', 'desc');
+    }
 
     public static function getProject()
     {

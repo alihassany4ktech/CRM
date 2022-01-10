@@ -167,9 +167,35 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // ========================================= Tasks Routes ============================================ \\
         Route::get('/tasks', 'Admin\TaskController@allTasks')->name('tasks');
         Route::get('/create/task', 'Admin\TaskController@create')->name('task.create');
+        Route::post('/task/store', 'Admin\TaskController@taskStore')->name('task.store');
+        Route::get('/show/task/{id}', 'Admin\TaskController@showTask')->name('task.show');
+
+        Route::post('/task/assignee/add', 'Admin\TaskController@taskAssigneesAdd')->name('task.assignee.add');
+        Route::get('/task/assignee/delete/{id}', 'Admin\TaskController@deleteTaskAssingnee')->name('task.delete.assignee');
+
+        Route::post('/task/file/delete', 'Admin\TaskController@deleteFile')->name('task.file.delete');
+        Route::post('/task/file/download', 'Admin\TaskController@downloadFile')->name('task.file.download');
+        Route::get('/add/task/file/{id}', 'Admin\TaskController@addTaskFile')->name('task.add.file');
+        Route::post('/task/file/store', 'Admin\TaskController@taskFileStore')->name('task.file.store');
+
+        Route::post('/task/label/add', 'Admin\TaskController@taskLabelAdd')->name('task.label.add');
+        Route::get('/task/label/{id}', 'Admin\TaskController@deleteTaskLabel')->name('task.delete.label');
+
+        Route::get('/export-excel/task', 'Admin\TaskController@exportInToExcel')->name('export.task.excel');
+        Route::get('/export-csv/task', 'Admin\TaskController@exportInToCSV')->name('export.task.csv');
+
         Route::post('/task/category/store', 'Admin\TaskController@categoryStore')->name('task.category.store');
         Route::post('/task/category/delete', 'Admin\TaskController@deleteCategory')->name('task.category.delete');
-        Route::post('/task/label/store', 'Admin\TaskController@labelStore')->name('task.label.store');
+        Route::get('/task/delete/{id}', 'Admin\TaskController@deleteTask')->name('task.delete');
+        Route::get('/task/edit/{id}', 'Admin\TaskController@editTask')->name('task.edit');
+        Route::post('/task/update', 'Admin\TaskController@taskUpdate')->name('task.update');
+        // task label
+        Route::get('/create/task-label', 'Admin\TaskLabelController@create')->name('task.label.create');
+        Route::post('/task/label/store', 'Admin\TaskLabelController@labelStore')->name('task.label.store');
+        Route::get('/task-label-list', 'Admin\TaskLabelController@labelList')->name('task.label.list');
+        Route::get('/task/label/delete/{id}', 'Admin\TaskLabelController@delete')->name('task.label.delete');
+        Route::get('/task/label/edit/{id}', 'Admin\TaskLabelController@edit')->name('task.label.edit');
+        Route::post('/task/label/update', 'Admin\TaskLabelController@labelUpdate')->name('task.label.update');
     });
 });
 

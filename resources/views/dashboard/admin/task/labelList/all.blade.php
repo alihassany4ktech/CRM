@@ -11,7 +11,8 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                       <li class="breadcrumb-item"><a href="#">Works</a></li>
-                    <li class="breadcrumb-item active">Tasks</li>
+                    <li class="breadcrumb-item active"><a href="{{route('admin.tasks')}}">Tasks </a></li>
+                    <li class="breadcrumb-item active">Tasks Labels</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -116,25 +117,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tasks</h4>
-                           <div class="dropdown">
-                            <a href="#" type="button" class="btn btn-info t-10 float-right" style="font-size: 12px" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-download" style="font-size: 12px"></i> Export</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:0px">
-                                <a class="dropdown-item text-dark" href="{{route('admin.export.task.excel')}}"
-                                    style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
-                                    Excel</a>
-                                <a class="dropdown-item  text-dark" href="{{route('admin.export.task.csv')}}"
-                                    style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
-                                    CSV</a>
-
-                            </div>
-                        </div>
-                         <a href="{{route('admin.task.label.list')}}" type="button"
-                            class="btn btn-outline-primary m-t-8 float-right" style="margin-right: 10px;font-size: 12px">Task Labels</a>
-                        <a href="{{route('admin.task.create')}}" type="button"
+                        <h4 class="card-title">Task Labels</h4>
+                      <a href="{{route('admin.tasks')}}" type="button"
+                            class="btn btn-outline-primary m-t-8 float-right" style="margin-right: 10px;font-size: 12px">View Tasks</a>
+                        <a href="{{route('admin.task.label.create')}}" type="button"
                             class="btn btn-outline-success m-t-8 float-right" style="margin-right: 10px;font-size: 12px">
-                            <i class="fa fa-plus" style="font-size: 12px"></i> Add New Task</a>
+                            <i class="fa fa-plus" style="font-size: 12px"></i> Add New Label</a>
+                       
                          
                         <div class="table-responsive m-t-40">
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
@@ -142,47 +131,32 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Task</th>
-                                        <th>Project</th>
-                                        <th>Assigned To</th>
-                                        <th>Due Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th style="text-align: left">Label Name</th>
+                                        <th>Description</th>
+                                        <th style="text-align: end">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tasks as $key=>$value)
+                                    @foreach ($labelList as $row)
                                     <tr>
-                                          <td>{{$loop->iteration}}</td>
-                                          <td>{{$value->title}}</td>
-                                          <td>{{$value->project->project_name}}</td>
-                                          <td>
-                                            @forelse($value->users as $item)
-                                            <img src="{{asset($item->image) }}" alt="user" class="img-circle" width="30" height="30"> {{$item->name}}
-                                            @empty
-                                            No record found
-                                            @endforelse
-                                        </td>
-                                          <td>{{$value->due_date}}</td>
-                                          <td>{{$value->status}}</td>
+                                          <td style="width: 5px">{{$loop->iteration}}</td>
+                                          <td style="width: 10px"><span class="badge text-white p-2" style="background:{{$row->color}};">{{$row->label_name}}</span> </td>
+                                          <td >{!!ucwords($row->description)!!}</td>
+                                       
                                         
-                                                  <td class="">
+                                                  <td class="" style="text-align: end">
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-cogs" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.task.show',['id'=>$value->id])}}"
-                                                        type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 12px"></i> View</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
-                                                        href="{{route('admin.task.edit',['id'=>$value->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
+                                                        href="{{route('admin.task.label.edit',['id'=>$row->id])}}"><i
+                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>     
                                                     <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.task.delete',['id'=>$value->id])}}"
+                                                        href="{{route('admin.task.label.delete',['id'=>$row->id])}}"
                                                         type="button" style="font-size: 12px" id="delete"><i class="fa fa-times"
                                                             style="font-size: 12px"></i> Delete</a>
                                                 </div>

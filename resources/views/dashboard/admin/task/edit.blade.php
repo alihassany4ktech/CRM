@@ -121,7 +121,7 @@ input[type=number] {
                 <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Work</a></li>
                     <li class="breadcrumb-item"><a href="{{route('admin.tasks')}}">Tasks</a></li>
-                    <li class="breadcrumb-item active">Add New Task</li>
+                    <li class="breadcrumb-item active">Update Task</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -225,11 +225,12 @@ input[type=number] {
         <!-- End Right sidebar -->
         <div class="row">
             <div class="col-12">
-                <h4 class="card-title">ADD TASK</h4>
+                <h4 class="card-title">UPDATE TASK</h4>
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('admin.task.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.task.update')}}" method="POST">
                             @csrf
+                            <input type="hidden" name="task_id" value="{{$task->id}}">
                              <br>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3 mt-1">
@@ -237,8 +238,7 @@ input[type=number] {
                                        <select class="select2 form-control" style="width: 100%" name="project" >
                                     <option value="">--</option>
                                     @foreach ($projects as $row)
-                                        <option value="{{$row->id}}">{{$row->project_name}}</option>
-
+                                        <option value="{{$row->id}}" {{$row->project_name == $task->project->project_name ? 'selected' : ''}}>{{$row->project_name}}</option>
                                     @endforeach
                                 </select>
                                     @error('project')
@@ -254,7 +254,7 @@ input[type=number] {
                                      <select class="select2 form-control" style="width: 100%" name="task_category" >
                                     <option value="">No task category added</option>
                                     @foreach ($categories as $row)
-                                        <option value="{{$row->id}}">{{$row->category_name}}</option>
+                                        <option value="{{$row->id}}" {{$row->category_name == $task->category->category_name ? 'selected' : ''}}>{{$row->category_name}}</option>
                                     @endforeach
                                 </select>
                                     @error('task_category')
@@ -267,7 +267,7 @@ input[type=number] {
                                     <label for="validationDefault03">Title <small
                                             class="text-danger">*</small></label>
                                       <input type="text" name="title" class="form-control" id="validationDefault03"
-                                        placeholder="" >
+                                        value="{{$task->title}}" >
                                          @error('title')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -277,7 +277,7 @@ input[type=number] {
                               <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label for="validationDefault03">Description</label>
-                                    <textarea class="summernote" name="description"></textarea>
+                                    <textarea class="summernote" name="description">{{$task->description}}</textarea>
                                     @error('description')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -290,7 +290,7 @@ input[type=number] {
                                     <label for="validationDefault03">Start Date <small
                                             class="text-danger">*</small></label>
                                       <input type="date" name="start_date" class="form-control" id="validationDefault03"
-                                        placeholder="" >
+                                        value="{{Carbon\Carbon::parse($task->start_date)->format('Y-m-d')}}" >
                                          @error('start_date')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -301,22 +301,27 @@ input[type=number] {
                                     <label for="validationDefault03">Due Date <small
                                             class="text-danger">*</small></label>
                                     <input type="date" name="duedate" class="form-control" id="validationDefault03"
-                                        placeholder="">
+                                        value="{{Carbon\Carbon::parse($task->due_date)->format('Y-m-d')}}">
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                {{-- <div class="col-md-4 mb-3">
                                     <label for="validationDefault03">Assigned To<small class="text-danger"> * you can select multiple</small></label>
                                    <select class="select2 m-b-10 select2-multiple" name="assignTo[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose">
-                                                        @foreach ($employees as $row)
-                                                            <option value="{{$row->id}}">{{$row->name}}</option>
-                                                        @endforeach
-                                                  
+                                                        
+                                                   @foreach ($employees as $key => $value)
+                                                       
+                                                      @if(isset($task->users[$key]))
+                                                            <option value="{{$value->id}}" {{$task->users[$key]->name == $value->name ? 'selected' : ''}} >{{$value->name}}</option>
+                                                            @else
+                                                                  <option value="{{$value->name}}">{{$value->name}}</option>
+                                                            @endif
+                                                        @endforeach 
                                                 </select>
                                     @error('assignTo')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
-                                </div>
+                                </div> --}}
                             </div>
-                            <div class="form-row mt-2">
+                            {{-- <div class="form-row mt-2">
                                     <div class="col-md-12 mb-3">
                                     <label for="validationDefault04">Label
                                         <a href="#" id="addLeadsource" data-toggle="modal"
@@ -325,37 +330,42 @@ input[type=number] {
                                     </label>
                                   
                                 <select class="select2 m-b-10 select2-multiple" name="label[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose">
-                                        @foreach ($labelList as $row)
-                                            <option value="{{$row->id}}">{{$row->label_name}}</option>
-                                        @endforeach
-                                                  
+                                       
+                                                      @foreach ($labelList as $key => $value)
+                                                       
+                                                      @if(isset($task->labels[$key]))
+                                                            <option value="{{$value->id}}" {{$task->labels[$key]->label_name == $value->label_name ? 'selected' : ''}} >{{$value->label_name}}</option>
+                                                            @else
+                                                                  <option value="{{$value->id}}">{{$value->label_name}}</option>
+                                                            @endif
+                                                        @endforeach
                                         </select>
                                     @error('label')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                               <div class="form-row">
                                 <div class="col-md-2 mb-2" style="margin-top: 38px">
-                                    <input type="checkbox" id="md_checkbox_1" class="chk-col-red" name="make_private"/>
+                                    <input type="checkbox" id="md_checkbox_1" class="chk-col-red" name="make_private" {{$task->isPrivate == 1 ? 'checked':''}} />
                                   <label for="md_checkbox_1">Make Prvate <span class="mytooltip"> <i class="fa fa-info-circle" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:100px;"><span class="tooltip-inner2" style="font-size: 12px">Private Tasks are only visible to admin, assignor and assignee.</span></span></span></span></label>
                                 </div>
                                  <div class="col-md-2 mb-3" style="margin-top: 38px">
-                                    <input type="checkbox" id="md_checkbox_2" class="chk-col-pink" name="billable"/>
+                                    <input type="checkbox" id="md_checkbox_2" class="chk-col-pink" name="billable" {{$task->billable == 1 ? 'checked':''}}/>
                                   <label for="md_checkbox_2">Billable  <span class="mytooltip"> <i class="fa fa-info-circle" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:100px;"><span class="tooltip-inner2" style="font-size: 12px">Invoice can be generated for this task's time log.</span></span></span></span></label>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-top: 38px">
-                                    <input type="checkbox" id="md_checkbox_3" class="chk-col-indigo" name="set_time"/>
+                                    <input type="checkbox" id="md_checkbox_3" class="chk-col-indigo" name="set_time" {{$task->set_time == 1 ? 'checked':''}}/>
                                   <label for="md_checkbox_3">Set time estimate</label>
                                 </div>
                                 <div class="col-md-3 mb-3" style="margin-top: 35px" id="setTime">
                                     <label>Hour</label>
-                                    <input type="number" class="form-control" width="5px" name="hour"/> 
+                                    <input type="number" class="form-control" width="5px" name="hour" value="{{$task->hour}}"/> 
                                   
                                 </div>
                                 <div class="col-md-3 mb-3" style="margin-top: 35px" id="setMint">
                                     <label>Mins</label>
-                                    <input type="number" class="form-control" width="5px" name="mnt"/> 
+                                    <input type="number" class="form-control" width="5px" name="mnt" value="{{$task->mins}}"/> 
                                   
                                 </div>
                             </div>
@@ -364,8 +374,8 @@ input[type=number] {
                                     <label for="validationDefault04">Status</label>
                                      <select class="select2 form-control" style="width: 100%" name="status" >
                              
-                                        <option value="Incomplete">Incomplete</option>
-                                        <option value="Completed">Completed</option>
+                                        <option value="Incomplete" {{$task->status == 'Incomplete'? 'selected':''}}>Incomplete</option>
+                                        <option value="Completed" {{$task->status == 'Completed'? 'selected':''}}>Completed</option>
                                     
                                 </select>
                                     @error('status')
@@ -374,28 +384,19 @@ input[type=number] {
                                 </div>
                                 <div class="col-md-4 mb-3" style="margin-top: 38px">
                                     <label for="validationDefault03">Priority</label> <br>
-                                     <input name="priority_status" type="radio" id="radio_30" value="High" class="with-gap radio-col-green" checked/>
+                                     <input name="priority_status" type="radio" id="radio_30" value="High" class="with-gap radio-col-green" {{$task->priority == 'High'? 'checked':''}}/>
                                                 <label for="radio_30" class="text-success">High</label>
-                                                <input name="priority_status" type="radio" value="Medium" id="radio_31" class="with-gap radio-col-orange"  />
+                                                <input name="priority_status" type="radio" value="Medium" id="radio_31" class="with-gap radio-col-orange" {{$task->priority == 'Medium'? 'checked':''}} />
                                                 <label for="radio_31" style="color: orange">Medium</label>
-                                                 <input name="priority_status" type="radio" value="Low" id="radio_32" class="with-gap radio-col-red" />
+                                                 <input name="priority_status" type="radio" value="Low" id="radio_32" class="with-gap radio-col-red" {{$task->priority == 'Low'? 'checked':''}} />
                                                 <label for="radio_32" class="text-danger">Low</label>
                                                 
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col-md-12">             
-                                    <div class="col-12" style="margin-left: 14px">
-                                            <label class="bg-success" id="kuchbe" for="files">Choose files</label>
-                                            <hr />
-                                            <input type="file" id="files" name="files[]" multiple
-                                                autocomplete="off" style="display: none" />
-                                    </div>
-                                </div>
-                            </div>
+                  
                          
                             <br>
-                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
                     </div>
@@ -513,8 +514,18 @@ input[type=number] {
 @push('lead-store-script')
 <script>
     $(document).ready(function(){
-          $('#setTime').hide();
+          var set_time = @json($task->set_time);
+       
+      if(set_time == 1)
+      {
+                $('#setTime').show();
+          $('#setMint').show();
+      }else
+      {
+                  $('#setTime').hide();
           $('#setMint').hide();
+      }
+      
         $('#md_checkbox_3').click(function(){
             if($(this).prop("checked") == true){
                 $('#setTime').show();
@@ -586,36 +597,5 @@ input[type=number] {
         });
     };
 </script>
-
-
-      <script>
-        $(document).ready(function () {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function (e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function (e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img class=\"imageThumb\" src=\"" + e.target.result +
-                                "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\">Remove</span>" +
-                                "</span>").insertAfter("#files");
-                            $(".remove").click(function () {
-                                $(this).parent(".pip").remove();
-                            });
-                        });
-                        fileReader.readAsDataURL(f);
-                    }
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
-            }
-        });
-
-    </script>
 @endpush
 

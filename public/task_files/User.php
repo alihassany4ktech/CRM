@@ -55,47 +55,25 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class, 'department_id');
     }
 
-    public function member()
-    {
-        return $this->hasMany(ProjectMember::class, 'user_id');
-    }
-
-    public function assignee()
-    {
-        return $this->hasMany(TaskUser::class, 'user_id');
-    }
-
-    public function projects()
-    {
-        return $this->hasMany(Project::class, 'user_id');
-    }
-
-    public function contracts()
-    {
-        return $this->hasMany(Contract::class, 'user_id', 'id');
-    }
-
     // get Excel 
 
     public static function getEmployee()
     {
         $records = DB::table('users')->where('type', '=', 'Employee')->select(
-            [
-                'id',
-                'employee_id',
-                'name',
-                'email',
-                'designation',
-                'department',
-                'phone',
-                'slack_username',
-                'address',
-                'joining_date',
-                'exit_date',
-                'gender',
-                'hourly_rate',
-                'skills'
-            ]
+            'id',
+            'employee_id',
+            'name',
+            'email',
+            'designation',
+            'department',
+            'phone',
+            'slack_username',
+            'address',
+            'joining_date',
+            'exit_date',
+            'gender',
+            'hourly_rate',
+            'skills',
         )->get()->toArray();
         return $records;
     }
