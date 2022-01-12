@@ -1,18 +1,6 @@
 @extends('dashboard.admin.layouts.includes')
 @section('content')
 <style>
-    /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
   #multistep_form fieldset:not(:first-of-type) {
             display: none;
         }
@@ -231,6 +219,7 @@ input[type=number] {
                         <form action="{{route('admin.task.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                              <br>
+                             <input type="hidden" name="status" value="Completed">
                             <div class="form-row">
                                 <div class="col-md-6 mb-3 mt-1">
                                     <label for="validationDefault03">Project <small class="text-danger">*</small></label>
@@ -249,7 +238,7 @@ input[type=number] {
                                     <label for="validationDefault04">Task Category
                                         <a href="#" id="addLeadsource" data-toggle="modal"
                                             data-target="#responsive-modal2" id="addLeadsource"
-                                            class="btn btn-sm  btn-outline-success"><i class="ti-plus"></i></a>
+                                            class="btn btn-sm  btn-outline-success"><i class="fa fa-plus"></i></a>
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="task_category" >
                                     <option value="">No task category added</option>
@@ -321,7 +310,7 @@ input[type=number] {
                                     <label for="validationDefault04">Label
                                         <a href="#" id="addLeadsource" data-toggle="modal"
                                             data-target="#responsive-modal3" id="addLeadsource"
-                                            class="btn btn-sm  btn-outline-success"><i class="ti-plus"></i> Add Task Label</a><small class="text-danger"> * you can select multiple</small>
+                                            class="btn btn-sm  btn-outline-success"><i class="fa fa-plus"></i> Add Task Label</a><small class="text-danger"> * you can select multiple</small>
                                     </label>
                                   
                                 <select class="select2 m-b-10 select2-multiple" name="label[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose">
@@ -360,18 +349,7 @@ input[type=number] {
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-4 mb-3" style="margin-top: 38px">
-                                    <label for="validationDefault04">Status</label>
-                                     <select class="select2 form-control" style="width: 100%" name="status" >
-                             
-                                        <option value="Incomplete">Incomplete</option>
-                                        <option value="Completed">Completed</option>
-                                    
-                                </select>
-                                    @error('status')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+                               
                                 <div class="col-md-4 mb-3" style="margin-top: 38px">
                                     <label for="validationDefault03">Priority</label> <br>
                                      <input name="priority_status" type="radio" id="radio_30" value="High" class="with-gap radio-col-green" checked/>

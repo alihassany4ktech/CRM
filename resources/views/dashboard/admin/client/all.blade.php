@@ -116,9 +116,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Clients</h4>
+                        <h4 class="card-title"><i class="icon-people"></i> Clients</h4>
                         <a href="{{route('admin.create.client')}}" type="button"
-                            class="btn btn-outline-success m-t-10 float-right" style="font-size: 12px"><i class="fa fa-plus" style="font-size: 12px"></i> Add New
+                            class="btn btn-outline-success m-t-10 float-right" style="font-size: 12px"><i class="ti-plus" style="font-size: 12px"></i> Add New
                             Client</a>
                         <div class="table-responsive m-t-40">
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
@@ -165,14 +165,14 @@
                                         <td class="">
                                             <a href="{{route('admin.client.show' , ['id'=>$row->id])}}"  type="button" class="btn btn-sm btn-info text-white"
                                                 data-toggle="tooltip" title="View Details">
-                                                <i class="fa fa-eye"></i>
+                                                <i class="ti-eye"></i>
                                             </a>
                                             <a href="{{route('admin.client.show' , ['id'=>$row->id])}}" type="button" class="btn btn-sm btn-primary text-white"
                                                 data-toggle="tooltip" title="Edit Client">
-                                                <i class="fas fa-edit"></i>
+                                                <i class="ti-marker-alt"></i>
                                             </a>
                                             <a href="{{route('admin.client.delete' , ['id'=>$row->id])}}"class="btn btn-sm btn-danger" data-toggle="tooltip" id="delete" title="Delete Client">
-                                                <i class="fa fa-times"></i>
+                                                <i class="ti-close"></i>
                                         </a>
                                         </td>
                                     </tr>

@@ -48,6 +48,23 @@
     <script src="{{asset('assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
     <script src="{{asset('assets/plugins/summernote/dist/summernote.min.js')}}"></script>
     <script src="{{asset('assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+         <!-- Draggable-portlet -->
+    {{-- <script src="{{asset('assets/plugins/jqueryui/jquery-ui.min.js')}}"></script> --}}
+    {{-- <script src="../../../../../cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> --}}
+    <script src="{{asset('assets/plugins/gridstack/lodash.js')}}"></script>
+    <script src="{{asset('assets/plugins/gridstack/gridstack.js')}}"></script>
+    <script src="{{asset('assets/plugins/gridstack/gridstack.jQueryUI.js')}}"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('.grid-stack').gridstack({
+            width: 12,
+            alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+            resizable: {
+                handles: 'e, se, s, sw, w'
+            }
+        });
+    });
+    </script>
     <script>
     jQuery(document).ready(function() {
 
@@ -713,5 +730,10 @@
  {{-- employe create page script --}}
  @stack('employee-create-page-script')
  @stack('employee-edit-page-script')
+ @stack('product-page-script')
+ @stack('tickect-page-script')
+ @stack('tickect-types-page-script')
+ @stack('tickect-channels-page-script')
+ @stack('tickect-groups-page-script')
 </body>
 </html>

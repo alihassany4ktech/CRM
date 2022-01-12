@@ -16,8 +16,8 @@
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#">Customers</a></li>
-                    <li class="breadcrumb-item active">Leads</li>
+                    <li class="breadcrumb-item active"><a href="{{route('admin.tickets')}}">Tickets</a></li>
+                    <li class="breadcrumb-item active">Ticket Types</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -122,125 +122,49 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Leads</h4>
-                        <div class="dropdown">
-                            <a href="#" type="button" class="btn btn-info t-10 float-right" style="font-size: 12px" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-download"></i> Export</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
-                                <a class="dropdown-item text-dark" href="{{route('admin.export.lead.excel')}}"
-                                    style="font-size: 12px"><i class="fa fa-file-excel"></i>
-                                    Excel</a>
-                                <a class="dropdown-item  text-dark" href="{{route('admin.export.lead.csv')}}"
-                                    style="font-size: 12px"><i class="fa fa-file-excel"></i>
-                                    CSV</a>
-
-                            </div>
-                        </div>
-                        <a href="{{route('admin.lead.kanbanBoard')}}" type="button" 
-                            class="btn btn-outline-primary t-10 float-right" style="margin-right: 10px;font-size: 12px"><i class="fa fa-clipboard" aria-hidden="true"></i>Kanban Board</a>
-                        <a href="{{route('admin.create.lead')}}" type="button"
-                            class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
-                                class="fa fa-plus" ></i> Add New
-                            Lead</a>
-
-                        <?php
-                                $leadStstus = App\LeadStatus::all();
-                                $leadFollowUp = App\leadFollowUp::all();
-                                $leadsConverted = App\Lead::where('status','=','converted')->get();
-                        ?>
-                        <div class="row justify-content-center" style="margin-top: 6%">
-                            <div class="col-md-3 col-xs-6 b-r"> <span
-                                    class="btn btn-circle  btn-info text-white">{{$leads->count()}}</span> <strong>Total
-                                    Leads</strong>
-
-                            </div>
-                            <div class="col-md-3 col-xs-6 b-r"><span
-                                    class="btn btn-circle  btn-warning text-white">{{$leadsConverted->count()}}</span>
-                                <strong>Total Client
-                                    Convert</strong>
-
-                            </div>
-                            <div class="col-md-3 col-xs-6"><span
-                                    class="btn btn-circle  btn-success text-white">{{$leadFollowUp->count()}}</span>
-                                <strong>Total Pending Follow Up</strong>
-
-                            </div>
-                        </div>
+                        <h4 class="card-title">Ticket Types</h4>
+                        <a href="{{route('admin.tickets')}}" type="button"
+                            class="btn btn-outline-success float-right" style="margin-right: 10px; font-size: 12px">View Tickets</a>
+                      
+                        <a href="" data-toggle="modal" data-target="#responsive-modal3" id="addLeadsource" type="button"
+                            class="btn btn-outline-warning float-right" style="margin-right: 10px; font-size: 12px"><i class="ti-plus"></i>Add Type</a>
+                       
                         <div class="table-responsive m-t-40">
-
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
                                 cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Client Name</th>
-                                        <th>Client Email</th>
-                                        <th>Company Name</th>
-                                        <th>Lead Value</th>
-                                        <th>Created</th>
-                                        <th>Next Fallow Up</th>
-                                        <th>Lead Agent</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Name</th>
+                                        <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    @foreach ($leads as $row)
+                                    
+                                    @foreach ($types as $row)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$row->client_name}}</td>
-                                        <td>{{$row->client_email}}</td>
-                                        <td>{{$row->company_name}}</td>
-                                        <td>{{$row->value}}</td>
-                                        <td>{{$row->created_at->format('d-m-y')}}</td>
-                                        <td>{{$row->next_follow_up}}</td>
-                                        <td>
-                                            <img src="{{asset($row->client->image)}}" class="img-circle elevation-2"
-                                                alt="admin Image" style="height: 35px;width:35px">
-                                            {{ucwords($row->client->name)}}
-                                        </td>
-                                        <td style="width:10%">
-                                            <select id="{{$row->id}}" class="form-control bg-light changeStatus">
-                                                @foreach ($leadStstus as $item)
-                                                <option value="{{$item->id}}"
-                                                    {{$item->type == $row->lead_status->type ? 'selected':''}}>
-                                                    {{$item->type}}</option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                        <td class="">
+                                        <td>{{$row->type}}</td>
+                                 
+                                      
+                                        <td style="text-align: center">
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
+                                                    <i class="ti-settings" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.lead.show' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 12px"></i> View</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
-                                                        href="{{route('admin.lead.show' , ['id'=>$row->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
-                                                    <a class="dropdown-item text-dark" type="button"
-                                                        href="{{route('admin.lead.delete' , ['id'=>$row->id])}}"
-                                                        id="delete"><i class="fa fa-times"
-                                                            style="font-size: 12px"></i> Delete</a>
-                                                    <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.change.leadToCliet' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 12px"><i class="fa fa-user"
-                                                            style="font-size: 12px"></i> Change To
-                                                        Client</a>
-                                                    <button class="dropdown-item text-dark" onclick="getLeadId(this)"
-                                                        id="{{$row->id}}" data-toggle="modal"
-                                                        data-target="#responsive-modallead"
-                                                        style="font-size: 12px;  cursor: pointer;"><i
-                                                            class="fa fa-thumbs-up" style="font-size: 12px"></i> Add
-                                                        Follow Up</button>
-
-
+                                                        data-toggle="modal" data-target="#responsive-modal4"
+                                                         onclick="editType(this)"
+                                                        id="{{$row->id}}" name="{{$row->type}}"
+                                                        href=""><i
+                                                            class="ti-marker-alt" style="font-size: 12px"></i> Edit</a>
+                                                    <a class="dropdown-item text-dark" onclick="deleteType(this)"
+                                                        id="{{$row->id}}"
+                                                        type="button" style="font-size: 12px;cursor: pointer;" id="delete"><i class="ti-close"
+                                                            style="font-size: 12px; cursor: pointer;"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -265,32 +189,23 @@
 <!-- End Page wrapper  -->
 
 <!-- leaD Category modal -->
-<div id="responsive-modallead" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- Ticket Type modal -->
+<div id="responsive-modal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
     aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-success">
-                <h4 class="modal-title text-white" id="exampleModalLabel"><i class="fa fa-plus"></i> Follow Up Next
-                </h4>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                <h4 class="modal-title text-white" id="exampleModalLabel1">Add New Ticket Type</h4>
+                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
-
             <div class="modal-body">
-
-                <form id="followUpForm">
+            <form id="ticketTypeForm">
                     @csrf
-                    <input type="hidden" name="leadId" id="leadId">
                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">Follow Up Next</label>
-                        <input class="form-control" id="datepicker" name="next_follow_up_date" type="date"
-                            id="example-date-input" required>
+                        <label for="recipient-name" class="control-label">Ticket Type</label>
+                        <input type="text" name="tiket_type" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Remark</label>
-                        <input type="text" name="remark" class="form-control" id="recipient-name" required>
-                    </div>
-
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
@@ -300,5 +215,105 @@
         </div>
     </div>
 </div>
-<!-- /.modal -->
+{{-- edit model --}}
+<div id="responsive-modal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
+    aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h4 class="modal-title text-white" id="exampleModalLabel1">Update Ticket Type</h4>
+                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+            <form id="ticketTypeUpdateForm">
+                    @csrf
+                    <input type="hidden" name="id" id="ticketId">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Ticket Type</label>
+                        <input type="text" name="tiket_type" id="ticketType" class="form-control" required>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                    Update</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
+@push('tickect-types-page-script')
+{{-- Type --}}
+<script>
+    $(document).ready(function(){
+       $('#ticketTypeForm').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+                url:'{{route("admin.ticket.type.store")}}',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                 success: function (data) {
+                  if (data.success) {
+                        toastr.success(data.success);
+                        window.location.reload();
+                    }
+                }
+            });
+     });
+    });
+</script>
+{{-- edit --}}
+<script>
+     
+      function editType(elem) {
+        var id = $(elem).attr("id");
+        var type = $(elem).attr("name");
+        $('#ticketId').val(id);
+        $('#ticketType').val(type);
+    };
+</script>
+<script>
+    $(document).ready(function(){
+       $('#ticketTypeUpdateForm').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+                url:'{{route("admin.ticket.type.update")}}',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                 success: function (data) {
+                  if (data.success) {
+                        toastr.success(data.success);
+                        window.location.reload();
+                    }
+                }
+            });
+     });
+    });
+</script>
+{{--  --}}
+{{-- delete --}}
+<script>
+     
+         function deleteType(elem) {
+        var type_id = $(elem).attr("id");
+        $.ajax({
+            url: "{{ route('admin.ticket.type.delete') }}",
+            method: "POST",
+            dataType: "json",
+
+            data: {
+                _token: "{{ csrf_token() }}",
+                type_id: type_id,
+            },
+
+            success: function (data) {
+                toastr.error(data.success);
+                window.location.reload();
+            }
+        });
+    };
+</script>
+@endpush

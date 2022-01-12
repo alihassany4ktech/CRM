@@ -13,6 +13,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/datatables/media/css/dataTables.bootstrap4.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/gridstack/gridstack.css')}}" rel="stylesheet">
+    
        <!-- summernotes CSS -->
     <link href="{{asset('assets/plugins/summernote/dist/summernote.css')}}" rel="stylesheet" />
     <!-- chartist CSS -->

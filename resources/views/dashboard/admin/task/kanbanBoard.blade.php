@@ -4,7 +4,46 @@
     .dropdown-menu {
         min-width: 5.4rem !important;
     }
-
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 0;
+    width: 286%;
+    z-index: 0 !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+@media only screen and (max-width: 600px) {
+ .grid-stack > .grid-stack-item > .grid-stack-item-content {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 0;
+    width:auto;
+    z-index: 0 !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+}
+@media only screen and (max-width: 800px) {
+ .grid-stack > .grid-stack-item > .grid-stack-item-content {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 0;
+    width:auto;
+    z-index: 0 !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+}
 </style>
 <div class="page-wrapper">
     <!-- Container fluid  -->
@@ -15,7 +54,7 @@
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('admin.leads')}}">Leads</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.tasks')}}">Tasks</a></li>
                     <li class="breadcrumb-item active">kanban Board</li>
                 </ol>
             </div>
@@ -117,104 +156,115 @@
         </div>
         <!-- End Right sidebar -->
         <!-- Start Page Content -->
-        {{-- pendind --}}
-             <div class="row el-element-overlay">
-                    <div class="col-md-12">
-                        <h4 class="card-title text-danger">PENDING</h4>
-                  </div>
-                   @if ($pendingLeads->isEmpty())
-                  <div class="col-md-12">
-                        <h6 class="card-subtitle m-b-20 text-muted">Not Found</h6>
-                    </div>
-                     @else 
-                   @foreach ($pendingLeads as $row)
-                        <div class="col-lg-3 col-md-6">
+         {{-- <div class="row">
+                    <div class="col-12">
                         <div class="card">
-                              
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="{{ $row->client->image ? asset($row->client->image): asset('assets/images/users/2.jpg')}}" style="height:230px" alt="user" />
-                                    <div class="el-overlay" data-toggle="tooltip" title="{{$row->client->name}} (agent)">
-                                        <ul class="el-info">
-                                            <li><a class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Edit" href="{{route('admin.lead.show' , ['id'=>$row->id])}}"><i class="ti-marker-alt"></i></a></li>
-                                        </ul>
+                            <div class="card-body">
+                                <h4 class="card-title">Draggable Panel Portlets</h4>
+                                <h6 class="card-subtitle">Thus is a widget layout jquery plugin. <a href="http://troolee.github.io/gridstack.js/" target="_blank">gridstack.js</a> is used to design this layout. This is drag-and-drop multi-column grid. It allows you to build draggable responsive layouts.</h6>
+                                <div class="grid-stack" data-gs-width="12" data-gs-animate="yes">
+                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
+                                        <div class="grid-stack-item-content">1</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+                                        <div class="grid-stack-item-content">2</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="8" data-gs-y="0" data-gs-width="2" data-gs-height="2" data-gs-min-width="2" data-gs-no-resize="yes">
+                                        <div class="grid-stack-item-content"> <span class="fa fa-hand-o-up"></span> Drag me! </div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="10" data-gs-y="0" data-gs-width="2" data-gs-height="2">
+                                        <div class="grid-stack-item-content">4</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="2" data-gs-width="2" data-gs-height="2">
+                                        <div class="grid-stack-item-content">5</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="2" data-gs-y="2" data-gs-width="2" data-gs-height="4">
+                                        <div class="grid-stack-item-content">6</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="8" data-gs-y="2" data-gs-width="4" data-gs-height="2">
+                                        <div class="grid-stack-item-content">7</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="4" data-gs-width="2" data-gs-height="2">
+                                        <div class="grid-stack-item-content">8</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="4" data-gs-y="4" data-gs-width="4" data-gs-height="2">
+                                        <div class="grid-stack-item-content">9</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="8" data-gs-y="4" data-gs-width="2" data-gs-height="2">
+                                        <div class="grid-stack-item-content">10</div>
+                                    </div>
+                                    <div class="grid-stack-item" data-gs-x="10" data-gs-y="4" data-gs-width="2" data-gs-height="2">
+                                        <div class="grid-stack-item-content">11</div>
                                     </div>
                                 </div>
-                                <div class="el-card-content">
-                                    <h3 class="box-title">{{$row->client_name}}</h3> <small> <i class="fa fa-building"></i> {{$row->company_name}}</small>
-                                    <br/> 
-                                    <div class="ribbon ribbon-danger ribbon-corner ribbon-bottom"><i class="fab fa-leanpub"></i></div>
-                              </div>
                             </div>
                         </div>
                     </div>
-                   @endforeach
-                   @endif
-                </div>
-   {{-- INPROCESS --}}
-             <div class="row el-element-overlay">
-                    <div class="col-md-12">
-                        <h4 class="card-title text-danger">INPROCESS</h4>
-                  </div>
-                   @if ($inprocessLeads->isEmpty())
-                  <div class="col-md-12">
-                        <h6 class="card-subtitle m-b-20 text-muted">Not Found</h6>
-                    </div>
-                     @else 
-                   @foreach ($inprocessLeads as $row)
-                        <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="{{ $row->client->image ? asset($row->client->image): asset('assets/images/users/3.jpg')}}" style="height:230px" alt="user" />
-                                    <div class="el-overlay" data-toggle="tooltip" title="{{$row->client->name}} (agent)">
-                                        <ul class="el-info">
-                                            <li><a class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Edit" href="{{route('admin.lead.show' , ['id'=>$row->id])}}"><i class="ti-marker-alt"></i></a></li>
-                                            <li><a class="btn default btn-outline" href="{{route('admin.lead.delete' , ['id'=>$row->id])}}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a></li>
-                                        </ul>
+                </div> --}}
+        {{-- COMPLETED --}}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-success">COMPLETED</h4>
+                        @if ($completeTasks->isEmpty())
+                        <div class="col-md-12">
+                            <h6 class="card-subtitle m-b-20 text-muted">Not Found</h6>
+                        </div>
+                        @else
+                        @foreach ($completeTasks as $row)
+                        <div class="grid-stack" data-gs-width="12" data-gs-animate="yes" style="margin-top:10px;width:100%">
+                            <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
+                                data-gs-height="2">
+                                <div class="grid-stack-item-content">
+                                      <p class="mt-2">{{$row->title}}</p>
+                                      <small>{{date_format($row->start_date,"d-m-Y")}}</small> <small> To {{date_format($row->due_date,"d-m-Y")}}</small><br>
+                                       <a type="button" href="{{route('admin.task.edit' , ['id'=>$row->id])}}"
+                                                class="btn btn-sm btn-success">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                     </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h3 class="box-title">{{$row->client_name}}</h3> <i class="fa fa-building"></i> <small>{{$row->company_name}}</small>
-                                    <br/>
-                               </div>
-                               <div class="ribbon ribbon-danger ribbon-corner ribbon-bottom"><i class="fab fa-leanpub"></i></div>
                             </div>
                         </div>
+                        @endforeach
+                        @endif
+                        
                     </div>
-                   @endforeach
-                   @endif
                 </div>
-   {{-- CONVERTED --}}
-             <div class="row el-element-overlay">
-                    <div class="col-md-12">
-                        <h4 class="card-title text-danger">CONVERTED</h4>
-                  </div>
-                 @if ($convertedLeads->isEmpty())
-                  <div class="col-md-12">
-                        <h6 class="card-subtitle m-b-20 text-muted">Not Found</h6>
-                    </div>
-                     @else 
-                       @foreach ($convertedLeads as $row)
-                        <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="{{ $row->client->image ? asset($row->client->image): asset('assets/images/users/1.jpg')}}" style="height:230px" alt="user" />
-                                    <div class="el-overlay" data-toggle="tooltip" title="{{$row->client->name}} (agent)">
-                                        <ul class="el-info">
-                                            <li><a class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Edit" href="{{route('admin.lead.show' , ['id'=>$row->id])}}"><i class="ti-marker-alt"></i></a></li>
-                                            <li><a class="btn default btn-outline" href="{{route('admin.lead.delete' , ['id'=>$row->id])}}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a></li>
-                                        </ul>
+            </div>
+                {{-- INCOMPLETE --}}
+             <div class="col-md-6">
+                <div class="card">
+                     <div class="card-body">
+                        <h4 class="card-title text-danger">INCOMPLETE</h4>
+                        @if ($inCompleteTasks->isEmpty())
+                        <div class="col-md-12">
+                            <h6 class="card-subtitle m-b-20 text-muted">Not Found</h6>
+                        </div>
+                        @else
+                        @foreach ($inCompleteTasks as $row)
+                        <div class="grid-stack" data-gs-width="12" data-gs-animate="yes">
+                            <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
+                                data-gs-height="2">
+                                <div class="grid-stack-item-content">
+                                      <p class="mt-2">{{$row->title}}</p>
+                                      <small>{{date_format($row->start_date,"d-m-Y")}}</small> <small> To {{date_format($row->due_date,"d-m-Y")}}</small><br>
+                                       <a type="button" href="{{route('admin.task.edit' , ['id'=>$row->id])}}"
+                                                class="btn btn-sm btn-success">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                     </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h3 class="box-title">{{$row->client_name}}</h3> <i class="fa fa-building"></i> <small>{{$row->company_name}}</small>
-                                    <br/> </div>
-                                    <div class="ribbon ribbon-danger ribbon-corner ribbon-bottom"><i class="fab fa-leanpub"></i></div>
                             </div>
                         </div>
+                        @endforeach
+                        @endif
                     </div>
-                   @endforeach
-                 @endif
                 </div>
+            </div>
+        </div>
+    
+      
+
         <!-- footer -->
         <footer class="footer">
             © 2021 Webfabricant

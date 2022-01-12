@@ -35,7 +35,6 @@ class ProjectController extends Controller
 
     public function projectStore(Request $request)
     {
-        // dd($request);
         $request->validate([
             'project_name' => 'required',
             'project_category' => 'required',

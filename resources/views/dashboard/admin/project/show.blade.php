@@ -357,7 +357,7 @@
                                                     <a href="{{route('admin.project.delete.member' , ['id'=>$row->id])}}"
                                                         id="deleteMember" type="button" class="btn btn-sm btn-danger"
                                                         data-toggle="tooltip" title="Delete">
-                                                        <i class="fa fa-times"></i>
+                                                        <i class="ti-close"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -372,7 +372,7 @@
                             <div class="card-body">
                                 <a href="{{route('admin.project.add.file',['id'=>$project->id])}}" type="button"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
-                                class="fa fa-plus" style="font-size: 12px"></i> Add More File</a>
+                                class="ti-plus" style="font-size: 12px"></i> Add More File</a>
                                 <h4 class="card-title">Files</h4>
                                 <div class="row">
                                     @if (count($project->files) > 0)
@@ -382,16 +382,16 @@
                                            
                                             <button onclick="downloadFile(this)" id="{{$row->id}}"
                                                 class="btn btn-sm btn-circle text-white mt-2 bg-success ml-2"
-                                                data-toggle="tooltip" title="Download"><i class="fa fa-download"
+                                                data-toggle="tooltip" title="Download"><i class="ti-download"
                                                     style="font-size: 12px"></i></button>
                                             <button onclick="deleteFile(this)" id="{{$row->id}}"
                                                 class="btn btn-sm btn-circle text-white mt-2 bg-danger ml-2"
-                                                data-toggle="tooltip" title="Delete"><i class="fa fa-times"
+                                                data-toggle="tooltip" title="Delete"><i class="ti-close"
                                                     style="font-size: 12px"></i></button>
                                             <div class="comment-text active w-100">
                                                 <p> {{pathinfo($row->filename, PATHINFO_FILENAME) }}
                                                      @if ($row->link != null) &nbsp;
-                                                <a href="{{$row->link}}" data-toggle="tooltip" title="File Link"  target="_blank"><i class="fa fa-link"
+                                                <a href="{{$row->link}}" data-toggle="tooltip" title="File Link"  target="_blank"><i class="ti-link"
                                                     style="font-size: 12px"></i></a> 
                                             @endif
                                              

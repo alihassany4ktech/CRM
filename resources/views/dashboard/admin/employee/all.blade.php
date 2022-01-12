@@ -116,10 +116,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Employee List</h4>
+                        <h4 class="card-title"> Employee List</h4>
                         <div class="dropdown">
                             <a href="#" type="button" class="btn btn-info t-10 float-right" style="font-size: 12px" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-download" style="font-size: 12px"></i> Export</a>
+                                aria-haspopup="true" aria-expanded="false"><i class="ti-download" style="font-size: 12px"></i> Export</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
                                 <a class="dropdown-item text-dark" href="{{route('admin.export.employee.excel')}}"
                                     style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
@@ -132,7 +132,7 @@
                         </div>
                          <a href="{{route('admin.create.employee')}}"  type="button"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
-                                class="fa fa-plus" style="font-size: 12px"></i> Add New
+                                class="ti-plus" style="font-size: 12px"></i> Add New
                             Employee</a>
 
 
@@ -200,17 +200,17 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
+                                                    <i class="ti-settings" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.employee.show' , ['id'=>$row->id])}}"
                                                         type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 12px"></i> View</a>
+                                                            class="ti-eye" style="font-size: 12px"></i> View</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
                                                         href="{{route('admin.employee.show' , ['id'=>$row->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
+                                                            class="ti-marker-alt" style="font-size: 12px"></i> Edit</a>
                                                    
 
                                                 </div>

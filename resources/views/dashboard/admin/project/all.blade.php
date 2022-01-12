@@ -125,7 +125,7 @@
                         <h4 class="card-title">Projects</h4>
                         <div class="dropdown">
                             <a href="#" type="button" class="btn btn-info t-10 float-right" data-toggle="dropdown" style="font-size: 12px"
-                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-download" style="font-size: 12px"></i> Export</a>
+                                aria-haspopup="true" aria-expanded="false"><i class="ti-download" style="font-size: 12px"></i> Export</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
                                 <a class="dropdown-item text-dark" href="{{route('admin.project.export')}}"
                                     style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
@@ -138,13 +138,13 @@
                         </div>
                         <a href="{{route('admin.project.create')}}" type="button"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
-                                class="fa fa-plus" style="font-size: 12px"></i> New</a>
+                                class="ti-plus" style="font-size: 12px"></i> New</a>
                         {{-- <a href="" type="button"
                             class="btn btn-outline-primary t-10 float-right" style="margin-right: 10px"><i
                                 class="mdi mdi-plus"></i> Project Templates</a> --}}
                                 <a href="{{route('admin.projects.archive')}}" type="button"
                             class="btn btn-outline-warning t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
-                                class="fa fa-trash" style="font-size: 12px"></i> View Archive</a>
+                                class="ti-trash" style="font-size: 12px"></i> View Archive</a>
                            {{-- <a href="" type="button"
                             class="btn btn-outline-info t-10 float-right" style="margin-right: 10px"><i class="mdi mdi-pin" style="font-size: 14px"></i> Pinned Project</a> --}}
                         <div class="row justify-content-center" style="margin-top: 6%">
@@ -227,28 +227,28 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
+                                                    <i class="ti-settings" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.project.show' , ['id'=>$value->id])}}"
                                                         type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 12px"></i> View Details</a>
+                                                            class="ti-eye" style="font-size: 12px"></i> View Details</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
                                                         href="{{route('admin.project.edit' , ['id'=>$value->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
+                                                            class="ti-marker-alt" style="font-size: 12px"></i> Edit</a>
                                                         <a class="dropdown-item text-dark"
                                                         href="{{route('admin.project.show' , ['id'=>$value->id])}}"
                                                         type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-user-plus" style="font-size: 12px"></i> Add Member</a>
+                                                            class="icon-user-follow" style="font-size: 12px"></i> Add Member</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         href="{{route('admin.project.archive' , ['id'=>$value->id])}}"
-                                                        id="archivep" style="font-size: 12px;"><i class="fa fa-trash"
+                                                        id="archivep" style="font-size: 12px;"><i class="ti-trash"
                                                             style="font-size: 12px"></i> Archive</a>
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.project.delete' , ['id'=>$value->id])}}"
-                                                        type="button" style="font-size: 12px" id="delete"><i class="fa fa-times"
+                                                        type="button" style="font-size: 12px" id="delete"><i class="ti-close"
                                                             style="font-size: 12px"></i> Delete</a>
                                                 </div>
                                             </div>

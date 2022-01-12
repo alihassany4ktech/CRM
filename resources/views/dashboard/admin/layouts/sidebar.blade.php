@@ -82,17 +82,17 @@
                                 <li><a href="#"><i class="fa fa-clock" aria-hidden="true"></i> Leaves</a></li>
                             </ul>
                         </li>
-                        <li  class="{{$link == route('admin.projects')||$link == route('admin.tasks')|| $link == route('admin.contracts')||$link == route('admin.task.create') || $link == route('admin.project.create')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hide-menu">Work</span></a>
+                        <li  class="{{$link == route('admin.projects')|| $link == route('admin.task-board') || $link == route('admin.task.kanbanBoard') |$link == route('admin.tasks')|| $link == route('admin.contracts')||$link == route('admin.task.create') || $link == route('admin.project.create')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hide-menu">Work</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('admin.contracts')}}" class="{{$link == route('admin.contracts') ? 'active':''}}">Contracts</a></li>
                                 <li><a href="{{route('admin.projects')}}"  class="{{$link == route('admin.projects') || $link == route('admin.project.create') ? 'active':'' }}">Projects</a></li>
-                                <li><a href="{{route('admin.tasks')}}" class="{{$link == route('admin.tasks') ||$link == route('admin.task.create') ? 'active' : ''}}">Tasks</a></li>
-                                <li><a href="#">Task Board</a></li>
+                                <li><a href="{{route('admin.tasks')}}" class="{{$link == route('admin.tasks')|| $link == route('admin.task.kanbanBoard') ||$link == route('admin.task.create') ? 'active' : ''}}">Tasks</a></li>
+                                <li><a href="{{route('admin.task-board')}}" class="{{$link == route('admin.task-board') ? 'active':''}}">Task Board</a></li>
                                 <li><a href="#">Task Calender</a></li>
                                 <li><a href="#">Time Logs</a></li>
                             </ul>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Fainance</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><span class="hide-menu"> <i class="fa fa-money-bill-alt" style="font-size: 18px"></i> Fainance</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="ui-cards.html">Cards</a></li>
                                 <li><a href="ui-user-card.html">User Cards</a></li>
@@ -100,6 +100,9 @@
                             
                             </ul>
                         </li>
+                        <li class="{{$link == route('admin.products') || $link == route('admin.product.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.products')}}" aria-expanded="false"><i class="mdi mdi-basket-fill" aria-hidden="true"></i><span class="hide-menu">Products</span></a></li>
+                        <li class="{{$link == route('admin.tickets') || $link == route('admin.ticket.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.tickets')}}" aria-expanded="false"><i class="mdi mdi-ticket" aria-hidden="true"></i><span class="hide-menu">Tickets</span></a></li>
+
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>

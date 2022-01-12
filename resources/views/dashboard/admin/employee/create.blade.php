@@ -173,7 +173,7 @@
                                     <label for="validationDefault01">Designation
                                         <a href="#" id="addLeadsource" data-toggle="modal"
                                             data-target="#responsive-modal3" class="btn btn-sm  btn-outline-success"><i
-                                                class="fa fa-plus"></i> Manage Designation</a> <small
+                                                class="ti-plus"></i> Manage Designation</a> <small
                                             class="text-danger">*</small>
                                     </label>
                                     <select class="select2 form-control" style="width: 100%" name="designation"
@@ -191,7 +191,7 @@
                                     <label for="validationDefault02">Department
                                         <a href="#" id="addLeadsource" data-toggle="modal"
                                             data-target="#responsive-modal2" class="btn btn-sm  btn-outline-success"><i
-                                                class="fa fa-plus"></i> Manage Department</a> <small
+                                                class="ti-plus"></i> Manage Department</a> <small
                                             class="text-danger">*</small>
                                     </label>
                                     <select class="select2 form-control" style="width: 100%" name="department">

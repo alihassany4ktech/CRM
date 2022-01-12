@@ -323,4 +323,11 @@ class TaskController extends Controller
     {
         return Excel::download(new TaskExport, 'taskList.csv');
     }
+
+    public function kanbanBoard()
+    {
+        $inCompleteTasks = Task::where('status', '=', 'Incomplete')->get();
+        $completeTasks = Task::where('status', '=', 'Completed')->get();
+        return view('dashboard.admin.task.kanbanBoard', compact('inCompleteTasks', 'completeTasks'));
+    }
 }

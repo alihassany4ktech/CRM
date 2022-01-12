@@ -120,7 +120,7 @@
                         <a href="" type="button" data-toggle="modal"
                                             data-target="#responsive-modal2"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size:12px"><i
-                                class="fa fa-plus"></i> Add New Departmenet</a>
+                                class="ti-plus"></i> Add New Departmenet</a>
                         <div class="table-responsive m-t-40">
 
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
@@ -155,15 +155,15 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
+                                                    <i class="ti-settings" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark" href="{{route('admin.department.edit',['id'=>$value->id])}}" type="button"
-                                                        style="font-size: 12px;cursor: pointer"><i class="fa fa-cogs"
+                                                        style="font-size: 12px;cursor: pointer"><i class="ti-settings"
                                                             style="font-size: 12px"></i> Manage</a>
                                                     <a class="dropdown-item text-dark" type="button" id="delete"
                                                         style="font-size: 12px; cursor: pointer;" href="{{route('admin.department.delete' , ['id'=>$value->id])}}"><i
-                                                            class="fa fa-trash"  style="font-size: 12px"></i> Delete</a>
+                                                            class="ti-close"  style="font-size: 12px"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>

@@ -116,10 +116,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Contracts</h4>
+                        <h4 class="card-title"><i class="ti-file"></i> Contracts</h4>
                            <div class="dropdown">
                             <a href="#" type="button" class="btn btn-info t-10 float-right" style="font-size: 12px" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-download" style="font-size: 12px"></i> Export</a>
+                                aria-haspopup="true" aria-expanded="false"><i class="ti-download" style="font-size: 12px"></i> Export</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:0px">
                                 <a class="dropdown-item text-dark" href="{{route('admin.export.contract.excel')}}"
                                     style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                         <a href="{{route('admin.contract.create')}}" type="button"
-                            class="btn btn-outline-success m-t-8 float-right" style="margin-right: 10px;font-size: 12px"><i class="fa fa-plus" style="font-size: 12px"></i> Add New
+                            class="btn btn-outline-success m-t-8 float-right" style="margin-right: 10px;font-size: 12px"><i class="ti-plus" style="font-size: 12px"></i> Add New
                             Contract</a>
                          
                               <div class="row justify-content-center" style="margin-top: 6%">
@@ -183,24 +183,24 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-cogs" style="font-size: 10px"></i>
+                                                    <i class="ti-settings" style="font-size: 10px"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.contract.show' , ['id'=>$row->id])}}"
                                                         type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-eye" style="font-size: 12px"></i> View</a>
+                                                            class="ti-eye" style="font-size: 12px"></i> View</a>
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
                                                         href="{{route('admin.contract.edit' , ['id'=>$row->id])}}"><i
-                                                            class="fa fa-edit" style="font-size: 12px"></i> Edit</a>
+                                                            class="ti-marker-alt" style="font-size: 12px"></i> Edit</a>
                                                              <a class="dropdown-item text-dark"
                                                         href="{{route('admin.contract.show' , ['id'=>$row->id])}}"
                                                         type="button" style="font-size: 12px;cursor: pointer"><i
-                                                            class="fa fa-undo" style="font-size: 12px"></i> Renew</a>
+                                                            class="ti-reload" style="font-size: 12px"></i> Renew</a>
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.contract.delete' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 12px" id="delete"><i class="fa fa-times"
+                                                        type="button" style="font-size: 12px" id="delete"><i class="ti-close"
                                                             style="font-size: 12px"></i> Delete</a>
                                                 </div>
                                             </div>

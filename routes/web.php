@@ -69,7 +69,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/permission/save', 'Admin\RolePermissionController@savePermission')->name('permission.save');
         //delete permission 
         Route::get('/delete/permission/{id}', 'Admin\RolePermissionController@deletePermission')->name('permission.delete');
-
         // ========================================= Leads Routes ============================================ \\
         Route::get('/leads', 'Admin\LeadsController@leads')->name('leads');
         Route::get('/create/lead', 'Admin\LeadsController@createLead')->name('create.lead');
@@ -169,21 +168,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create/task', 'Admin\TaskController@create')->name('task.create');
         Route::post('/task/store', 'Admin\TaskController@taskStore')->name('task.store');
         Route::get('/show/task/{id}', 'Admin\TaskController@showTask')->name('task.show');
-
         Route::post('/task/assignee/add', 'Admin\TaskController@taskAssigneesAdd')->name('task.assignee.add');
         Route::get('/task/assignee/delete/{id}', 'Admin\TaskController@deleteTaskAssingnee')->name('task.delete.assignee');
-
         Route::post('/task/file/delete', 'Admin\TaskController@deleteFile')->name('task.file.delete');
         Route::post('/task/file/download', 'Admin\TaskController@downloadFile')->name('task.file.download');
         Route::get('/add/task/file/{id}', 'Admin\TaskController@addTaskFile')->name('task.add.file');
         Route::post('/task/file/store', 'Admin\TaskController@taskFileStore')->name('task.file.store');
-
         Route::post('/task/label/add', 'Admin\TaskController@taskLabelAdd')->name('task.label.add');
         Route::get('/task/label/{id}', 'Admin\TaskController@deleteTaskLabel')->name('task.delete.label');
-
         Route::get('/export-excel/task', 'Admin\TaskController@exportInToExcel')->name('export.task.excel');
         Route::get('/export-csv/task', 'Admin\TaskController@exportInToCSV')->name('export.task.csv');
-
+        Route::get('/task/kanban-board/', 'Admin\TaskController@kanbanBoard')->name('task.kanbanBoard');
         Route::post('/task/category/store', 'Admin\TaskController@categoryStore')->name('task.category.store');
         Route::post('/task/category/delete', 'Admin\TaskController@deleteCategory')->name('task.category.delete');
         Route::get('/task/delete/{id}', 'Admin\TaskController@deleteTask')->name('task.delete');
@@ -196,6 +191,50 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/task/label/delete/{id}', 'Admin\TaskLabelController@delete')->name('task.label.delete');
         Route::get('/task/label/edit/{id}', 'Admin\TaskLabelController@edit')->name('task.label.edit');
         Route::post('/task/label/update', 'Admin\TaskLabelController@labelUpdate')->name('task.label.update');
+        // ========================================= Task Board Routes ============================================ \\
+        Route::get('/task-board', 'Admin\TaskBoardController@taskBoard')->name('task-board');
+        Route::get('/create/task-c', 'Admin\TaskBoardController@createCompletedTask')->name('create.completed.task');
+        Route::get('/create/task-i', 'Admin\TaskBoardController@createIncompleteTask')->name('create.incomplete.task');
+        // ========================================= Task Time Logs Routes ============================================ \\
+        // ========================================= Fainance Routes ============================================ \\
+        // ========================================= Products Routes ============================================ \\
+        Route::get('/products', 'Admin\ProductController@products')->name('products');
+        Route::get('/create/product', 'Admin\ProductController@create')->name('product.create');
+        Route::post('/product/store', 'Admin\ProductController@store')->name('product.store');
+        Route::get('/product/delete/{id}', 'Admin\ProductController@delete')->name('product.delete');
+        Route::get('/product/edit/{id}', 'Admin\ProductController@edit')->name('product.edit');
+        Route::post('/product/update', 'Admin\ProductController@update')->name('product.update');
+        Route::get('/export-excel/product', 'Admin\ProductController@exportInToExcel')->name('product.export.excel');
+        Route::get('/export-csv/product', 'Admin\ProductController@exportInToCSV')->name('product.export.csv');
+        // Product Category Routes
+        Route::post('/product/category/store', 'Admin\ProductCategoryController@store')->name('product.category.store');
+        Route::post('/product/category/delete', 'Admin\ProductCategoryController@deleteCategory')->name('product.category.delete');
+        // Product Sub Category Routes
+        Route::post('/product/sub-category/store', 'Admin\ProductSubCategoryController@store')->name('product.subCategory.store');
+        Route::post('/product/sub-category/delete', 'Admin\ProductSubCategoryController@deleteSubCategory')->name('product.subCategory.delete');
+        // Product Tax Routes
+        Route::post('/product/tax/store', 'Admin\ProductController@taxStore')->name('product.tax.store');
+        Route::post('/product/tax/delete', 'Admin\ProductController@taxDelete')->name('product.tax.delete');
+
+        // ========================================= Tickets Routes ============================================ \\
+        Route::get('/tickets', 'Admin\TicketController@tickets')->name('tickets');
+        Route::get('/create/ticket', 'Admin\TicketController@create')->name('ticket.create');
+        // Ticket Types Routes
+        Route::post('/ticket/type/store', 'Admin\TicketTypeController@store')->name('ticket.type.store');
+        Route::post('/ticket/type/update', 'Admin\TicketTypeController@update')->name('ticket.type.update');
+        Route::get('/ticket/types', 'Admin\TicketTypeController@types')->name('ticket.types');
+        Route::post('/ticket/type/delete', 'Admin\TicketTypeController@delete')->name('ticket.type.delete');
+        // Ticket Channels Routes
+        Route::post('/ticket/channel/store', 'Admin\TicketChannelController@store')->name('ticket.channel.store');
+        Route::post('/ticket/channel/update', 'Admin\TicketChannelController@update')->name('ticket.channel.update');
+        Route::get('/ticket/channels', 'Admin\TicketChannelController@channels')->name('ticket.channels');
+        Route::post('/ticket/channel/delete', 'Admin\TicketChannelController@delete')->name('ticket.channel.delete');
+
+        // Ticket Agents Route 
+        Route::get('/ticket/agents', 'Admin\TicketAgentController@agents')->name('ticket.agents');
+        // Ticket Group Routes
+        Route::post('/ticket/group/delete', 'Admin\TicketGroupController@delete')->name('ticket.group.delete');
+        Route::post('/ticket/group/store', 'Admin\TicketGroupController@store')->name('ticket.group.store');
     });
 });
 
