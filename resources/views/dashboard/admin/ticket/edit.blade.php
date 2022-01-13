@@ -2,8 +2,8 @@
 @section('content')
 <style>
     .phone_country_code {
-    width: 150px;
-    /* background: #e4e7ea; */
+    width: 120px;
+    background: #e4e7ea;
     padding: 4px 10px;
     border-radius: 4px 0 0 4px !important;
     }
@@ -37,7 +37,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{route('admin.tickets')}}">Tickets</a></li>
-                    <li class="breadcrumb-item active">Create Ticket</li>
+                    <li class="breadcrumb-item active">Update Ticket</li>
                 </ol>
             </div>
             <div class="col-md-7 col-4 align-self-center">
@@ -137,33 +137,32 @@
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
         <!-- End Right sidebar -->
              <div class="row">
                     <div class="col-12">
-                          <h4 class="card-title">CREATE TICKET</h4>
+                          <h4 class="card-title">UPDATE TICKET</h4>
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="{{route('admin.ticket.store')}}">
+                                <form method="POST" action="{{route('admin.ticket.update')}}">
                                       @csrf
+                                      <input type="hidden" name="id" value="{{$ticket->id}}">
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                           <label for="validationDefault01">Ticket Subject <small class="text-danger">*</small></label>
-                                          <input type="text" name="subject" class="form-control" id="validationDefault01">
+                                          <input type="text" name="subject" class="form-control" id="validationDefault01" value="{{$ticket->subject}}">
                                               @error('subject')
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
                                           <label for="validationDefault02">Mobile</label>
-                                          {{-- <input type="string"  name="mobile" class="form-control" id="validationDefault02"> --}}
                                           <div class="form-group" style="display: flex;">
                                           <select class="select2 phone_country_code form-control" name="phone_code">
                                                 @foreach ($countries as $item)
-                                                    <option value="{{ $item->id }}">+{{ $item->phonecode.' ('.$item->iso.')' }}</option>
+                                                    <option value="{{ $item->id }}" {{$ticket->country_id == $item->id?'selected':''}}>+{{ $item->phonecode.' ('.$item->iso.')' }}</option>
                                                 @endforeach
                                             </select>
-                                            <input type="tel" name="mobile" id="mobile"  style="width:100%;" class="mobile" autocomplete="nope">
+                                            <input type="tel" name="mobile" id="mobile" value="{{$ticket->mobile}}"  style="width:100%;" class="mobile" autocomplete="nope">
                                             </div>
                                            @error('mobile')
                                                 <small class="text-danger">{{ $message }}</small>
@@ -172,7 +171,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                          <label for="validationDefault01">Agent <a href="#" id="addLeadsource" data-toggle="modal"
+                                          <label>Agent <a href="#" id="addLeadsource" data-toggle="modal"
                                             data-target="#responsive-modal2" 
                                             class="btn btn-xs  btn-outline-success"><i class="ti-plus"></i></a></label>
                                         <select class="select2 form-control" style="width: 100%" name="agent" >
@@ -181,7 +180,7 @@
                                                     @if(count($group->enabled_agents) > 0)
                                                         <optgroup label="{{ ucwords($group->group_name) }}">
                                                             @foreach($group->enabled_agents as $agent)
-                                                                <option value="{{ $agent->user->id }}">{{ ucwords($agent->user->name).' ['.$agent->user->email.']' }}</option>
+                                                                <option value="{{ $agent->user->id }}" {{$ticket->agent_id == $agent->user->id?'selected':''}}>{{ ucwords($agent->user->name).' ['.$agent->user->email.']' }}</option>
                                                             @endforeach
                                                         </optgroup>
                                                     @endif
@@ -200,7 +199,7 @@
                                             <select class="select2 form-control" style="width: 100%" name="type" >
                                                 <option value="" selected>--</option>
                                                  @foreach ($ticketTypes as $row)
-                                                     <option value="{{$row->id}}">{{$row->type}}</option>
+                                                     <option value="{{$row->id}}" {{$ticket->type_id == $row->id?'selected':''}}>{{$row->type}}</option>
                                                  @endforeach
                                           </select>
                                             @error('type')
@@ -218,22 +217,10 @@
                                           <select class="select2 form-control" style="width: 100%" name="channel_name" >
                                                 <option value="" selected>--</option>
                                                 @foreach ($ticketChannels as $row)
-                                                    <option value="{{$row->id}}">{{$row->channel_name}}</option>
+                                                    <option value="{{$row->id}}" {{$ticket->channel_id == $row->id?'selected':''}}>{{$row->channel_name}}</option>
                                                 @endforeach
                                           </select>
                                               @error('channel_name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                        </div>
-                                        <div class="col-md-5 mb-3">
-                                          <label for="validationDefault01">Requester Name</label>
-                                          <select class="select2 form-control" style="width: 100%" name="requester_name" >
-                                                <option value="" selected>--</option>
-                                          @foreach ($users as $row)
-                                              <option value="{{$row->id}}">{{$row->name}}</option>
-                                          @endforeach
-                                          </select>
-                                              @error('requester_name')
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                         </div>
@@ -241,13 +228,16 @@
                                               <label for="">Select Me</label>
                                         </div> --}}
                                     </div>
-
+                               
                                     <div class="form-row">
                                           <div class="col-md-2">
                                                 <label for="validationDefault01">Tags</label>
                                           <div class="tags-default">
-                                          <input type="text" class="form-control" name="tags" data-role="tagsinput"
-                                            placeholder="enter multiple tags" />
+                                          <select multiple data-role="tagsinput" name="tags">
+                                          @foreach($ticket->tags as $tag)
+                                                <option value="{{ $tag->tag->tag_name }}">{{ $tag->tag->tag_name }}</option>
+                                          @endforeach
+                                    </select>
 
                                           </div>
                                               @error('tags')
@@ -258,11 +248,11 @@
                                                       <label for="validationDefault01">Status</label>
                    
                                             <select class="select2 form-control" style="width: 100%" name="status" >
-                                                <option value="" selected>--</option>
-                                                <option value="Open">Open</option>
-                                                <option value="Pending">Pending</option>
-                                                <option value="Resolved">Resolved</option>
-                                                <option value="Closed">Closed</option>
+                                                <option value="">--</option>
+                                                <option value="Open" {{$ticket->status == 'Open' ? 'selected' : ''}}>Open</option>
+                                                <option value="Pending" {{$ticket->status == 'Pending' ? 'selected' : ''}}>Pending</option>
+                                                <option value="Resolved" {{$ticket->status == 'Resolved' ? 'selected' : ''}}>Resolved</option>
+                                                <option value="Closed" {{$ticket->status == 'Closed' ? 'selected' : ''}}>Closed</option>
                                           </select>
                                               @error('status')
                                                 <small class="text-danger">{{ $message }}</small>
@@ -270,30 +260,20 @@
                                           </div>
                                     <div class="col-md-5 mb-3" style="">
                                     <label for="validationDefault03">Priority</label> <br>
-                                     <input name="priority" type="radio" id="radio_30" value="High" class="with-gap radio-col-green" checked/>
+                                     <input name="priority" type="radio" id="radio_30" value="High" class="with-gap radio-col-green" {{$ticket->priority == 'High' ? 'checked' : ''}} />
                                                 <label for="radio_30" class="text-success">High</label>
-                                                <input name="priority" type="radio" value="Medium" id="radio_31" class="with-gap radio-col-orange"  />
+                                                <input name="priority" type="radio" value="Medium" id="radio_31" class="with-gap radio-col-orange" {{$ticket->priority == 'Medium' ? 'checked' : ''}} />
                                                 <label for="radio_31" style="color: orange">Medium</label>
-                                                 <input name="priority" type="radio" value="Low" id="radio_32" class="with-gap radio-col-red" />
+                                                 <input name="priority" type="radio" value="Low" id="radio_32" class="with-gap radio-col-red" {{$ticket->priority == 'Low' ? 'checked' : ''}} />
                                                 <label for="radio_32" class="text-danger">Low</label>
-                                                 <input name="priority" type="radio" value="Urgent" id="radio_33" class="with-gap radio-col-black" />
+                                                 <input name="priority" type="radio" value="Urgent" id="radio_33" class="with-gap radio-col-black" {{$ticket->priority == 'Urgent' ? 'checked' : ''}} />
                                                 <label for="radio_33" class="text-dark">Urgent</label>
                                                 
                                 </div>
                                     </div>
-                                    <br>
-                                    <div class="form-row">
-                                        <div class="col-md-12">
-                                          <label for="validationDefault03">Ticket Description <small class="text-danger">*</small></label>
-                                           <textarea class="summernote" name="description"></textarea>
-                                             @error('description')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                        </div>
-                              
-                                    </div>
+                                  
                                   <br>
-                                    <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                                    <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
                                     <button type="reset" class="btn btn-info">Rest</button>
                                 </form>
                             </div>

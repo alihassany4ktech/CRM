@@ -129,19 +129,20 @@
 
 
                         <div class="form-row" style="margin-top: 50px">
+                            <h5>Add New Ticket Agent</h5>
                             <div class="col-md-12">
-                                <form id="ProductCategoryForm">
+                                <form id="ticketAgentForm">
                                     @csrf
                                  <div class="form-row">
                                        <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="recipient-name" class="control-label">Choose Agents <small
                                                 class="text-danger">*</small></label>
-                                        <select class="select2 m-b-10 select2-multiple" name="agent[]"
+                                        <select class="select2 m-b-10 select2-multiple" name="user_id[]"
                                             class="form-control" style="width: 100%" multiple="multiple"
                                             data-placeholder="Choose" required>
                                             @foreach ($employees as $row)
-                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                            <option value="{{$row->id}}">{{$row->name . " [$row->email]"}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -153,7 +154,7 @@
                                             data-target="#responsive-modal3" id="addLeadsource"
                                             class="btn btn-xs  btn-outline-success"><i class="ti-plus"></i></a> <small class="text-danger">*</small></label>
 
-                                        <select class="select2 form-control" style="width: 100%" name="group" required>
+                                        <select class="select2 form-control" style="width: 100%" name="group_id" required>
                                             <option value="" selected>--</option>
                                             @foreach ($groups as $row)
                                                 <option value="{{$row->id}}">{{$row->group_name}}</option>
@@ -163,7 +164,7 @@
                                        </div>
                                  </div>
                                     <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i
-                                            class="fa fa-check"></i>Save</button>
+                                            class="ti-check"></i> Save</button>
 
                             </div>
 
@@ -187,42 +188,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Name</td>
-                                    <td>Group</td>
-                                    <td>Status</td>
-                                    <td style="text-align: center">Action</td>
 
-                                </tr>
-
-                                {{-- @foreach ($types as $row)
+                                @foreach ($ticketAgents as $row)
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                <td>{{$row->type}}</td>
-
-
-                                <td style="text-align: center">
-                                    <div class="dropdown">
-                                        <button class="btn btn-light" type="button" id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="ti-settings" style="font-size: 10px"></i>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item text-dark" type="button"
-                                                style="font-size: 12px; cursor: pointer;" data-toggle="modal"
-                                                data-target="#responsive-modal4" onclick="editType(this)"
-                                                id="{{$row->id}}" name="{{$row->type}}" href=""><i class="ti-marker-alt"
-                                                    style="font-size: 12px"></i> Edit</a>
-                                            <a class="dropdown-item text-dark" onclick="deleteType(this)"
-                                                id="{{$row->id}}" type="button" style="font-size: 12px;cursor: pointer;"
-                                                id="delete"><i class="ti-close"
-                                                    style="font-size: 12px; cursor: pointer;"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                </tr>
-                                @endforeach --}}
+                                        <td style="width: 8%">{{$loop->iteration}}</td>
+                                        <td><img src="{{asset($row->user->image)}}" class="img-circle elevation-2"
+                                                alt="admin Image" style="height: 35px;width:35px"> {{$row->user->name}}</td>
+                                        <td style="width: 20%"> 
+                                            <select id="{{$row->id}}" class="form-control bg-light assignGroup">
+                                                <option value="">No group assigned</option>
+                                                @foreach ($groups as $item)
+                                                <option value="{{$item->id}}"
+                                                    {{$item->group_name == $row->group->group_name ? 'selected':''}}>
+                                                    {{$item->group_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td style="width: 20%">
+                                             <select id="{{$row->id}}" class="form-control bg-light changeStatus">
+                                             @if ($row->status == 'enabled')
+                                                  <option value="enabled" selected>Enabled</option>
+                                                  <option value="disabled">Disabled</option>
+                                             @else
+                                                 <option value="disabled" selected>Disabled</option>
+                                                    <option value="enabled">Enabled</option>
+                                             @endif
+                                               
+                                            
+                                            </select>
+                                        </td>
+                                        <td style="text-align: center">
+                                            <button class="btn btn-sm btn-danger" onclick="deleteAgent(this)" id="{{$row->id}}" type="button" id="dropdownMenuButton"
+                                            data-toggle="tooltip" title="Delete">
+                                            <i class="ti-close" style="font-size: 10px"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -322,7 +324,7 @@
 </div>
 @endsection
 @push('tickect-groups-page-script')
-{{-- Type --}}
+{{-- group --}}
 <script>
     $(document).ready(function () {
         $('#ticketGroupForm').on('submit', function (event) {
@@ -341,24 +343,14 @@
             });
         });
     });
-
 </script>
-{{-- edit --}}
-<script>
-    function editType(elem) {
-        var id = $(elem).attr("id");
-        var type = $(elem).attr("name");
-        $('#ticketId').val(id);
-        $('#ticketType').val(type);
-    };
-
-</script>
+{{-- agent store --}}
 <script>
     $(document).ready(function () {
-        $('#ticketTypeUpdateForm').on('submit', function (event) {
+        $('#ticketAgentForm').on('submit', function (event) {
             event.preventDefault();
             $.ajax({
-                url: '{{route("admin.ticket.type.update")}}',
+                url: '{{route("admin.ticket.agent.store")}}',
                 method: 'post',
                 data: $(this).serialize(),
                 dataType: 'json',
@@ -373,13 +365,110 @@
     });
 
 </script>
-{{--  --}}
 {{-- delete --}}
 <script>
     function deleteTicketGroup(elem) {
         var id = $(elem).attr("id");
         $.ajax({
             url: "{{ route('admin.ticket.group.delete') }}",
+            method: "POST",
+            dataType: "json",
+
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id,
+            },
+
+            success: function (data) {
+                toastr.error(data.success);
+                window.location.reload();
+            }
+        });
+    };
+
+</script>
+
+{{-- assign or unassign group --}}
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.assignGroup').change(function () {
+            var groupId = $(this).val();
+            var agentGroupId = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('admin.ticket.agent.change.group') }}",
+                method: "POST",
+                dataType: "json",
+
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    agentGroupId: agentGroupId,
+                    groupId: groupId,
+                },
+
+                success: function (data) {
+                    toastr.success(data.success);
+                    window.location.reload();
+                }
+            });
+        });
+
+
+    });
+
+</script>
+
+{{-- change status --}}
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.changeStatus').change(function () {
+            var status = $(this).val();
+            var agentGroupId = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('admin.ticket.agent.change.status') }}",
+                method: "POST",
+                dataType: "json",
+
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    agentGroupId: agentGroupId,
+                    status: status,
+                },
+
+                success: function (data) {
+                    toastr.success(data.success);
+                    window.location.reload();
+                }
+            });
+        });
+
+
+    });
+
+</script>
+
+{{-- delete agent --}}
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function deleteAgent(elem) {
+        var id = $(elem).attr("id");
+        $.ajax({
+            url: "{{ route('admin.ticket.agent.delete') }}",
             method: "POST",
             dataType: "json",
 

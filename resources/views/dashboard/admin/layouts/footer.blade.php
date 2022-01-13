@@ -465,8 +465,27 @@
                 });
             });
     </script>
+    <script>
+         $(document).on("click", "#deleteTicket", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover the deleted ticket!",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, delete it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
 {{-- all leads page script --}}
-
 {{-- get leadc id --}}
 
 <script>
@@ -582,6 +601,7 @@
 
             success: function (data) {
                 toastr.error(data.success);
+                window.location.reload();
             }
         });
     };
@@ -608,6 +628,7 @@
 
             success: function (data) {
                 toastr.error(data.success);
+                window.location.reload();
             }
         });
     };
@@ -626,6 +647,7 @@
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.success);
+                        window.location.reload();
                     }
 
                 }
@@ -650,6 +672,7 @@
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.success);
+                        window.location.reload();
                     } else {
                         toastr.error(data[0]);
                     }
@@ -676,6 +699,7 @@
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.success);
+                        window.location.reload();
                     } 
 
                 }
@@ -699,6 +723,7 @@
                  success: function (data) {
                   if (data.success) {
                         toastr.success(data.success);
+                        window.location.reload();
                     }
                 }
             });
@@ -718,6 +743,7 @@
                  success: function (data) {
                   if (data.success) {
                         toastr.success(data.success);
+                        window.location.reload();
                     }
                 }
             });
@@ -735,5 +761,6 @@
  @stack('tickect-types-page-script')
  @stack('tickect-channels-page-script')
  @stack('tickect-groups-page-script')
+ @stack('tickect-agents-page-script')
 </body>
 </html>

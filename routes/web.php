@@ -219,6 +219,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // ========================================= Tickets Routes ============================================ \\
         Route::get('/tickets', 'Admin\TicketController@tickets')->name('tickets');
         Route::get('/create/ticket', 'Admin\TicketController@create')->name('ticket.create');
+        Route::post('/ticket/store', 'Admin\TicketController@store')->name('ticket.store');
+        Route::get('/ticket/edit/{id}', 'Admin\TicketController@edit')->name('ticket.edit');
+        Route::post('/ticket/update', 'Admin\TicketController@update')->name('ticket.update');
+        Route::get('/ticket/delete/{id}', 'Admin\TicketController@delete')->name('ticket.delete');
         // Ticket Types Routes
         Route::post('/ticket/type/store', 'Admin\TicketTypeController@store')->name('ticket.type.store');
         Route::post('/ticket/type/update', 'Admin\TicketTypeController@update')->name('ticket.type.update');
@@ -232,6 +236,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Ticket Agents Route 
         Route::get('/ticket/agents', 'Admin\TicketAgentController@agents')->name('ticket.agents');
+        Route::post('/ticket/agent/store', 'Admin\TicketAgentController@store')->name('ticket.agent.store');
+        Route::post('/ticket/agent/change/group', 'Admin\TicketAgentController@changeGroup')->name('ticket.agent.change.group');
+        Route::post('/ticket/agent/change/status', 'Admin\TicketAgentController@changeStatus')->name('ticket.agent.change.status');
+        Route::post('/ticket/agent/delete', 'Admin\TicketAgentController@delete')->name('ticket.agent.delete');
         // Ticket Group Routes
         Route::post('/ticket/group/delete', 'Admin\TicketGroupController@delete')->name('ticket.group.delete');
         Route::post('/ticket/group/store', 'Admin\TicketGroupController@store')->name('ticket.group.store');

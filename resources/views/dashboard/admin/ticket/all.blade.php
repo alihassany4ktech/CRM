@@ -143,7 +143,43 @@
                             class="btn waves-effect waves-light btn-outline-secondary t-10 float-right" style="margin-right: 10px;font-size: 12px">Ticket Channels</a>
                                  <a href="{{route('admin.ticket.agents')}}" type="button"
                             class="btn waves-effect waves-light btn-outline-primary t-10 float-right" style="margin-right: 10px;font-size: 12px">Ticket Agents</a>
-                        <div class="table-responsive m-t-40">
+                        
+                        
+                          <div class="row " style="margin-top: 6%">
+                            <div class="col-md-3 col-xs-6 b-r"> <span
+                                    class="btn btn-circle  btn-info text-white">{{count($tickets)}}</span>
+                                     <label for="validationDefault03">Total Tickets <span class="mytooltip"> <i class="fa fa-info-circle text-dark" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:120px;"><span class="tooltip-inner2" style="font-size: 12px">No. of new tickets which where created for the selected date range.</span></span></span></span></label>
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"><span
+                                    class="btn btn-circle  btn-warning text-white">{{count($closedTickets)}}</span>
+                                     <label for="validationDefault03">Closed Tickets <span class="mytooltip"> <i class="fa fa-info-circle text-dark" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:120px;"><span class="tooltip-inner2" style="font-size: 12px">No. of new tickets which where closed in the selected data range</span></span></span></span></label>
+
+                            </div>
+                            <div class="col-md-3 col-xs-6"><span
+                                    class="btn btn-circle  btn-success text-white">{{count($openTickets)}}</span>
+                           
+                                     <label for="validationDefault03">Open Tickets <span class="mytooltip"> <i class="fa fa-info-circle text-dark" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:130px;"><span class="tooltip-inner2" style="font-size: 12px">No. of tickets which are not yet assigned to any agent and and updated in the selected range.</span></span></span></span></label>
+
+                            </div>
+                        </div>
+
+                         <div class="row " style="margin-top: 2%">
+                            <div class="col-md-3 col-xs-6 b-r"> <span
+                                    class="btn btn-circle text-white" style="background-color: #12c4f1">{{count($pendingTickets)}}</span> 
+                                   
+                                     <label for="validationDefault03">Pending Tickets <span class="mytooltip"> <i class="fa fa-info-circle text-dark" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:130px;"><span class="tooltip-inner2" style="font-size: 12px">No. of tickets which where updated in the selected date range and are assigned  to an agent.</span></span></span></span></label>
+
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"><span
+                                    class="btn btn-circle text-white" style="background-color: #33cea8">{{count($resolvedTickets)}}</span>
+                            
+                                     <label for="validationDefault03">Resolved Tickets <span class="mytooltip"> <i class="fa fa-info-circle text-dark" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:130px;"><span class="tooltip-inner2" style="font-size: 12px">No. of tickets which where resolved in the selected date range but waiting for requester confirmation.</span></span></span></span></label>
+
+                            </div>
+
+                        </div>
+                        
+                            <div class="table-responsive m-t-40">
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
                                 cellspacing="0" width="100%">
                                 <thead>
@@ -157,28 +193,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                      <tr>
-                                            <td>1</td>
-                                            <td>sub</td>
-                                            <td>r name</td>
-                                            <td>r on</td>
-                                            <td>other</td>
-                                            <td>action</td>
-                                      </tr>
-                                    {{-- @foreach ($products as $row)
+                                   
+                                    @foreach ($tickets as $row)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$row->name}}</td>
-                                         <td>{{$row->hsn_sac_code}}</td>
-                                         <td>${{$row->price}}</td>
-                                         <td>${{$row->total_amount}}</td>
-                                         <td>
-                                             @if ($row->allow_purchase == 'Allowed')
-                                                <small class="label" style="background-color: #edf9f7;color:#33cea8">Allowed</small>
-                                             @else
-                                                 <small class="label" style="background-color: #fcf2ed;color:#e49886">Not Allowed</small>
-                                             @endif
-                                            </td>
+                                        <td>{{$row->subject}}</td>
+                                        <td>{{$row->requester->name}}</td>
+                                        <td>{{ $row->created_at->format('Y-m-d H:i')}}</td>
+                                        <td>Agent: {{$row->agent->name}} <br> Status:
+                                            @if ($row->status == 'Open')
+                                            <label class="label" style="color:#33cea8;background-color: #ccf0d1">{{$row->status}}</label>   
+                                            @elseif($row->status == 'Pending')
+                                            <label class="label" style="background-color: #ffe8d0;color:#ffaf00">{{$row->status}}</label>
+                                            @elseif($row->status == 'Resolved')
+                                            <label class="label" style="background-color: #d2e8ba;color:#97bf6b">{{$row->status}}</label>
+                                            @else
+                                            <label class="label" style="background-color: #fcf2ed;color:#e49886">{{$row->status}}</label>
+                                            @endif
+                                            <br> Priority: {{$row->priority}}</td>
                                         <td style="text-align: end">
                                             <div class="dropdown">
                                                 <button class="btn btn-light" type="button" id="dropdownMenuButton"
@@ -188,17 +220,21 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
-                                                        href="{{route('admin.product.edit' , ['id'=>$row->id])}}"><i
+                                                        href="#"><i
+                                                            class="ti-eye" style="font-size: 12px"></i> View</a>
+                                                            <a class="dropdown-item text-dark" type="button"
+                                                        style="font-size: 12px; cursor: pointer;"
+                                                        href="{{route('admin.ticket.edit' , ['id'=>$row->id])}}"><i
                                                             class="ti-marker-alt" style="font-size: 12px"></i> Edit</a>
                                                     <a class="dropdown-item text-dark"
-                                                        href="{{route('admin.product.delete' , ['id'=>$row->id])}}"
-                                                        type="button" style="font-size: 12px" id="delete"><i class="ti-close"
+                                                        href="{{route('admin.ticket.delete' , ['id'=>$row->id])}}"
+                                                        type="button" style="font-size: 12px" id="deleteTicket"><i class="ti-close"
                                                             style="font-size: 12px"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach --}}
+                                    @endforeach
 
                                 </tbody>
                             </table>

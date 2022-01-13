@@ -101,7 +101,7 @@
                             </ul>
                         </li>
                         <li class="{{$link == route('admin.products') || $link == route('admin.product.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.products')}}" aria-expanded="false"><i class="mdi mdi-basket-fill" aria-hidden="true"></i><span class="hide-menu">Products</span></a></li>
-                        <li class="{{$link == route('admin.tickets') || $link == route('admin.ticket.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.tickets')}}" aria-expanded="false"><i class="mdi mdi-ticket" aria-hidden="true"></i><span class="hide-menu">Tickets</span></a></li>
+                        <li class="{{$link == route('admin.tickets') || $link==route('admin.ticket.types') || $link==route('admin.ticket.channels') || $link==route('admin.ticket.agents') || $link == route('admin.ticket.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.tickets')}}" aria-expanded="false"><i class="mdi mdi-ticket" aria-hidden="true"></i><span class="hide-menu">Tickets</span></a></li>
 
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>
