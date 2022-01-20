@@ -40,8 +40,13 @@ class RolePermissionController extends Controller
     public function addMember(Request $request)
     {
         if ($request->ajax()) {
-            $member = User::find($request->memberId);
-            $member->assignRole($request->roleId);
+            $members = $request->memberId;
+            foreach ($members as $row) {
+                $member = User::find($row);
+                $member->roles()->detach();
+                $member->assignRole($request->roleId);
+            }
+
             return response()->json(['success' => 'Member Added Successfully!']);
         }
     }
@@ -75,6 +80,11 @@ class RolePermissionController extends Controller
 
 
 
+
+
+
+
+
     public function saveRolePermission(Request $request)
     {
         $request->validate([
@@ -89,10 +99,6 @@ class RolePermissionController extends Controller
         );
         return redirect()->back()->with($notification);
     }
-
-
-
-
 
     public function editeRole($id)
 

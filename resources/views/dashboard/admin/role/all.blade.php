@@ -138,7 +138,9 @@
                                 class="btn btn-success float-right"><i class="ti-key"></i> Permissions</a>
                             <?php
                                     $members = App\User::role($role->name)->get();
-                                    $employees = App\User::doesntHave('roles')->where('type','=','Employee')->get();
+                                    // $employees = App\User::doesntHave('roles')->where('type','=','Employee')->get();
+                                    $employees = App\User::where('type','=','Employee')->get();
+
                             ?>
                             <a type="button" href="#" data-toggle="modal" data-target="#responsive-modal{{$role->id}}"
                                 {{-- onclick="getRoleId(this)" id="{{$role->id}}" --}}
@@ -264,12 +266,17 @@
 
                                 <label for="recipient-name" class="control-label">Add Members <small
                                         class="text-danger">*</small></label>
-
-                                <select class="form-control" name="memberId">
+                                        <select class="select2 m-b-10 select2-multiple" name="memberId[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+                                                @foreach ($employees as $emp)
+                                                    <option value="{{$emp->id}}">{{$emp->name}}</option>
+                                                @endforeach
+                                                  
+                                                </select>
+                                {{-- <select class="form-control" name="memberId">
                                     @foreach ($employees as $emp)
                                     <option value="{{$emp->id}}">{{$emp->name}}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
                     </div>
                     <div class="modal-footer">
