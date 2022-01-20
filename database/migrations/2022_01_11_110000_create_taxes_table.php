@@ -15,6 +15,7 @@ class CreateTaxesTable extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->string('tax_name')->nullable();
             $table->string('rate_percent')->nullable();
             $table->timestamps();

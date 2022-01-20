@@ -103,7 +103,7 @@
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Project</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.projects')}}">Projects</a></li>
                     <li class="breadcrumb-item active">Project Details</li>
                 </ol>
             </div>

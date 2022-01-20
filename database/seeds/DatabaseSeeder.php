@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             LeadStatusSeeder::class,
             DesignationDepartmentSeeder::class,
             RolePermissionSeeder::class,
-            ProjectSeeder::class
+            ProjectSeeder::class,
+            ProjectCategorySeeder::class
         ]);
     }
 }

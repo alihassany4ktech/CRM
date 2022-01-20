@@ -15,6 +15,7 @@ class CreateLeadsTable extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->integer('agent_id')->nullable()->default(null);
             $table->integer('source_id')->nullable()->default(null);
             $table->integer('category_id')->nullable()->default(null);

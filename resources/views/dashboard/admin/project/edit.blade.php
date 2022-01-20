@@ -325,6 +325,17 @@ input[type=number] {
                                 </div>
 
                             </div>
+                            <div class="form-row">
+                               
+                                    <div class="col-md-12 mb-3">
+                                    <label for="validationDefault03">Completions</label>
+                                        <input type="number" min="0" max="100" name="completion_percent" class="form-control percentage-inputmask" id="percentage-mask" value="$project->completion_percent">
+                                    @error('note')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                             
+                            </div>
                             <h4 class="card-title">CLIENT INFO</h4>
                              <div class="form-row">
                                     <div class="col-md-4 mb-3">
@@ -371,10 +382,10 @@ input[type=number] {
                                     <label for="validationDefault05">Currency
                                     </label>
                                        <select class="form-control" name="currency" id="">
-                                        <option value="1">Dollers (USD)</option>
-                                        <option value="2">Pounds (GBS)</option>
-                                        <option value="3">Euros (EUR)</option>
-                                        <option value="4">Rupee (INR)</option>
+                                         @foreach($currencies as $row)
+                                            <option value="{{ $row->id }}" {{$row->id == $project->currency_id?'selected': ''}}>{{ $row->currency_symbol.' ('.$row->currency_code.')' }}
+                                            </option>
+                                            @endforeach
                                     </select>
                                             @error('currency')
                                     <span class="text-danger">{{ $message }}</span>

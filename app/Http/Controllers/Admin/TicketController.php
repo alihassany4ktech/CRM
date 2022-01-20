@@ -15,6 +15,8 @@ use App\TicketTagList;
 use App\ProductCategory;
 use App\ProductSubCategory;
 use Illuminate\Http\Request;
+use App\Exports\TicketExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,21 +24,21 @@ class TicketController extends Controller
 {
     public function tickets()
     {
-        $tickets = Ticket::all();
-        $openTickets = Ticket::where('status', '=', 'Open')->get();
-        $pendingTickets = Ticket::where('status', '=', 'Pending')->get();
-        $resolvedTickets = Ticket::where('status', '=', 'Resolved')->get();
-        $closedTickets = Ticket::where('status', '=', 'Closed')->get();
+        $tickets = Ticket::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $openTickets = Ticket::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Open')->get();
+        $pendingTickets = Ticket::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Pending')->get();
+        $resolvedTickets = Ticket::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Resolved')->get();
+        $closedTickets = Ticket::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Closed')->get();
         return view('dashboard.admin.ticket.all', compact('tickets', 'openTickets', 'pendingTickets', 'resolvedTickets', 'closedTickets'));
     }
 
     public function create()
     {
-        $ticketTypes = TicketType::all();
-        $users = User::all();
-        $employees = User::doesntHave('agent')->where('type', '=', 'Employee')->get();
-        $ticketChannels = TicketChannel::all();
-        $groups = TicketGroup::all();
+        $ticketTypes = TicketType::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $users = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $employees = User::doesntHave('agent')->where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Employee')->get();
+        $ticketChannels = TicketChannel::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $groups = TicketGroup::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         $countries = Country::all();
         return view('dashboard.admin.ticket.create', compact('users', 'groups', 'employees', 'countries', 'ticketTypes', 'ticketChannels'));
     }
@@ -56,6 +58,7 @@ class TicketController extends Controller
             'description' => 'required',
         ]);
         $ticket = new Ticket();
+        $ticket->auth_id = Auth::guard('admin')->user()->id;
         $ticket->subject = $request->subject;
         $ticket->country_id  = $request->phone_code;
         $ticket->mobile = $request->mobile;
@@ -142,16 +145,16 @@ class TicketController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function edit($id)
+    public function view($id)
     {
         $ticket = Ticket::find($id);
         $ticketTypes = TicketType::all();
-        $users = User::all();
-        $employees = User::doesntHave('agent')->where('type', '=', 'Employee')->get();
-        $ticketChannels = TicketChannel::all();
-        $groups = TicketGroup::all();
+        $users = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $employees = User::doesntHave('agent')->where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Employee')->get();
+        $ticketChannels = TicketChannel::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $groups = TicketGroup::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         $countries = Country::all();
-        return view('dashboard.admin.ticket.edit', compact('ticket', 'users', 'groups', 'employees', 'countries', 'ticketTypes', 'ticketChannels'));
+        return view('dashboard.admin.ticket.show', compact('ticket', 'users', 'groups', 'employees', 'countries', 'ticketTypes', 'ticketChannels'));
     }
 
     public function delete($id)
@@ -163,5 +166,15 @@ class TicketController extends Controller
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);
+    }
+
+    public function exportInToExcel()
+    {
+        return Excel::download(new TicketExport, 'ticketList.xlsx');
+    }
+
+    public function exportInToCSV()
+    {
+        return Excel::download(new TicketExport, 'ticketList.csv');
     }
 }

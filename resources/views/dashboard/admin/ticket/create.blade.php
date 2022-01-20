@@ -293,7 +293,7 @@
                               
                                     </div>
                                   <br>
-                                    <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                                    <button class="btn btn-success" type="submit"><i class="ti-check"></i> Save</button>
                                     <button type="reset" class="btn btn-info">Rest</button>
                                 </form>
                             </div>
@@ -320,7 +320,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-white" id="exampleModalLabel1">Add New Agents</h4>
-                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button text-white" style="color: white"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="ticketAgentForm">
@@ -345,7 +345,7 @@
                   </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>Save</button>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>Save</button>
             </div>
              </form>
         </div>
@@ -358,7 +358,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-white" id="exampleModalLabel1">Add New Ticket Type</h4>
-                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button text-white" style="color: white"  class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -370,7 +370,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
             </form>
@@ -384,7 +384,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-white" id="exampleModalLabel1">Add New Ticket Channel</h4>
-                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button text-white" style="color: white" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -397,7 +397,7 @@
                    
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
             </form>

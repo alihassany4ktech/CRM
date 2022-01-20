@@ -15,6 +15,7 @@ class CreateTicketAgentGroupsTable extends Migration
     {
         Schema::create('ticket_agent_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->integer('agent_id')->unsigned();
             $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('group_id')->unsigned()->nullable();

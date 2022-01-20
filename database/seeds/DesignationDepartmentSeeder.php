@@ -32,11 +32,13 @@ class DesignationDepartmentSeeder extends Seeder
 
         foreach ($departments as $department) {
             Department::create([
+                'auth_id' => 1,
                 'name' => $department,
             ]);
         }
         foreach ($designations as $designation) {
             Designation::create([
+                'auth_id' => 1,
                 'name' => $designation,
             ]);
         }

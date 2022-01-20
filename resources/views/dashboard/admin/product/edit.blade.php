@@ -215,8 +215,7 @@
                                           <label for="md_checkbox_1">Client can purchase</label>
                                           </div>
                                     </div>
-                                    <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
-                                    <button type="reset" class="btn btn-info">Rest</button>
+                                    <button class="btn btn-success" type="submit"><i class="ti-check"></i> Update</button>
                                 </form>
                             </div>
                         </div>
@@ -247,7 +246,7 @@
             </div>
                   <div class="modal-body">
                        <div class="table-responsive m-t-40">
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
+                            <table id="example23" style="color: white" class="display nowrap table table-hover table-striped table-bordered"
                                 cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -283,7 +282,7 @@
                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
              </form>
@@ -302,7 +301,7 @@
             </div>
                   <div class="modal-body">
                       <div class="table-responsive m-t-40">
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
+                            <table id="example23" style="color: white" class="display nowrap table table-hover table-striped table-bordered"
                                 cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -347,7 +346,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
             </form>
@@ -362,7 +361,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-white" id="exampleModalLabel1">Tax</h4>
-                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button text-white" style="color: white" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
                   <div class="modal-body">
@@ -408,7 +407,7 @@
                    
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
             </form>

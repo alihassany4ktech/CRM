@@ -13,6 +13,7 @@ use App\Exports\LeadExport;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +22,7 @@ class LeadsController extends Controller
 {
     public function leads()
     {
-        $leads = Lead::orderBy('id', 'desc')->get();
+        $leads = Lead::where('auth_id', '=', Auth::guard('admin')->user()->id)->orderBy('id', 'desc')->get();
         return view('dashboard.admin.leads.all', compact('leads'));
     }
 
@@ -29,7 +30,7 @@ class LeadsController extends Controller
     {
         $categories = LeadCategory::all();
         $agents = LeadAgent::all();
-        $users = User::where('type', '=', 'Customer')->get();
+        $users = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Customer')->get();
         $sources = LeadSource::all();
         return view('dashboard.admin.leads.create', compact('categories', 'sources', 'agents', 'users'));
     }
@@ -47,6 +48,7 @@ class LeadsController extends Controller
             }
             $leadStatus = LeadStatus::where('default', '1')->first();
             $lead = new Lead();
+            $lead->auth_id = Auth::guard('admin')->user()->id;
             $lead->company_name = $request->company_name;
             $lead->website = $request->website;
             $lead->address = $request->address;

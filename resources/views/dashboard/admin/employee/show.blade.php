@@ -492,7 +492,7 @@
                                         </div>
                                     </div> <br>
                                     <?php
-                                          $roles  = Spatie\Permission\Models\Role::all(); 
+                                          $roles  = Spatie\Permission\Models\Role::where('auth_id','=',Auth::guard('admin')->user()->id)->get(); 
                                           $permissions = Spatie\Permission\Models\Permission::all();
                                      ?>
                                     <div class="form-row">

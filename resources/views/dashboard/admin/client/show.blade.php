@@ -142,17 +142,44 @@
                         <small class="text-muted p-t-10 db">Zip Code</small>
                         <h6>{{$client->zip}}</h6>
                         <small class="text-muted p-t-10 db">Website</small>
-                        <h6><a href="{{$client->website_url}}" target="__blanck">{{$client->website_url}}</a></h6>
+                        <h6>
+                            @if ($client->website_url != null)
+                                <a href="{{$client->website_url}}" target="__blanck">{{$client->website_url}}</a>
+                            @else
+                                <a href="#">no url</a>
+                            @endif
+                        </h6>
                         <small class="text-muted p-t-20 db">Social Profile</small>
                         <br />
-                        <a href="{{$client->facebook_url}}" type="button" target="__blanck" class="btn btn-circle btn-secondary"><i
+                        @if ($client->facebook_url != null)
+                            <a href="{{$client->facebook_url}}" type="button" target="__blanck" class="btn btn-circle btn-secondary"><i
                                 class="mdi mdi-facebook"></i></a>
-                        <a href="{{$client->twitter_url}}" type="button"  target="__blanck" class="btn btn-circle btn-secondary"><i
+                        @else
+                            <a href="#" type="button" class="btn btn-circle btn-secondary"><i
+                                class="mdi mdi-facebook"></i></a>
+                        @endif
+                        @if ($client->twitter_url != null)
+                            <a href="{{$client->twitter_url}}" type="button"  target="__blanck" class="btn btn-circle btn-secondary"><i
                                 class="mdi mdi-twitter"></i></a>
-                        <a href="{{$client->skyp_url}}" type="button"  target="__blanck" class="btn btn-circle btn-secondary"><i
+                        @else
+                            <a href="#" type="button" class="btn btn-circle btn-secondary"><i
+                                class="mdi mdi-twitter"></i></a>
+                        @endif
+                        @if ($client->skyp_url != null)
+                            <a href="{{$client->skyp_url}}" type="button"  target="__blanck" class="btn btn-circle btn-secondary"><i
                                 class="mdi mdi-skype"></i></a>
-                        <a href="{{$client->linkedin_url}}" type="button"  target="__blanck" class="btn btn-circle btn-secondary"><i
+                        @else
+                            <a href="#" type="button"   class="btn btn-circle btn-secondary"><i
+                                class="mdi mdi-skype"></i></a>
+                        @endif
+                        @if ($client->linkedin_url != null)
+                            <a href="{{$client->linkedin_url}}" type="button"  target="__blanck" class="btn btn-circle btn-secondary"><i
                                 class="mdi mdi-linkedin"></i></a>
+                        @else
+                            <a href="#" type="button"  class="btn btn-circle btn-secondary"><i
+                                class="mdi mdi-linkedin"></i></a>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -200,25 +227,6 @@
                                 <hr>
                                 <h5 class="font-medium m-t-30">Note</h5>
                                 <p>{!!$client->note!!}</p>
-                                <hr>
-                                <h5 class="font-medium m-t-30">Role</h5>
-                                
-                                @if ($client->getRoleNames()->isEmpty())
-                                <p>No Role</p>
-                                @else
-                                <p>{{$client->getRoleNames()[0]}}</p>
-                                @endif
-                                   <hr>
-                                <h5 class="font-medium m-t-30">Permissions</h5>
-                             
-                                @if ($client->getAllPermissions()->isEmpty())
-                                <p> No Permissions</p>
-                                @else
-                                @foreach ($client->getAllPermissions() as $permission)
-
-                                <a href="#" class="badge badge-info"> {{$permission->name}}</a>
-                                @endforeach
-                                @endif
 
 
 
@@ -322,7 +330,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                           <label for="validationDefault05">Client Password</label>
-                                          <input type="text" name="client_password" class="form-control" id="validationDefault05" placeholder="new password">
+                                          <input type="text" name="client_password" class="form-control" id="validationDefault05" placeholder="optional">
                                              @error('client_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -348,11 +356,6 @@
                                           <input name="facebook_url"  type="url" class="form-control" id="validationDefault05" value="{{$client->facebook_url}}">
                                         </div>
                                     </div> 
-                                    
-                                    <?php
-                                          $roles  = Spatie\Permission\Models\Role::all(); 
-                                          $permissions = Spatie\Permission\Models\Permission::all();
-                                     ?>
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <label for="validationDefault01">Log In</label>
@@ -369,7 +372,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                         <div class="col-md-4 mb-3">
+                                         {{-- <div class="col-md-4 mb-3">
                                             <label for="validationDefault01">Role</label>
                                             <select name="role_name" class="selectpicker form-control"
                                                 data-style="form-control btn-secondary">
@@ -387,8 +390,25 @@
                                                 @endif
                                                 @endforeach
                                                 @endif
-                                            </select>
-                                        </div>
+                                            </select> --}}
+                                            {{-- <select name="role_name" class="selectpicker form-control"
+                                                data-style="form-control btn-secondary">
+                                                @if ($client->getRoleNames()->isEmpty())
+                                                <option disabled selected>No Role</option>
+                                                @else
+                                                <option value="{{$client->getRoleNames()[0]}}" selected>
+                                                    {{$client->getRoleNames()[0]}}</option>
+                                                @foreach ($roles as $role)
+                                                @if ($client->getRoleNames()[0] == $role->name )
+                                                <option style="display: none" value="{{$role->name}}">{{$role->name}}
+                                                </option>
+                                                @else
+                                                <option value="{{$role->name}}">{{$role->name}}</option>
+                                                @endif
+                                                @endforeach
+                                                @endif
+                                            </select> --}}
+                                        {{-- </div> --}}
                                              <div class="col-md-4 mb-3">
                                         <label for="validationDefault04">Email Notifications</label><br>
                                         @if ($client->notification_status == 'yes')

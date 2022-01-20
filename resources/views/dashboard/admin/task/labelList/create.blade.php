@@ -258,7 +258,7 @@
                                 </div>
                             </div>
                             <br>
-                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                            <button class="btn btn-success" type="submit"><i class="ti-check"></i> Save</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
                     </div>

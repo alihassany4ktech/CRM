@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+|// Route::get('/google/login', 'User\UserController@redirectToGoogle')->name('google.login');
+        // Route::get('/google/login/callback', 'User\UserController@handleGoogleCallback');
+        // facebook
+        // Route::get('/facebook/login', 'User\UserController@redirectToFacebook')->name('facebook.login');
+        // Route::get('/facebook/login/callback', 'User\UserController@handleFacebookCallback');
+        
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -54,21 +59,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/delete/client/{id}', 'Admin\AdminController@deleteClient')->name('client.delete');
         Route::get('/show/client/{id}', 'Admin\AdminController@showClient')->name('client.show');
         // role  
+        // new
+        Route::post('/role-permission/store', 'Admin\RolePermissionController@rolePermissionStore')->name('role-permission.store');
+        Route::post('/role/store', 'Admin\RolePermissionController@roleStore')->name('role.store');
+        Route::post('/delete/role', 'Admin\RolePermissionController@deleteRole')->name('role.delete');
+        Route::post('/add/role/member', 'Admin\RolePermissionController@addMember')->name('add.role.member');
+        Route::post('/delete/role/member', 'Admin\RolePermissionController@deleteRoleMember')->name('delete.role.member');
+        // end new
         Route::get('/roles', 'Admin\RolePermissionController@rolesPermissions')->name('roles_permissions');
-        Route::get('/create/role-permission', 'Admin\RolePermissionController@createRolesPermissions')->name('create.role_permission');
-        Route::post('/role/save', 'Admin\RolePermissionController@saveRolePermission')->name('role_permission.save');
+        // Route::get('/create/role-permission', 'Admin\RolePermissionController@createRolesPermissions')->name('create.role_permission');
+        // Route::post('/role/save', 'Admin\RolePermissionController@saveRolePermission')->name('role_permission.save');
         // delete role 
-        Route::get('/delete/role/{id}', 'Admin\RolePermissionController@deleteRole')->name('role.delete');
+        // Route::get('/delete/role/{id}', 'Admin\RolePermissionController@deleteRole')->name('role.delete');
         //edit role
-        Route::get('/edit/role/{id}', 'Admin\RolePermissionController@editeRole')->name('role.edit');
+        // Route::get('/edit/role/{id}', 'Admin\RolePermissionController@editeRole')->name('role.edit');
         // update role 
-        Route::post('/update/role', 'Admin\RolePermissionController@updateRole')->name('role.update');
+        // Route::post('/update/role', 'Admin\RolePermissionController@updateRole')->name('role.update');
         //and permission route
-        Route::get('/permissions', 'Admin\RolePermissionController@permissions')->name('permissions');
-        Route::get('/create/permission', 'Admin\RolePermissionController@createPermissions')->name('create.permission');
-        Route::post('/permission/save', 'Admin\RolePermissionController@savePermission')->name('permission.save');
-        //delete permission 
-        Route::get('/delete/permission/{id}', 'Admin\RolePermissionController@deletePermission')->name('permission.delete');
+        // Route::get('/permissions', 'Admin\RolePermissionController@permissions')->name('permissions');
+        // Route::get('/create/permission', 'Admin\RolePermissionController@createPermissions')->name('create.permission');
+        // Route::post('/permission/save', 'Admin\RolePermissionController@savePermission')->name('permission.save');
+        // //delete permission 
+        // Route::get('/delete/permission/{id}', 'Admin\RolePermissionController@deletePermission')->name('permission.delete');
         // ========================================= Leads Routes ============================================ \\
         Route::get('/leads', 'Admin\LeadsController@leads')->name('leads');
         Route::get('/create/lead', 'Admin\LeadsController@createLead')->name('create.lead');
@@ -220,9 +232,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/tickets', 'Admin\TicketController@tickets')->name('tickets');
         Route::get('/create/ticket', 'Admin\TicketController@create')->name('ticket.create');
         Route::post('/ticket/store', 'Admin\TicketController@store')->name('ticket.store');
-        Route::get('/ticket/edit/{id}', 'Admin\TicketController@edit')->name('ticket.edit');
+        Route::get('/ticket/view/{id}', 'Admin\TicketController@view')->name('ticket.view');
         Route::post('/ticket/update', 'Admin\TicketController@update')->name('ticket.update');
         Route::get('/ticket/delete/{id}', 'Admin\TicketController@delete')->name('ticket.delete');
+        Route::get('/export-excel/ticket', 'Admin\TicketController@exportInToExcel')->name('ticket.export.excel');
+        Route::get('/export-csv/ticket', 'Admin\TicketController@exportInToCSV')->name('ticket.export.csv');
         // Ticket Types Routes
         Route::post('/ticket/type/store', 'Admin\TicketTypeController@store')->name('ticket.type.store');
         Route::post('/ticket/type/update', 'Admin\TicketTypeController@update')->name('ticket.type.update');
@@ -243,6 +257,32 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Ticket Group Routes
         Route::post('/ticket/group/delete', 'Admin\TicketGroupController@delete')->name('ticket.group.delete');
         Route::post('/ticket/group/store', 'Admin\TicketGroupController@store')->name('ticket.group.store');
+
+        // ========================================= Notice Board Routes ============================================ \\
+        Route::get('/notice-boards', 'Admin\NoticeBoardController@noticeBords')->name('notice-boards');
+        Route::get('/create/notice-board', 'Admin\NoticeBoardController@create')->name('create.notice-board');
+        Route::post('/notice-board/store', 'Admin\NoticeBoardController@store')->name('notice-board.store');
+        Route::get('/notice-board/delete/{id}', 'Admin\NoticeBoardController@delete')->name('notice-board.delete');
+        Route::get('/notice-board/edit/{id}', 'Admin\NoticeBoardController@edit')->name('notice-board.edit');
+        Route::post('/notice-board/update', 'Admin\NoticeBoardController@update')->name('notice-board.update');
+        Route::get('/export-excel/notice-board', 'Admin\NoticeBoardController@exportInToExcel')->name('notice-board.export.excel');
+        Route::get('/export-csv/notice-board', 'Admin\NoticeBoardController@exportInToCSV')->name('notice-board.export.csv');
+
+        // ========================================= Expenses Routes ============================================ \\
+        Route::get('/expenses', 'Admin\ExpenseController@expenses')->name('expenses');
+        Route::get('/expense/create', 'Admin\ExpenseController@create')->name('expense.create');
+        Route::post('/expense/store', 'Admin\ExpenseController@store')->name('expense.store');
+        Route::post('/expense/change/status', 'Admin\ExpenseController@changeStatus')->name('expense.change.status');
+        Route::get('/expense/delete/{id}', 'Admin\ExpenseController@delete')->name('expense.delete');
+        Route::get('/export-excel/expense', 'Admin\ExpenseController@exportInToExcel')->name('expense.export.excel');
+        Route::get('/export-csv/expense', 'Admin\ExpenseController@exportInToCSV')->name('expense.export.csv');
+        // fetch member 
+        Route::post('/fetch/member', 'Admin\ExpenseController@fetchMember')->name('fetch.member');
+        // expenses category routes
+        Route::post('/expense/category/store', 'Admin\ExpanseCategoryController@store')->name('expense.category.store');
+        Route::post('/expense/category/delete', 'Admin\ExpanseCategoryController@delete')->name('expense.category.delete');
+        // ========================================= Settings Routes ============================================ \\
+        Route::get('/settings', 'Admin\OrganisationSettingsController@settings')->name('settings');
     });
 });
 
@@ -252,18 +292,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('user')->name('user.')->group(function () {
 
     Route::middleware(['guest:web',])->group(function () {
+        // ========================================= Common Routes ============================================ \\
         Route::get('/login', 'User\UserController@showLoginForm')->name('login');
         Route::post('/check', 'User\UserController@check')->name('check');
-        // social login
-        // Route::get('/google/login', 'User\UserController@redirectToGoogle')->name('google.login');
-        // Route::get('/google/login/callback', 'User\UserController@handleGoogleCallback');
-        // facebook
-        // Route::get('/facebook/login', 'User\UserController@redirectToFacebook')->name('facebook.login');
-        // Route::get('/facebook/login/callback', 'User\UserController@handleFacebookCallback');
+        // s
+
     });
 
     Route::middleware(['auth:web',])->group(function () {
-        Route::get('/home', 'User\UserController@dashboard')->name('home');
+        Route::middleware('checkType')->group(function () {
+            // ========================================= Employee Routes ============================================ \\
+            Route::get('/employee/dashboard', 'User\Employee\EmployeeController@dashboard')->name('home');
+            Route::get('/employee/projects', 'User\Employee\ProjectController@projects')->name('employee.projects');
+        });
+
+        Route::middleware('client')->group(function () {
+            // ========================================= Client Routes ============================================ \\
+            Route::get('/client/dashboard', 'User\Client\ClientController@dashboard')->name('client.dashboard');
+            Route::get('/client/projects', 'User\Client\ProjectController@projects')->name('client.projects');
+        });
+
+
+        // ========================================= Common Routes ============================================ \\
         Route::post('/logout', 'User\UserController@logout')->name('logout');
     });
 });

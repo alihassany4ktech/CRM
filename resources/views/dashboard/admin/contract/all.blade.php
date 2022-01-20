@@ -116,7 +116,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title"><i class="ti-file"></i> Contracts</h4>
+                        <h4 class="card-title">Contracts</h4>
                            <div class="dropdown">
                             <a href="#" type="button" class="btn btn-info t-10 float-right" style="font-size: 12px" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false"><i class="ti-download" style="font-size: 12px"></i> Export</a>

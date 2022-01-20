@@ -190,7 +190,7 @@
                                         <th>Members</th>
                                         <th>Dedline</th>
                                         <th>Client</th>
-                                        <th>Category</th>
+                                        <th>Completions</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -214,11 +214,10 @@
                                         <td>{{$value->deadline != null?  date_format($value->deadline,"d/m/Y") : 'No Deadline'}}</td>
                                         <td>{{$value->client->name}}</td>
                                         <td>
-                                            {{$value->category->name}}
-                                            {{-- <p>Progress &nbsp;<small class="pull-right">{{$value->completion_percent}}%</small></p>
+                                            <p>Progress &nbsp;<small class="pull-right">{{$value->completion_percent}}%</small></p>
                                         <div class="progress ">
                                             <div class="progress-bar bg-danger wow animated progress-animated" style="width: {{$value->completion_percent}}%; height:6px;" role="progressbar"> </div>
-                                        </div> --}}
+                                        </div>
                                         </td>
                                         <td><small
                                                 class="label" style="background-color: #edf9f7;color:#33cea8">{{$value->project_status}}</small></td>

@@ -15,6 +15,7 @@ class CreateTaskLabelListsTable extends Migration
     {
         Schema::create('task_label_lists', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->string('label_name')->nullable();
             $table->string('color')->nullable();
             $table->mediumText('description')->nullable();

@@ -204,7 +204,7 @@
                                             aria-describedby="basic-addon2" name="client_password">
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1"><a type="button"  
-                                                    style="cursor:pointer" class="text-dark"><span class="fa fa-eye" style="font-size: 11px" id="toggleBtn" onclick="toggePassword()" ></span></a></span>
+                                                    style="cursor:pointer" class="text-dark"><span class="ti-eye" style="font-size: 11px" id="toggleBtn" onclick="toggePassword()" ></span></a></span>
                                         </div>
                                     </div>
                               
@@ -236,17 +236,6 @@
                                         </div>
                                     </div> 
                                     <div class="form-row">
-                                        <div class="col-md-3 mb-3">
-                                        <label for="validationDefault05">Role</label>
-                                        <select name="role_name"  class="selectpicker form-control" data-style="form-control btn-secondary">
-                                            @foreach ($roles as $row)
-                                                            <option value="{{$row->name}}">{{$row->name}}</option>
-                                            @endforeach
-                                        </select>
-                                          @error('role_name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                        </div>
                                         <div class="col-md-3 mb-3">
                                         <label for="validationDefault05">Log In</label>
                                         <select name="login_status"  class="selectpicker form-control" data-style="form-control btn-secondary">
@@ -302,7 +291,7 @@
                                         </div>
                               
                                     </div>
-                                    <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                                    <button class="btn btn-success" type="submit"><i class="ti-check"></i> Save</button>
                                     <button type="reset" class="btn btn-info">Rest</button>
                                 </form>
                             </div>

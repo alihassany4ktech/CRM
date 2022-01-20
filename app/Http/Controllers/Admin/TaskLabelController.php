@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\TaskLabelList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TaskLabelController extends Controller
 {
@@ -12,7 +13,7 @@ class TaskLabelController extends Controller
 
     public function labelList()
     {
-        $labelList = TaskLabelList::all();
+        $labelList = TaskLabelList::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.task.labelList.all', compact('labelList'));
     }
 
@@ -25,6 +26,7 @@ class TaskLabelController extends Controller
     {
         if ($request->ajax()) {
             $taslLabel = new TaskLabelList();
+            $taslLabel->auth_id = Auth::guard('admin')->user()->id;
             $taslLabel->label_name = $request->name;
             $taslLabel->color = $request->color;
             $taslLabel->description = $request->description;

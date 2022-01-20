@@ -245,7 +245,7 @@ input[type=number] {
                                     <label for="validationDefault04">Project Category
                                         <a href="#" id="addLeadsource" data-toggle="modal"
                                             data-target="#responsive-modal2" id="addLeadsource"
-                                            class="btn btn-sm  btn-outline-success"><i class="fa fa-plus"></i></a>
+                                            class="btn btn-sm  btn-outline-success"><i class="ti-plus"></i></a>
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="project_category" >
                                     <option value="">Select Category</option>
@@ -258,13 +258,13 @@ input[type=number] {
                                     @enderror
                                 </div>
                                 <?php 
-                                $departments = App\Department::all();
+                                $departments = App\Department::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
                                  ?>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationDefault04">Department 
                                         <a href="#" type="button" data-toggle="modal" data-target="#responsive-modal"
                                             id="addLeadsource" class="btn btn-sm  btn-outline-success"><i
-                                                class="fa fa-plus"></i></a>
+                                                class="ti-plus"></i></a>
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="department" >
                                     <option value="">--</option>
@@ -301,9 +301,9 @@ input[type=number] {
                                 </div>
                             </div>
                             <?php
-                              $employees = App\User::where('type','=','Employee')->get();
-                              $customers = App\User::where('type','=','Customer')->get();
-                              $departments = App\Department::all();
+                              $employees = App\User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type','=','Employee')->get();
+                              $customers = App\User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type','=','Customer')->get();
+                              $departments = App\Department::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
                              ?>
                             <div class="form-row">
                                     <div class="col-md-12 mb-3">
@@ -382,10 +382,10 @@ input[type=number] {
                                     <label for="validationDefault05">Currency
                                     </label>
                                        <select class="form-control" name="currency" id="">
-                                        <option value="1">Dollers (USD)</option>
-                                        <option value="2">Pounds (GBS)</option>
-                                        <option value="3">Euros (EUR)</option>
-                                        <option value="4">Rupee (INR)</option>
+                                        @foreach($currencies as $row)
+                                            <option value="{{ $row->id }}">{{ $row->currency_symbol.' ('.$row->currency_code.')' }}
+                                            </option>
+                                            @endforeach
                                     </select>
                                             @error('currency')
                                     <small class="text-danger">{{ $message }}</small>
@@ -430,7 +430,7 @@ input[type=number] {
                             </div>
                          
                             <br>
-                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                            <button class="btn btn-success" type="submit"><i class="ti-check"></i> Save</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
                     </div>
@@ -472,7 +472,7 @@ input[type=number] {
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
             </form>
@@ -506,7 +506,7 @@ input[type=number] {
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$row->name}}</td>
                                   <td style="text-align: end">
-                                    <button onclick="deleteProjectCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"
+                                    <button onclick="deleteProjectCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="ti-close"
                                             aria-hidden="true"></i></i></button>
                                 </td>
                                 </tr>
@@ -526,7 +526,7 @@ input[type=number] {
                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
              </form>

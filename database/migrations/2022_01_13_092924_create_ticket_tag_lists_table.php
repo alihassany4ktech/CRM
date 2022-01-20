@@ -15,6 +15,7 @@ class CreateTicketTagListsTable extends Migration
     {
         Schema::create('ticket_tag_lists', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->string('tag_name');
             $table->timestamps();
         });

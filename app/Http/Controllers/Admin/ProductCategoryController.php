@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\ProductCategory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductCategoryController extends Controller
 {
@@ -12,6 +13,7 @@ class ProductCategoryController extends Controller
     {
         if ($request->ajax()) {
             $productCategory = new ProductCategory();
+            $productCategory->auth_id = Auth::guard('admin')->user()->id;
             $productCategory->category_name = $request->category_name;
             $productCategory->save();
             return response()->json(['success' => 'Product Category Save Successfully!']);

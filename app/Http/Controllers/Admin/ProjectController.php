@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Currency;
 use App\User;
 use App\Project;
 use App\ProjectFile;
@@ -9,28 +10,30 @@ use App\ProjectMember;
 use App\ProjectCategory;
 use Illuminate\Http\Request;
 use App\Exports\ProjectExport;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 
 class ProjectController extends Controller
 {
     public function allProjects()
     {
-        $projects = Project::all();
-        $completedProjects = Project::where('project_status', '=', 'Finished')->get();
-        $noStartedProjects = Project::where('project_status', '=', 'No Started')->get();
-        $inProgressProjects = Project::where('project_status', '=', 'In Progress')->get();
-        $canceledProjects = Project::where('project_status', '=', 'Canceled')->get();
-        $underReviewProjects = Project::where('project_status', '=', 'Under Review')->get();
+        $projects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $completedProjects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('project_status', '=', 'Finished')->get();
+        $noStartedProjects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('project_status', '=', 'No Started')->get();
+        $inProgressProjects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('project_status', '=', 'In Progress')->get();
+        $canceledProjects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('project_status', '=', 'Canceled')->get();
+        $underReviewProjects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('project_status', '=', 'Under Review')->get();
         return view('dashboard.admin.project.all', compact('projects', 'completedProjects', 'noStartedProjects', 'inProgressProjects', 'canceledProjects', 'underReviewProjects'));
     }
 
     public function create()
     {
-        $projectsCategories = ProjectCategory::all();
-        return view('dashboard.admin.project.create', compact('projectsCategories'));
+        $projectsCategories = ProjectCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $currencies = Currency::all();
+        return view('dashboard.admin.project.create', compact('projectsCategories', 'currencies'));
     }
 
     public function projectStore(Request $request)
@@ -48,6 +51,7 @@ class ProjectController extends Controller
         ]);
         $membersList = $request->employee;
         $project = new Project();
+        $project->auth_id = Auth::guard('admin')->user()->id;
         $project->project_name = $request->project_name;
         $project->category_id = $request->project_category;
         $project->department = $request->department;
@@ -99,8 +103,9 @@ class ProjectController extends Controller
     public function editProject($id)
     {
         $project = Project::findOrFail($id);
-        $projectsCategories = ProjectCategory::all();
-        return view('dashboard.admin.project.edit', compact('project', 'projectsCategories'));
+        $currencies = Currency::all();
+        $projectsCategories = ProjectCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        return view('dashboard.admin.project.edit', compact('project', 'projectsCategories', 'currencies'));
     }
 
     public function projectUpdate(Request $request)
@@ -110,6 +115,7 @@ class ProjectController extends Controller
         $project->category_id = $request->project_category;
         $project->department = $request->department;
         $project->start_date = $request->start_date;
+        $project->completion_percent = $request->completion_percent;
         if ($request->without_deadline == null) {
             $project->deadline = $request->deadline;
         }
@@ -140,6 +146,7 @@ class ProjectController extends Controller
     {
         if ($request->ajax()) {
             $category = new ProjectCategory();
+            $category->auth_id = Auth::guard('admin')->user()->id;
             $category->name = $request->name;
             $category->save();
             return response()->json(['success' => 'Project Category Save Successfully!']);

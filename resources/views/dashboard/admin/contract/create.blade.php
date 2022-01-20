@@ -257,7 +257,7 @@ input[type=number] {
                                  <div class="col-md-4 mb-4">
                                    <label for="validationDefault03">Contract Type <a href="#" type="button" data-toggle="modal" data-target="#responsive-modal"
                                             id="addLeadsource" class="btn btn-sm  btn-outline-success"><i
-                                                class="fa fa-plus"></i> Add Contract Type </a></label>
+                                                class="ti-plus"></i> Add Contract Type </a></label>
                                        <select class="select2 form-control" style="width: 100%" name="contract_type" >
                                     <option value="">--</option>
                                     @foreach ($contractTypes as $row)
@@ -412,7 +412,7 @@ input[type=number] {
                             </div>
                          
                             <br>
-                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                            <button class="btn btn-success" type="submit"><i class="ti-check"></i> Save</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
                     </div>
@@ -458,7 +458,7 @@ input[type=number] {
                                           <td>{{$loop->iteration}}</td>
                                           <td>{{$row->name}}</td>
                                           <td style="text-align: end">
-                                                <button onclick="deleteContractType(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"
+                                                <button onclick="deleteContractType(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="ti-close"
                                             aria-hidden="true" style="font-size: 12px"></i></button>
                                           </td>
                                     </tr>
@@ -476,7 +476,7 @@ input[type=number] {
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
              </form>

@@ -126,17 +126,17 @@
                             <a href="#" type="button" class="btn btn-info t-10 float-right" data-toggle="dropdown" style="font-size: 12px"
                                 aria-haspopup="true" aria-expanded="false"><i class="ti-download" style="font-size: 12px"></i> Export</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px">
-                                <a class="dropdown-item text-dark" href="{{route('admin.product.export.excel')}}"
+                                <a class="dropdown-item text-dark" href="{{route('admin.ticket.export.excel')}}"
                                     style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
                                     Excel</a>
-                                <a class="dropdown-item  text-dark" href="{{route('admin.product.export.csv')}}"
+                                <a class="dropdown-item  text-dark" href="{{route('admin.ticket.export.csv')}}"
                                     style="font-size: 12px"><i class="fa fa-file-excel" style="font-size: 12px"></i>
                                     CSV</a>
                             </div>
                         </div>
                         <a href="{{route('admin.ticket.create')}}" type="button"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px;font-size: 12px"><i
-                                class="ti-plus" style="font-size: 12px"></i>Create Ticket</a>
+                                class="ti-plus" style="font-size: 12px"></i> Create Ticket</a>
                         <a href="{{route('admin.ticket.types')}}" type="button"
                             class="btn waves-effect waves-light btn-outline-warning t-10 float-right" style="margin-right: 10px;font-size: 12px">Ticket Types</a>
                              <a href="{{route('admin.ticket.channels')}}" type="button"
@@ -220,12 +220,8 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-dark" type="button"
                                                         style="font-size: 12px; cursor: pointer;"
-                                                        href="#"><i
+                                                        href="{{route('admin.ticket.view' , ['id'=>$row->id])}}"><i
                                                             class="ti-eye" style="font-size: 12px"></i> View</a>
-                                                            <a class="dropdown-item text-dark" type="button"
-                                                        style="font-size: 12px; cursor: pointer;"
-                                                        href="{{route('admin.ticket.edit' , ['id'=>$row->id])}}"><i
-                                                            class="ti-marker-alt" style="font-size: 12px"></i> Edit</a>
                                                     <a class="dropdown-item text-dark"
                                                         href="{{route('admin.ticket.delete' , ['id'=>$row->id])}}"
                                                         type="button" style="font-size: 12px" id="deleteTicket"><i class="ti-close"

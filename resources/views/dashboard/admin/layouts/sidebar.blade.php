@@ -63,13 +63,11 @@
                                 <li><a href="#"><i class="fa fa-clock" aria-hidden="true"></i> Finanace Dashboard</a></li>
                             </ul>
                         </li>
-                        <li class="{{ $link == route('admin.clients') || $link == route('admin.roles_permissions') || $link == route('admin.lead.kanbanBoard') || $link == route('admin.create.lead')  ||$link == route('admin.leads')||$link == route('admin.permissions') ||$link == route('admin.create.client') || $link == route('admin.create.role_permission') ||$link == route('admin.create.permission') ? 'active':'' }}"> 
+                        <li class="{{ $link == route('admin.clients') || $link == route('admin.lead.kanbanBoard') || $link == route('admin.create.lead')  ||$link == route('admin.leads') ||$link == route('admin.create.client')  ? 'active':'' }}"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Customers</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('admin.clients')}}" class="{{ $link == route('admin.clients') ||$link == route('admin.create.client') ? 'active':'' }}">Clients</a></li>
                                 <li><a href="{{route('admin.leads')}}" class="{{$link == route('admin.leads') || $link == route('admin.lead.kanbanBoard')  || $link == route('admin.create.lead') ? 'active':''}}">Leads</a></li>
-                                <li><a href="{{route('admin.roles_permissions')}}" class="{{ $link == route('admin.roles_permissions') ||$link == route('admin.create.role_permission') ? 'active':'' }}">Roles</a></li>
-                                <li><a href="{{route('admin.permissions')}}" class="{{ $link == route('admin.permissions') || $link == route('admin.create.permission') ? 'active':'' }}">Permissions</a></li>
                             </ul>
                         </li>
                         <li class="{{$link == route('admin.employees')||$link == route('admin.designations')|| $link == route('admin.departments')||$link == route('admin.create.employee')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">HR</span></a>
@@ -82,6 +80,8 @@
                                 <li><a href="#"><i class="fa fa-clock" aria-hidden="true"></i> Leaves</a></li>
                             </ul>
                         </li>
+                        <li class="{{$link == route('admin.roles_permissions')? 'active':'' }}"><a class="waves-effect waves-dark" href="{{route('admin.roles_permissions')}}" aria-expanded="false"><i class="mdi mdi-lock" style="font-size: 20px" aria-hidden="true"></i><span class="hide-menu">Roles & Permissions</span></a></li>
+
                         <li  class="{{$link == route('admin.projects')|| $link == route('admin.task-board') || $link == route('admin.task.kanbanBoard') |$link == route('admin.tasks')|| $link == route('admin.contracts')||$link == route('admin.task.create') || $link == route('admin.project.create')  ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hide-menu">Work</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('admin.contracts')}}" class="{{$link == route('admin.contracts') ? 'active':''}}">Contracts</a></li>
@@ -92,98 +92,38 @@
                                 <li><a href="#">Time Logs</a></li>
                             </ul>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><span class="hide-menu"> <i class="fa fa-money-bill-alt" style="font-size: 18px"></i> Fainance</span></a>
+                        {{-- <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-money-bill-alt" style="font-size: 18px"></i> Fainance</a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="ui-cards.html">Cards</a></li>
                                 <li><a href="ui-user-card.html">User Cards</a></li>
                                 <li><a href="ui-buttons.html">Buttons</a></li>
                             
                             </ul>
-                        </li>
-                        <li class="{{$link == route('admin.products') || $link == route('admin.product.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.products')}}" aria-expanded="false"><i class="mdi mdi-basket-fill" aria-hidden="true"></i><span class="hide-menu">Products</span></a></li>
-                        <li class="{{$link == route('admin.tickets') || $link==route('admin.ticket.types') || $link==route('admin.ticket.channels') || $link==route('admin.ticket.agents') || $link == route('admin.ticket.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.tickets')}}" aria-expanded="false"><i class="mdi mdi-ticket" aria-hidden="true"></i><span class="hide-menu">Tickets</span></a></li>
-
-                        <li class="nav-devider"></li>
+                        </li> --}}
                         <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>
+                        <li class="{{$link == route('admin.expenses') || $link == route('admin.expense.create') ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-money-bill-alt" style="font-size: 17px"></i><span class="hide-menu">Fainance</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="form-basic.html">Basic Forms</a></li>
-                                <li><a href="form-layout.html">Form Layouts</a></li>
+                                <li><a href="{{route('admin.expenses')}}" class="{{$link == route('admin.expenses')|| $link == route('admin.expense.create') ? 'active':'' }}">Expenses</a></li>
+                                {{-- <li><a href="form-layout.html">User Cards</a></li>
+                                  <li><a href="ui-buttons.html">Buttons</a></li> --}}
                                
                             </ul>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Tables</span></a>
+                        <li class="{{$link == route('admin.products') || $link == route('admin.product.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.products')}}" aria-expanded="false"><i class="mdi mdi-cart" aria-hidden="true"></i><span class="hide-menu">Products</span></a></li>
+                        <li class="{{$link == route('admin.tickets') || $link==route('admin.ticket.types') || $link==route('admin.ticket.channels') || $link==route('admin.ticket.agents') || $link == route('admin.ticket.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.tickets')}}" aria-expanded="false"><i class="mdi mdi-ticket" aria-hidden="true"></i><span class="hide-menu">Tickets</span></a></li>
+                        <li class="{{$link == route('admin.notice-boards') || $link==route('admin.create.notice-board') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.notice-boards')}}" aria-expanded="false"><i class="mdi mdi-clipboard" aria-hidden="true"></i><span class="hide-menu">Notice Board</span></a></li>
+            
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-av-timer"></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="table-basic.html">Basic Tables</a></li>
-                               
+                                <li><a href="form-basic.html">Task Report</a></li>
+                                <li><a href="form-layout.html">Time Log Report</a></li>
+                                <li><a href="form-layout.html">Finance Report</a></li>
+                                <li><a href="form-layout.html">Income Vs Expense Report</a></li>
+                                <li><a href="form-layout.html">Leave Report</a></li>
+                                <li><a href="form-layout.html">Attendance Report</a></li>
                             </ul>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Widgets</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="widget-apps.html">Widget Apps</a></li>
-                           
-                            </ul>
-                        </li>
-                        <li class="nav-devider"></li>
-                        <li class="nav-small-cap">EXTRA COMPONENTS</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span class="hide-menu">Page Layout</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="layout-single-column.html">1 Column</a></li>
-                               
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Sample Pages</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="starter-kit.html">Starter Kit</a></li>
-                                <li><a href="pages-blank.html">Blank page</a></li>
-                                <li><a href="#" class="has-arrow">Authentication <span class="label label-rounded label-success">6</span></a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="pages-login.html">Login 1</a></li>
-                               
-                                    </ul>
-                                </li>
-                                <li><a href="pages-profile.html">Profile page</a></li>
-                                <li><a href="pages-animation.html">Animation</a></li>
-                                <li><a href="#" class="has-arrow">Error Pages</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="pages-error-400.html">400</a></li>
-                                      
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file-chart"></i><span class="hide-menu">Charts</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-morris.html">Morris Chart</a></li>
-                         
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-brush"></i><span class="hide-menu">Icons</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="icon-material.html">Material Icons</a></li>
-                                <li><a href="icon-fontawesome.html">Fontawesome Icons</a></li>
-                            
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">Maps</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="map-google.html">Google Maps</a></li>
-                                <li><a href="map-vector.html">Vector Maps</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">item 1.1</a></li>
-                                <li><a href="#">item 1.2</a></li>
-                                <li> <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="#">item 1.3.1</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a href="#">item 1.4</a></li>
-                            </ul>
-                        </li>
+                        <li class="{{$link == route('admin.settings')? 'active':'' }}"><a class="waves-effect waves-dark" href="{{route('admin.settings')}}" aria-expanded="false"><i class="ti-settings" style="font-size: 18px" aria-hidden="true"></i><span class="hide-menu">Settings</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

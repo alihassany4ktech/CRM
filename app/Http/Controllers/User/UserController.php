@@ -28,16 +28,17 @@ class UserController extends Controller
 
         $creds = $request->only('email', 'password');
         if (Auth::guard('web')->attempt($creds)) {
-            return redirect()->route('user.home');
+            if (Auth::guard('web')->user()->type == 'Employee') {
+                return redirect()->route('user.home');
+            } else {
+                return redirect()->route('user.client.dashboard');
+            }
         } else {
             return redirect()->route('user.login')->with('fail', 'Incorrect credentials');
         }
     }
 
-    public function dashboard()
-    {
-        return view('dashboard.user.home');
-    }
+
 
     function logout()
     {

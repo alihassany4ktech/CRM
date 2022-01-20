@@ -135,7 +135,7 @@
                                         </div>
                                         
                                         <?php
-                                                $permissions = Spatie\Permission\Models\Permission::all();                                         ?>
+                                                $permissions = Spatie\Permission\Models\Permission::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();                                         ?>
                                         <div class="col-md-6 mb-3">
                                           <label for="validationDefault01">Permissions<small>(select)</small></label>
                                              

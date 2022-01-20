@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             // common feilds
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('provider_name')->nullable();
             $table->string('login')->default('Enable');

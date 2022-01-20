@@ -7,6 +7,7 @@ use App\Department;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmenetController extends Controller
 {
@@ -19,7 +20,7 @@ class DepartmenetController extends Controller
 
     public function departments()
     {
-        $departments = Department::all();
+        $departments = Department::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.employee.department.all', compact('departments'));
     }
 

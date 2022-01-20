@@ -249,7 +249,7 @@ input[type=number] {
                                     <label for="validationDefault04">Task Category
                                         <a href="#" id="addLeadsource" data-toggle="modal"
                                             data-target="#responsive-modal2" id="addLeadsource"
-                                            class="btn btn-sm  btn-outline-success"><i class="fa fa-plus"></i></a>
+                                            class="btn btn-sm  btn-outline-success"><i class="ti-plus"></i></a>
                                     </label>
                                      <select class="select2 form-control" style="width: 100%" name="task_category" >
                                     <option value="">No task category added</option>
@@ -396,7 +396,7 @@ input[type=number] {
                   
                          
                             <br>
-                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
+                            <button class="btn btn-success" type="submit"><i class="ti-check"></i> Update</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
                     </div>
@@ -441,7 +441,7 @@ input[type=number] {
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$row->category_name}}</td>
                                   <td style="text-align: end">
-                                    <button onclick="deleteTaskCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"
+                                    <button onclick="deleteTaskCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="ti-close"
                                             aria-hidden="true" style="font-size: 12px"></i></i></button>
                                 </td>
                                 </tr>
@@ -461,7 +461,7 @@ input[type=number] {
                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
              </form>
@@ -502,7 +502,7 @@ input[type=number] {
                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
              </form>

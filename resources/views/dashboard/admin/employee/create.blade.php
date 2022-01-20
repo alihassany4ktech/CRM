@@ -272,19 +272,7 @@
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="validationDefault05">Role</label>
-                                    <select name="role_name" class="selectpicker form-control"
-                                        data-style="form-control btn-secondary">
-                                        @foreach ($roles as $row)
-                                        <option value="{{$row->name}}">{{$row->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <small>Assign Employee Role.</small>
-                                    @error('role_name')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+
                                 <div class="col-md-3 mb-3">
                                     <label for="validationDefault03">Mobile</label>
                                     <input type="text" name="cell" class="form-control" id="validationDefault03"

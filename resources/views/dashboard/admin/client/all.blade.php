@@ -116,7 +116,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title"><i class="icon-people"></i> Clients</h4>
+                        <h4 class="card-title"> Clients</h4>
                         <a href="{{route('admin.create.client')}}" type="button"
                             class="btn btn-outline-success m-t-10 float-right" style="font-size: 12px"><i class="ti-plus" style="font-size: 12px"></i> Add New
                             Client</a>
@@ -129,8 +129,8 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Login</th>
-                                        <th>Role</th>
-                                        <th>Permissions</th>
+                                        <th>Company</th>
+                                        <th>Phone</th>
                                         <th>Created</th>
                                         <th>Action</th>
                                     </tr>
@@ -143,22 +143,11 @@
                                         <td>{{$row->email}}</td>
                                         <td><a href="#" class="badge badge-success">Enable</a></td>
                                         <td>
-                                            @if ($row->getRoleNames()->isEmpty())
-                                            No Role
-                                            @else
-                                            {{$row->getRoleNames()[0]}}
-                                            @endif
+                                            {{$row->company}}
 
                                         </td>
                                         <td>
-                                            @if ($row->getAllPermissions()->isEmpty())
-                                            No Permissions
-                                            @else
-                                            @foreach ($row->getAllPermissions() as $permission)
-
-                                            <a href="#" class="badge badge-info"> {{$permission->name}}</a>
-                                            @endforeach
-                                            @endif
+                                            {{$row->phone}}
 
                                         </td>
                                         <td>{{$row->created_at->format('d-m-Y')}}</td>

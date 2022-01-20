@@ -16,6 +16,7 @@ class CreateProjectsTable extends Migration
         Schema::enableForeignKeyConstraints();
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->string('project_name');
             $table->string('project_status')->nullable();
             $table->date('start_date');

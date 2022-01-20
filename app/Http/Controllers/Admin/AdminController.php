@@ -100,15 +100,13 @@ class AdminController extends Controller
 
     public function clients()
     {
-        $clients = User::where('type', '=', 'Customer')->orderBy('id', 'desc')->get();
+        $clients = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Customer')->orderBy('id', 'desc')->get();
         return view('dashboard.admin.client.all', compact('clients'));
     }
 
     public function create()
     {
-        $roles = Role::orderBy('id', 'desc')->get();
-        $permissions = Permission::all();
-        return view('dashboard.admin.client.create', compact('roles', 'permissions'));
+        return view('dashboard.admin.client.create');
     }
 
     public function saveClient(Request $request)
@@ -125,12 +123,13 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users,email',
             'client_password' => 'required|min:5|max:30',
             'note' => 'required',
-            'role_name' => 'required',
+            // 'role_name' => 'required',
             // 'permissions' => 'required',
         ]);
         $user = User::Create(
             [
                 'type' => 'Customer',
+                'auth_id' => Auth::guard('admin')->user()->id,
                 'phone' => $request->phone,
                 'company' => $request->company,
                 'address' => $request->address,
@@ -149,7 +148,7 @@ class AdminController extends Controller
         );
         // $role = Role::where('name', '=', $request->role_name)->first();
         // $role->syncPermissions($request->permissions);
-        $user->assignRole($request->role_name);
+        // $user->assignRole($request->role_name);
         $notification = array(
             'messege' => 'Client Save Successfully',
             'alert-type' => 'success'
@@ -169,21 +168,20 @@ class AdminController extends Controller
             'zip' => 'required|numeric',
             'client_name' => 'required',
             'email' => 'required|email',
-            'client_password' => 'required|min:5|max:30',
             'note' => 'required',
-            'role_name' => 'required',
+            // 'role_name' => 'required',
         ]);
         $client = User::find($request->client_id);
-        $delrole = '';
-        $oldrole = $client->getRoleNames();
-        foreach ($oldrole as $row) {
-            $delrole = $row;
-        }
-        if ($request->role_name != $delrole) {
+        // $delrole = '';
+        // $oldrole = $client->getRoleNames();
+        // foreach ($oldrole as $row) {
+        //     $delrole = $row;
+        // }
+        // if ($request->role_name != $delrole) {
 
-            $client->removeRole($delrole);
-            $client->assignRole($request->role_name);
-        }
+        //     $client->removeRole($delrole);
+        //     $client->assignRole($request->role_name);
+        // }
         // update feild
         $client->company = $request->company;
         $client->address = $request->address;
@@ -192,9 +190,11 @@ class AdminController extends Controller
         $client->city = $request->city;
         $client->state = $request->state;
         $client->zip = $request->zip;
-        $client->client_name = $request->client_name;
+        $client->name = $request->client_name;
         $client->email = $request->email;
-        $client->client_password = $request->client_password;
+        if ($request->client_password) {
+            $client->password = $request->client_password;
+        }
         $client->note = $request->note;
         // 
         $client->login = $request->login_status;

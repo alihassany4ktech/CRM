@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Exports\EmployeeExport;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
@@ -19,17 +20,16 @@ class EmployeeController extends Controller
 {
     public function employees()
     {
-        $employees = User::where('type', '=', 'Employee')->orderBy('id', 'desc')->get();
+        $employees = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Employee')->orderBy('id', 'desc')->get();
         return view('dashboard.admin.employee.all', compact('employees'));
     }
 
     public function createEmployee()
     {
-        $roles = Role::orderBy('id', 'desc')->get();
-        $permissions = Permission::all();
-        $departments = Department::all();
-        $designations = Designation::all();
-        return view('dashboard.admin.employee.create', compact('roles', 'permissions', 'departments', 'designations'));
+        $permissions = Permission::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $departments = Department::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $designations = Designation::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        return view('dashboard.admin.employee.create', compact('permissions', 'departments', 'designations'));
     }
 
     public function saveEmployee(Request $request)
@@ -47,7 +47,6 @@ class EmployeeController extends Controller
             'joining_date' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:5|max:30',
-            'role_name' => 'required',
             'skills' => 'required',
             'image' => 'required',
             'hourly_rate' => 'required',
@@ -65,6 +64,7 @@ class EmployeeController extends Controller
             $designationName = Designation::find($request->designation);
             // dd($designationName->name);
             $user = new User();
+            $user->auth_id = Auth::guard('admin')->user()->id;
             $user->type = 'Employee';
             $user->status = 'Active';
             $user->employee_id = 'emp-' . $request->employee_id;
@@ -96,7 +96,6 @@ class EmployeeController extends Controller
                 $user->image = 'employee_images/' . $name;
             }
             $user->save();
-            $user->assignRole($request->role_name);
             $notification = array(
                 'messege' => 'Employee Save Successfully',
                 'alert-type' => 'success'
@@ -118,7 +117,6 @@ class EmployeeController extends Controller
             'slack_username' => 'required',
             'joining_date' => 'required',
             'email' => 'required',
-            'role_name' => 'required',
             'skills' => 'required',
             'hourly_rate' => 'required',
             'cell' => 'required',
@@ -159,16 +157,16 @@ class EmployeeController extends Controller
             $image->move($destinationPath, $name);
             $user->image = 'employee_images/' . $name;
         }
-        $delrole = '';
-        $oldrole = $user->getRoleNames();
-        foreach ($oldrole as $row) {
-            $delrole = $row;
-        }
-        if ($request->role_name != $delrole) {
+        // $delrole = '';
+        // $oldrole = $user->getRoleNames();
+        // foreach ($oldrole as $row) {
+        //     $delrole = $row;
+        // }
+        // if ($request->role_name != $delrole) {
 
-            $user->removeRole($delrole);
-            $user->assignRole($request->role_name);
-        }
+        //     $user->removeRole($delrole);
+        //     $user->assignRole($request->role_name);
+        // }
         $user->update();
         $notification = array(
             'messege' => 'Employee Update Successfully',
@@ -180,9 +178,9 @@ class EmployeeController extends Controller
     public function showEmployee($id)
     {
         $employee = User::find($id);
-        $permissions = Permission::all();
-        $departments = Department::all();
-        $designations = Designation::all();
+        $permissions = Permission::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $departments = Department::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $designations = Designation::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         $documents = EmployeeDocument::where('user_id', '=', $id)->get();
         return view('dashboard.admin.employee.show', compact('employee', 'permissions', 'departments', 'designations', 'documents'));
     }
@@ -193,6 +191,7 @@ class EmployeeController extends Controller
     {
         if ($request->ajax()) {
             $designation = new Designation();
+            $designation->auth_id = Auth::guard('admin')->user()->id;
             $designation->name = $request->name;
             $designation->save();
             return response()->json(['success' => 'Designation Add Successfully!']);
@@ -205,6 +204,7 @@ class EmployeeController extends Controller
     {
         if ($request->ajax()) {
             $department = new Department();
+            $department->auth_id = Auth::guard('admin')->user()->id;
             $department->name = $request->name;
             $department->save();
             return response()->json(['success' => 'Department Add Successfully!']);

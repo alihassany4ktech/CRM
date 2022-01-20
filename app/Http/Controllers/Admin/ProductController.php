@@ -9,21 +9,22 @@ use App\ProductSubCategory;
 use Illuminate\Http\Request;
 use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
     public function products()
     {
-        $products = Product::all();
+        $products = Product::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.product.all', compact('products'));
     }
 
     public function create()
     {
-        $productCategories = ProductCategory::all();
-        $productSubCategories = ProductSubCategory::all();
-        $taxes = Tax::all();
+        $productCategories = ProductCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $productSubCategories = ProductSubCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $taxes = Tax::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.product.create', compact('productCategories', 'productSubCategories', 'taxes'));
     }
 
@@ -39,6 +40,7 @@ class ProductController extends Controller
         ]);
 
         $product = new Product();
+        $product->auth_id = Auth::guard('admin')->user()->id;
         $product->name = $request->name;
         if (!is_null($request->tax)) {
             $totalTax = 0;
@@ -70,9 +72,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $productCategories = ProductCategory::all();
-        $productSubCategories = ProductSubCategory::all();
-        $taxes = Tax::all();
+        $productCategories = ProductCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $productSubCategories = ProductSubCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $taxes = Tax::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.product.edit', compact('product', 'productCategories', 'productSubCategories', 'taxes'));
     }
 
@@ -138,6 +140,7 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $tax = new Tax();
+            $tax->auth_id = Auth::guard('admin')->user()->id;
             $tax->tax_name = $request->tax_name;
             $tax->rate_percent = $request->rate_percent;
             $tax->save();

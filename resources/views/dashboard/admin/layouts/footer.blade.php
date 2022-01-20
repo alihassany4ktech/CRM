@@ -16,11 +16,14 @@
     <script src="{{asset('assets/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
     <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!--stickey kit -->
-    <script src="{{asset('assets/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    {{-- <script src="{{asset('assets/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script> --}}
     <!--Custom JavaScript -->
     <script src="{{asset('assets/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/js/jasny-bootstrap.js')}}"></script>
+     <script src="{{asset('assets/plugins/inputmask/dist/min/jquery.inputmask.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/mask.init.js')}}"></script>
     <!-- ============================================================== -->
      <!-- This page plugins -->
     <!-- ============================================================== -->
@@ -48,6 +51,9 @@
     <script src="{{asset('assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
     <script src="{{asset('assets/plugins/summernote/dist/summernote.min.js')}}"></script>
     <script src="{{asset('assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+    <!-- Range slider  -->
+    <script src="{{asset('assets/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js')}}"></script>
          <!-- Draggable-portlet -->
     {{-- <script src="{{asset('assets/plugins/jqueryui/jquery-ui.min.js')}}"></script> --}}
     {{-- <script src="../../../../../cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> --}}
@@ -485,6 +491,48 @@
                 });
             });
     </script>
+
+      <script>
+         $(document).on("click", "#noticeDelete", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover the deleted notice!",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, delete it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+
+      <script>
+         $(document).on("click", "#deleteExpense", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover the deleted expense record!",
+                  icon: "warning",
+                buttons: ["No, cancel please!", "Yes, delete it!"],
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
 {{-- all leads page script --}}
 {{-- get leadc id --}}
 
@@ -762,5 +810,9 @@
  @stack('tickect-channels-page-script')
  @stack('tickect-groups-page-script')
  @stack('tickect-agents-page-script')
+ @stack('noticeboard-page-script')
+ @stack('expense-create-page-script')
+ @stack('expense-all-page-script')
+ @stack('role-page-script')
 </body>
 </html>

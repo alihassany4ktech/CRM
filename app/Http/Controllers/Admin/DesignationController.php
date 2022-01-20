@@ -6,6 +6,7 @@ use App\User;
 use App\Designation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DesignationController extends Controller
 {
@@ -37,7 +38,7 @@ class DesignationController extends Controller
 
     public function designations()
     {
-        $designations = Designation::all();
+        $designations = Designation::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.employee.designation.all', compact('designations'));
     }
     public function delete($id)

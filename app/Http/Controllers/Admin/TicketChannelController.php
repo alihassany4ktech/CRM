@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\TicketChannel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TicketChannelController extends Controller
 {
 
     public function channels()
     {
-        $channels = TicketChannel::all();
+        $channels = TicketChannel::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.ticket.channel.all', compact('channels'));
     }
 
     public function store(Request $request)
     {
         $channel = new TicketChannel();
+        $channel->auth_id = Auth::guard('admin')->user()->id;
         $channel->channel_name = $request->channel_name;
         $channel->save();
         return response()->json(['success' => 'Ticket Channel Added Successfully!']);

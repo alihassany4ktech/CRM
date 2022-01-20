@@ -7,14 +7,15 @@ use App\TicketGroup;
 use App\TicketAgentGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TicketAgentController extends Controller
 {
     public function agents()
     {
-        $employees = User::doesntHave('agent')->where('type', '=', 'Employee')->get();
-        $groups = TicketGroup::all();
-        $ticketAgents = TicketAgentGroup::all();
+        $employees = User::doesntHave('agent')->where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Employee')->get();
+        $groups = TicketGroup::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $ticketAgents = TicketAgentGroup::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.ticket.agent.all', compact('employees', 'groups', 'ticketAgents'));
     }
 
@@ -24,6 +25,7 @@ class TicketAgentController extends Controller
         if ($request->ajax()) {
             foreach ($users as $user) {
                 $agent = new TicketAgentGroup();
+                $agent->auth_id = Auth::guard('admin')->user()->id;
                 $agent->agent_id = $user;
                 $agent->group_id = $request->group_id;
                 $agent->save();

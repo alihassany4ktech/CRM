@@ -16,23 +16,28 @@ class CreateTicketTypesTable extends Migration
     {
         Schema::create('ticket_types', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->string('type')->unique();
             $table->timestamps();
         });
 
         $type = new TicketType();
+        $type->auth_id = 1;
         $type->type = 'Question';
         $type->save();
 
         $type = new TicketType();
+        $type->auth_id = 1;
         $type->type = 'Problem';
         $type->save();
 
         $type = new TicketType();
+        $type->auth_id = 1;
         $type->type = 'Incident';
         $type->save();
 
         $type = new TicketType();
+        $type->auth_id = 1;
         $type->type = 'Feature Request';
         $type->save();
     }

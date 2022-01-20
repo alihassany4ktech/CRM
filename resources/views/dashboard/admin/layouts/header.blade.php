@@ -37,6 +37,9 @@
     <link href="{{asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+      <!--Range slider CSS -->
+    <link href="{{asset('assets/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{asset('assets/css/colors/default-dark.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/plugins/dropify/dist/css/dropify.min.css')}}" />

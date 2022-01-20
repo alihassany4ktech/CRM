@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\TicketType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TicketTypeController extends Controller
 {
@@ -12,13 +13,14 @@ class TicketTypeController extends Controller
 
     public function types()
     {
-        $types = TicketType::all();
+        $types = TicketType::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.ticket.type.all', compact('types'));
     }
 
     public function store(Request $request)
     {
         $type = new TicketType();
+        $type->auth_id = Auth::guard('admin')->user()->id;
         $type->type = $request->tiket_type;
         $type->save();
         return response()->json(['success' => 'Ticket Type Added Successfully!']);

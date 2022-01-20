@@ -16,19 +16,23 @@ class CreateTicketGroupsTable extends Migration
     {
         Schema::create('ticket_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('auth_id')->nullable();
             $table->string('group_name');
             $table->timestamps();
         });
 
         $group = new TicketGroup();
+        $group->auth_id = 1;
         $group->group_name = 'Sales';
         $group->save();
 
         $group = new TicketGroup();
+        $group->auth_id = 1;
         $group->group_name = 'Code';
         $group->save();
 
         $group = new TicketGroup();
+        $group->auth_id = 1;
         $group->group_name = 'Management';
         $group->save();
     }

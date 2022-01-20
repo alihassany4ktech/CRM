@@ -7,17 +7,18 @@ use App\Contract;
 use Carbon\Carbon;
 use App\ContractType;
 use App\ContractRenew;
-use App\Exports\ContractExport;
 use Illuminate\Http\Request;
+use App\Exports\ContractExport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ContractController extends Controller
 {
     public function allContracts()
     {
-        $contracts = Contract::all();
+        $contracts = Contract::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         $expiredCounts = Contract::where(DB::raw('DATE(`end_date`)'), '<', Carbon::now()->format('Y-m-d'))->count();
         $aboutToExpireCounts = Contract::where(DB::raw('DATE(`end_date`)'), '>', Carbon::now()->format('Y-m-d'))
             ->where(DB::raw('DATE(`end_date`)'), '<', Carbon::now()->addDays(7)->format('Y-m-d'))
@@ -27,8 +28,8 @@ class ContractController extends Controller
 
     public function create()
     {
-        $clients = User::where('type', '=', 'Customer')->get();
-        $contractTypes = ContractType::all();
+        $clients = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Customer')->get();
+        $contractTypes = ContractType::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.contract.create', compact('clients', 'contractTypes'));
     }
 
@@ -52,6 +53,7 @@ class ContractController extends Controller
             'note' => 'required',
         ]);
         $contract = new Contract();
+        $contract->auth_id = Auth::guard('admin')->user()->id;
         $contract->user_id = $request->client;
         $contract->subject = $request->subject;
         $contract->contract_type_id = $request->contract_type;
@@ -105,7 +107,7 @@ class ContractController extends Controller
     public function contractEdit($id)
     {
         $contract = Contract::find($id);
-        $clients = User::where('type', '=', 'Customer')->get();
+        $clients = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Customer')->get();
         $contractTypes = ContractType::all();
         return view('dashboard.admin.contract.edit', compact('contract', 'clients', 'contractTypes'));
     }
@@ -207,6 +209,7 @@ class ContractController extends Controller
     {
         if ($request->ajax()) {
             $type = new ContractType();
+            $type->auth_id = Auth::guard('admin')->user()->id;
             $type->name = $request->name;
             $type->save();
             return response()->json(['success' => 'Type Save Succseefully!']);

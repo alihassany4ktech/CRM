@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'auth_id' => 1,
                 'name' => 'Dr.Hector Hammes',
                 'phone' => '+91 654 784 547',
                 'type' => 'Customer',
@@ -49,7 +50,7 @@ class UserSeeder extends Seeder
                 'status' => 'Active'
             ],
             [
-
+                'auth_id' => 1,
                 'name' => 'Angela Dominic',
                 'phone' => '+91 654 784 547',
                 'type' => 'Customer',
@@ -84,6 +85,7 @@ class UserSeeder extends Seeder
             ],
             // employee
             [
+                'auth_id' => 1,
                 'employee_id' => 'emp-1',
                 'name' => 'Micheal Doe',
                 'email' => 'micheal@gmail.com',
@@ -115,6 +117,7 @@ class UserSeeder extends Seeder
                 'status' => 'Active'
             ],
             [
+                'auth_id' => 1,
                 'employee_id' => 'emp-2',
                 'name' => 'Jhon',
                 'email' => 'jhon@gmail.com',

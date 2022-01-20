@@ -2,42 +2,43 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\TaskExport;
+use App\Task;
 use App\User;
+use App\Project;
+use App\TaskFile;
+use App\TaskUser;
+use App\TaskLabel;
 use App\TaskCategory;
+use App\TaskLabelList;
+use App\Exports\TaskExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Project;
-use App\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use App\TaskFile;
-use App\TaskLabel;
-use App\TaskLabelList;
-use App\TaskUser;
-use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
 
 class TaskController extends Controller
 {
     public function allTasks()
     {
-        $tasks = Task::all();
+        $tasks = Task::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.task.all', compact('tasks'));
     }
 
     public function create()
     {
-        $categories = TaskCategory::all();
-        $employees = User::where('type', '=', 'Employee')->get();
-        $projects = Project::all();
-        $labelList = TaskLabelList::all();
+        $categories = TaskCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $employees = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Employee')->get();
+        $projects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $labelList = TaskLabelList::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.task.create', compact('categories', 'employees', 'projects', 'labelList'));
     }
 
     public function showTask($id)
     {
         $task = Task::find($id);
-        $labels = TaskLabelList::all();
+        $labels = TaskLabelList::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         $assignees = User::doesntHave('assignee', 'and', function ($query) use ($id) {
             $query->where('task_id', $id);
         })->where('type', '=', 'Employee')->get();
@@ -112,6 +113,7 @@ class TaskController extends Controller
         $employeeList = $request->assignTo;
         $labelList = $request->label;
         $task = new Task();
+        $task->auth_id = Auth::guard('admin')->user()->id;
         $task->project_id = $request->project;
         $task->task_category_id = $request->task_category;
         $task->title = $request->title;
@@ -203,10 +205,10 @@ class TaskController extends Controller
     public function editTask($id)
     {
         $task = Task::find($id);
-        $categories = TaskCategory::all();
-        $employees = User::where('type', '=', 'Employee')->get();
-        $projects = Project::all();
-        $labelList = TaskLabelList::all();
+        $categories = TaskCategory::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $employees = User::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('type', '=', 'Employee')->get();
+        $projects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->all();
+        $labelList = TaskLabelList::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
         return view('dashboard.admin.task.edit', compact('task', 'categories', 'employees', 'projects', 'labelList'));
     }
 
@@ -225,6 +227,7 @@ class TaskController extends Controller
     {
         if ($request->ajax()) {
             $category = new TaskCategory();
+            $category->auth_id = Auth::guard('admin')->user()->id;
             $category->category_name = $request->category_name;
             $category->save();
             return response()->json(['success' => 'Category Saved Succseefully!']);
@@ -326,8 +329,8 @@ class TaskController extends Controller
 
     public function kanbanBoard()
     {
-        $inCompleteTasks = Task::where('status', '=', 'Incomplete')->get();
-        $completeTasks = Task::where('status', '=', 'Completed')->get();
+        $inCompleteTasks = Task::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Incomplete')->get();
+        $completeTasks = Task::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Completed')->get();
         return view('dashboard.admin.task.kanbanBoard', compact('inCompleteTasks', 'completeTasks'));
     }
 }

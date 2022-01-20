@@ -338,11 +338,11 @@ input[type=number] {
                               <div class="form-row">
                                 <div class="col-md-2 mb-2" style="margin-top: 38px">
                                     <input type="checkbox" id="md_checkbox_1" class="chk-col-red" name="make_private"/>
-                                  <label for="md_checkbox_1">Make Prvate <span class="mytooltip"> <i class="fa fa-info-circle" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:100px;"><span class="tooltip-inner2" style="font-size: 12px">Private Tasks are only visible to admin, assignor and assignee.</span></span></span></span></label>
+                                  <label for="md_checkbox_1">Make Prvate <span class="mytooltip"> <i class="fa fa-info-circle text-dark" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:100px;"><span class="tooltip-inner2" style="font-size: 12px">Private Tasks are only visible to admin, assignor and assignee.</span></span></span></span></label>
                                 </div>
                                  <div class="col-md-2 mb-3" style="margin-top: 38px">
                                     <input type="checkbox" id="md_checkbox_2" class="chk-col-pink" name="billable"/>
-                                  <label for="md_checkbox_2">Billable  <span class="mytooltip"> <i class="fa fa-info-circle" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:100px;"><span class="tooltip-inner2" style="font-size: 12px">Invoice can be generated for this task's time log.</span></span></span></span></label>
+                                  <label for="md_checkbox_2">Billable  <span class="mytooltip"> <i class="fa fa-info-circle text-dark" style="font-size: 12px" aria-hidden="true" ></i><span class="tooltip-content5"><span class="tooltip-text3" style="height:100px;"><span class="tooltip-inner2" style="font-size: 12px">Invoice can be generated for this task's time log.</span></span></span></span></label>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-top: 38px">
                                     <input type="checkbox" id="md_checkbox_3" class="chk-col-indigo" name="set_time"/>
@@ -395,7 +395,7 @@ input[type=number] {
                             </div>
                          
                             <br>
-                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
+                            <button class="btn btn-success" type="submit"><i class="ti-check"></i> Save</button>
                             <button type="reset" class="btn btn-info">Rest</button>
                         </form>
                     </div>
@@ -420,7 +420,7 @@ input[type=number] {
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-white" id="exampleModalLabel1">Task Category</h4>
-                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" style="color:white" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
                   <div class="modal-body">
@@ -440,7 +440,7 @@ input[type=number] {
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$row->category_name}}</td>
                                   <td style="text-align: end">
-                                    <button onclick="deleteTaskCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"
+                                    <button onclick="deleteTaskCategory(this)" id="{{$row->id}}" type="button" class="btn btn-sm btn-danger"><i class="ti-close"
                                             aria-hidden="true" style="font-size: 12px"></i></i></button>
                                 </td>
                                 </tr>
@@ -460,7 +460,7 @@ input[type=number] {
                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
              </form>
@@ -475,7 +475,7 @@ input[type=number] {
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-white" id="exampleModalLabel1">Add Task Label</h4>
-                <button type="button text-white" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" style="color: white" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -501,7 +501,7 @@ input[type=number] {
                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-check"></i>
+                <button type="submit" class="btn btn-sm btn-danger waves-effect waves-light"><i class="ti-check"></i>
                     Save</button>
             </div>
              </form>

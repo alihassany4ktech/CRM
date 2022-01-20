@@ -25,6 +25,8 @@ class Project extends Model
         return $this->hasMany(ProjectMember::class, 'project_id');
     }
 
+
+
     public function files()
     {
         return $this->hasMany(ProjectFile::class, 'project_id')->orderBy('id', 'desc');
@@ -32,6 +34,11 @@ class Project extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class, 'project_id')->orderBy('id', 'desc');
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 
     public static function getProject()
@@ -47,5 +54,40 @@ class Project extends Model
                 'projects.deadline',
             )->get()->toArray();
         return $projects;
+    }
+
+    public function scopeCompleted($query)
+    {
+        return $query->where('completion_percent', '100');
+    }
+
+    public function scopeInProcess($query)
+    {
+        return $query->where('project_status', 'In Progress');
+    }
+
+    public function scopeOnHold($query)
+    {
+        return $query->where('project_status', 'On Hold');
+    }
+
+    public function scopeFinished($query)
+    {
+        return $query->where('project_status', 'Finished');
+    }
+
+    public function scopeNotStarted($query)
+    {
+        return $query->where('project_status', 'No Started');
+    }
+
+    public function scopeCanceled($query)
+    {
+        return $query->where('project_status', 'Canceled');
+    }
+
+    public function scopeOverdue($query)
+    {
+        return $query->where('project_status', 'Under Review');
     }
 }
