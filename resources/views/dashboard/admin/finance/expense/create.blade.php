@@ -156,10 +156,7 @@ input[type=number] {
                                 <div class="col-md-6 mb-4">
                                     <label for="validationDefault04">Project</label>
                                      <select class="select2 form-control" style="width: 100%" name="project" id="projects">
-                                    <option value="">--</option>
-                                    {{-- @foreach ($projects as $row)
-                                        <option value="{{$row->id}}">{{$row->project_name}}</option>
-                                    @endforeach --}}
+                                        <option value="">--</option>
                                 </select>
                                     @error('project')
                                     <small class="text-danger">{{ $message }}</small>
@@ -338,7 +335,7 @@ input[type=number] {
         $('.member').change(function () {
             var id = $(this).val();
             $.ajax({
-                url: "{{ route('admin.fetch.member') }}",
+                url: "{{ route('admin.fetch.project') }}",
                 method: "POST",
                 dataType: "json",
 

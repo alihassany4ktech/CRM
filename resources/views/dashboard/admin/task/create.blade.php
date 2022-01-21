@@ -234,7 +234,7 @@ input[type=number] {
                             <div class="form-row">
                                 <div class="col-md-6 mb-3 mt-1">
                                     <label for="validationDefault03">Project <small class="text-danger">*</small></label>
-                                       <select class="select2 form-control" style="width: 100%" name="project" >
+                                       <select class="select2 form-control" id="project" style="width: 100%" name="project" >
                                     <option value="">--</option>
                                     @foreach ($projects as $row)
                                         <option value="{{$row->id}}">{{$row->project_name}}</option>
@@ -305,10 +305,10 @@ input[type=number] {
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationDefault03">Assigned To<small class="text-danger"> * you can select multiple</small></label>
-                                   <select class="select2 m-b-10 select2-multiple" name="assignTo[]" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose">
-                                                        @foreach ($employees as $row)
+                                   <select class="select2 m-b-10 select2-multiple" name="assignTo[]" id="members" class="form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+                                                        {{-- @foreach ($employees as $row)
                                                             <option value="{{$row->id}}">{{$row->name}}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                   
                                                 </select>
                                     @error('assignTo')
@@ -511,6 +511,45 @@ input[type=number] {
 <!-- /.modal -->
 @endsection
 @push('lead-store-script')
+
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#project').change(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: "{{ route('admin.fetch.member') }}",
+                method: "POST",
+                dataType: "json",
+
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                },
+
+                success: function (data) {
+                    var select = $('#members');
+                   $('option', select).remove();
+                   for (i = 0; i < data.length; i++)
+                        { 
+                            $('#members').append($('<option>',
+                            {
+                                value: data[i]['id'],
+                                text : data[i]['name'] 
+                            }));
+                        }
+                }
+            });
+        });
+
+
+    });
+
+</script>
 <script>
     $(document).ready(function(){
           $('#setTime').hide();
@@ -586,9 +625,7 @@ input[type=number] {
         });
     };
 </script>
-
-
-      <script>
+<script>
         $(document).ready(function () {
             if (window.File && window.FileList && window.FileReader) {
                 $("#files").on("change", function (e) {
@@ -616,6 +653,6 @@ input[type=number] {
             }
         });
 
-    </script>
+</script>
 @endpush
 

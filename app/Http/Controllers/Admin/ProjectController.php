@@ -275,9 +275,6 @@ class ProjectController extends Controller
 
     public function projectFileStore(Request $request)
     {
-
-
-
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $fileData) {
                 $file = new ProjectFile();

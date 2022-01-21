@@ -67,20 +67,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/delete/role/member', 'Admin\RolePermissionController@deleteRoleMember')->name('delete.role.member');
         // end new
         Route::get('/roles', 'Admin\RolePermissionController@rolesPermissions')->name('roles_permissions');
-        // Route::get('/create/role-permission', 'Admin\RolePermissionController@createRolesPermissions')->name('create.role_permission');
-        // Route::post('/role/save', 'Admin\RolePermissionController@saveRolePermission')->name('role_permission.save');
-        // delete role 
-        // Route::get('/delete/role/{id}', 'Admin\RolePermissionController@deleteRole')->name('role.delete');
-        //edit role
-        // Route::get('/edit/role/{id}', 'Admin\RolePermissionController@editeRole')->name('role.edit');
-        // update role 
-        // Route::post('/update/role', 'Admin\RolePermissionController@updateRole')->name('role.update');
-        //and permission route
-        // Route::get('/permissions', 'Admin\RolePermissionController@permissions')->name('permissions');
-        // Route::get('/create/permission', 'Admin\RolePermissionController@createPermissions')->name('create.permission');
-        // Route::post('/permission/save', 'Admin\RolePermissionController@savePermission')->name('permission.save');
-        // //delete permission 
-        // Route::get('/delete/permission/{id}', 'Admin\RolePermissionController@deletePermission')->name('permission.delete');
         // ========================================= Leads Routes ============================================ \\
         Route::get('/leads', 'Admin\LeadsController@leads')->name('leads');
         Route::get('/create/lead', 'Admin\LeadsController@createLead')->name('create.lead');
@@ -196,6 +182,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/task/delete/{id}', 'Admin\TaskController@deleteTask')->name('task.delete');
         Route::get('/task/edit/{id}', 'Admin\TaskController@editTask')->name('task.edit');
         Route::post('/task/update', 'Admin\TaskController@taskUpdate')->name('task.update');
+        // fetch member 
+        Route::post('/fetch/member', 'Admin\TaskController@fetchMember')->name('fetch.member');
         // task label
         Route::get('/create/task-label', 'Admin\TaskLabelController@create')->name('task.label.create');
         Route::post('/task/label/store', 'Admin\TaskLabelController@labelStore')->name('task.label.store');
@@ -276,8 +264,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/expense/delete/{id}', 'Admin\ExpenseController@delete')->name('expense.delete');
         Route::get('/export-excel/expense', 'Admin\ExpenseController@exportInToExcel')->name('expense.export.excel');
         Route::get('/export-csv/expense', 'Admin\ExpenseController@exportInToCSV')->name('expense.export.csv');
-        // fetch member 
-        Route::post('/fetch/member', 'Admin\ExpenseController@fetchMember')->name('fetch.member');
+        // fetch project 
+        Route::post('/fetch/project', 'Admin\ExpenseController@fetchProject')->name('fetch.project');
         // expenses category routes
         Route::post('/expense/category/store', 'Admin\ExpanseCategoryController@store')->name('expense.category.store');
         Route::post('/expense/category/delete', 'Admin\ExpanseCategoryController@delete')->name('expense.category.delete');
@@ -292,29 +280,31 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('user')->name('user.')->group(function () {
 
     Route::middleware(['guest:web',])->group(function () {
-        // ========================================= Common Routes ============================================ \\
         Route::get('/login', 'User\UserController@showLoginForm')->name('login');
         Route::post('/check', 'User\UserController@check')->name('check');
-        // s
+    });
+    Route::middleware(['auth:web',])->group(function () {
+        Route::post('/logout', 'User\UserController@logout')->name('logout');
+    });
+});
 
+Route::middleware(['auth:web'])->group(function () {
+
+    Route::prefix('employee')->name('employee.')->group(function () {
+        Route::middleware('checkType')->group(function () {
+            Route::get('/dashboard', 'User\Employee\EmployeeController@dashboard')->name('home');
+            Route::get('/projects', 'User\Employee\ProjectController@projects')->name('projects');
+        });
     });
 
-    Route::middleware(['auth:web',])->group(function () {
-        Route::middleware('checkType')->group(function () {
-            // ========================================= Employee Routes ============================================ \\
-            Route::get('/employee/dashboard', 'User\Employee\EmployeeController@dashboard')->name('home');
-            Route::get('/employee/projects', 'User\Employee\ProjectController@projects')->name('employee.projects');
-        });
+    Route::prefix('client')->name('client.')->middleware('client')->group(function () {
 
-        Route::middleware('client')->group(function () {
-            // ========================================= Client Routes ============================================ \\
-            Route::get('/client/dashboard', 'User\Client\ClientController@dashboard')->name('client.dashboard');
-            Route::get('/client/projects', 'User\Client\ProjectController@projects')->name('client.projects');
-        });
-
-
-        // ========================================= Common Routes ============================================ \\
-        Route::post('/logout', 'User\UserController@logout')->name('logout');
+        Route::get('/dashboard', 'User\Client\ClientController@dashboard')->name('dashboard');
+        Route::get('/projects', 'User\Client\ProjectController@projects')->name('projects');
+        Route::get('/project/details/{id}', 'User\Client\ProjectController@projectDetails')->name('project.details');
+        Route::get('/add/project/file/{id}', 'User\Client\ProjectController@addProjectFile')->name('project.add.file');
+        Route::post('/project/file/store', 'User\Client\ProjectController@projectFileStore')->name('project.file.store');
+        Route::post('/project/file/delete', 'User\Client\ProjectController@deleteFile')->name('project.file.delete');
     });
 });
 

@@ -26,7 +26,6 @@ class Project extends Model
     }
 
 
-
     public function files()
     {
         return $this->hasMany(ProjectFile::class, 'project_id')->orderBy('id', 'desc');
@@ -34,6 +33,11 @@ class Project extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class, 'project_id')->orderBy('id', 'desc');
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'project_id')->orderBy('id', 'desc');
     }
 
     public function currency()

@@ -4,7 +4,14 @@
     .dropdown-menu {
         min-width: 5.4rem !important;
     }
-
+    .prjectDiv{
+     margin-top: 6%;
+ }
+@media only screen and (max-width: 600px) {
+ .prjectDiv{
+     margin-top: 20%;
+ }
+}
 </style>
 <!-- Page wrapper  -->
 <div class="page-wrapper">
@@ -147,12 +154,12 @@
                                 class="ti-trash" style="font-size: 12px"></i> View Archive</a>
                            {{-- <a href="" type="button"
                             class="btn btn-outline-info t-10 float-right" style="margin-right: 10px"><i class="mdi mdi-pin" style="font-size: 14px"></i> Pinned Project</a> --}}
-                        <div class="row justify-content-center" style="margin-top: 6%">
-                            <div class="col-md-3 col-xs-6 b-r"> <span
+                        <div class="row justify-content-center prjectDiv" >
+                            <div class="col-md-3 col-xs-6 b-r mb-2"> <span
                                     class="btn btn-circle  btn-info text-white">{{count($projects)}}</span> <strong>Total Projects</strong>
 
                             </div>
-                            <div class="col-md-3 col-xs-6 b-r"><span
+                            <div class="col-md-3 col-xs-6 b-r mb-2"><span
                                     class="btn btn-circle  btn-warning text-white">{{count($underReviewProjects)}}</span>
                                 <strong>Overdue Projects</strong>
 
@@ -164,11 +171,11 @@
                             </div>
                         </div>
                             <div class="row justify-content-center" style="margin-top: 2%">
-                            <div class="col-md-3 col-xs-6 b-r"> <span
+                            <div class="col-md-3 col-xs-6 b-r mb-2"> <span
                                     class="btn btn-circle text-white" style="background-color: #12c4f1">{{count($completedProjects)}}</span> <strong>Completed Projects</strong>
 
                             </div>
-                            <div class="col-md-3 col-xs-6 b-r"><span
+                            <div class="col-md-3 col-xs-6 b-r mb-2"><span
                                     class="btn btn-circle text-white" style="background-color: #33cea8">{{count($inProgressProjects)}}</span>
                                 <strong>In Progress Projects</strong>
 

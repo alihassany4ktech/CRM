@@ -54,7 +54,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-info"><i class="fa fa-users"></i></div>
+                                    <div class="round round-sm align-self-center round-info"><i class="fa fa-users"></i></div>
                                     <div class="m-l-10 align-self-center">
                                         <h3 class="m-b-0 font-light">Total Clients</h3>
                                         <h5 class="text-muted m-b-0">{{count($clients)}}</h3></div>
@@ -68,9 +68,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-warning"><i class="fa fa-users"></i></div>
+                                    <div class="round round-sm align-self-center round-warning"><i class="fa fa-users"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Total Employees</h3>
+                                        <h3 class="m-b-0 font-light">Total Employees</h3>
                                         <h5 class="text-muted m-b-0">{{count($employees)}}</h5></div>
                                 </div>
                             </div>
@@ -82,10 +82,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-primary"><i class="fa fa-tasks" aria-hidden="true"></i></div>
+                                    <div class="round round-sm align-self-center round-primary"><i class="mdi mdi-buffer"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Total Projects</h3>
-                                        <h5 class="text-muted m-b-0">0</h5></div>
+                                        <h3 class="m-b-0 font-light">Total Projects</h3>
+                                        <h5 class="text-muted m-b-0">{{$totalProjects}}</h5></div>
                                 </div>
                             </div>
                         </div>
@@ -96,9 +96,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-danger"><i class="fa fa-file"></i></div>
+                                    <div class="round round-sm align-self-center round-danger"><i class="fa fa-file"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Unpaid Invoices</h3>
+                                        <h3 class="m-b-0 font-light">Unpaid Invoices</h3>
                                         <h5 class="text-muted m-b-0">0</h5></div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-success"><i class="fa fa-clock"></i></div>
+                                    <div class="round round-sm align-self-center round-success"><i class="fa fa-clock"></i></div>
                                     <div class="m-l-10 align-self-center">
                                         <h3 class="m-b-0 font-light">Hours Logged</h3>
                                         <h5 class="text-muted m-b-0">0 hrs</h3></div>
@@ -126,10 +126,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center" style="background-color: #0ccef5"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
+                                    <div class="round round-sm align-self-center" style="background-color: #0ccef5"><i class="fa fa-tasks" aria-hidden="true"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Pending Tasks</h3>
-                                        <h5 class="text-muted m-b-0">0</h5></div>
+                                        <h3 class="m-b-0 font-light">Pending Tasks</h3>
+                                        <h5 class="text-muted m-b-0">{{count($incompleteTasks)}}</h5></div>
                                 </div>
                             </div>
                         </div>
@@ -140,9 +140,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center" style="background-color: #3aba49"><i class="fa fa-percent" aria-hidden="true"></i></div>
+                                    <div class="round round-sm align-self-center" style="background-color: #3aba49"><i class="fa fa-percent" aria-hidden="true"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Today Attendance</h3>
+                                        <h3 class="m-b-0 font-light">Total Attendance</h3>
                                         <h5 class="text-muted m-b-0">0<small>% (0/1)</small> </h5></div>
                                 </div>
                             </div>
@@ -154,10 +154,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center" style="background-color: #f414f7"><i class="fa fa-ticket-alt"></i></div>
+                                    <div class="round round-sm align-self-center" style="background-color: #f414f7"><i class="fa fa-ticket-alt"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Unresolved Tickets</h3>
-                                        <h5 class="text-muted m-b-0">0</h5></div>
+                                        <h3 class="m-b-0 font-light">Unresolved Tickets</h3>
+                                        <h5 class="text-muted m-b-0">{{count($unResolvedTickets)}}</h5></div>
                                 </div>
                             </div>
                         </div>

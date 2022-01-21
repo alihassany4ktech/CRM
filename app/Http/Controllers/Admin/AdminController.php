@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Lead;
 use App\User;
 use App\Admin;
+use App\Project;
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Task;
+use App\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -41,7 +44,14 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('dashboard.admin.home');
+        $projects = Project::where('auth_id', '=', Auth::guard('admin')->user()->id)->get();
+        $totalProjects = count($projects);
+        $incompleteTasks = Task::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Incomplete')->get();
+        $unResolvedTickets = Ticket::where('auth_id', '=', Auth::guard('admin')->user()->id)
+            ->orWhere('status', '=', 'Open')
+            ->orWhere('status', '=', 'Pending')
+            ->get();
+        return view('dashboard.admin.home', compact('totalProjects', 'incompleteTasks', 'unResolvedTickets'));
     }
 
     function logout()

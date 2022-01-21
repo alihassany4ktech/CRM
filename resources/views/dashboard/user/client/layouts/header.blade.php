@@ -15,6 +15,8 @@
     <title>Client | Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}"  rel="stylesheet">
+     <link href="{{asset('assets/plugins/datatables/media/css/dataTables.bootstrap4.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/gridstack/gridstack.css')}}" rel="stylesheet">
     <!-- chartist CSS -->
     <link href="{{asset('assets/plugins/chartist-js/dist/chartist.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/chartist-js/dist/chartist-init.css')}}"  rel="stylesheet">
@@ -30,11 +32,10 @@
     <link href="{{asset('assets/css/colors/default-dark.css')}}" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <link href="{{asset('assetscss/colors/blue.css" id="theme')}}" rel="stylesheet">
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+     {{-- toastr  --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="{{asset('assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -324,7 +325,7 @@
                                                 <h4>{{Auth::guard('web')->user()->name}}</h4>
                                                 <p class="text-muted">
                                                     <a href="https://www.wrappixel.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23554251564d63444e424a4f0d404c4e">{{Auth::guard('web')->user()->email}}</a></p>
-                                                <a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <a href="#" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>

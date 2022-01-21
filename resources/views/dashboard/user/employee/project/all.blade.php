@@ -5,6 +5,15 @@
         min-width: 5.4rem !important;
     }
 
+        .prjectDiv{
+     margin-top: 6%;
+ }
+@media only screen and (max-width: 600px) {
+ .prjectDiv{
+     margin-top: 20%;
+ }
+}
+
 </style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -20,7 +29,7 @@
             <div class="col-md-5 col-8 align-self-center">
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('user.home')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('employee.home')}}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Projects</li>
                 </ol>
             </div>
@@ -70,13 +79,13 @@
                             Pinned Project</a> --}}
                         <a href="" type="button"
                             class="btn btn-outline-success t-10 float-right" style="margin-right: 10px"><i class="ti-pin-alt" style="font-size: 14px"></i> Pinned Project</a>
-                        <div class="row justify-content-center" style="margin-top: 6%">
-                            <div class="col-md-3 col-xs-6 b-r"> <span
+                        <div class="row justify-content-center prjectDiv">
+                            <div class="col-md-3 col-xs-6 b-r mb-2"> <span
                                     class="btn btn-circle  btn-info text-white">{{$totalProjects}}</span> <strong>Total
                                     Projects</strong>
 
                             </div>
-                            <div class="col-md-3 col-xs-6 b-r"><span
+                            <div class="col-md-3 col-xs-6 b-r mb-2"><span
                                     class="btn btn-circle  btn-warning text-white">{{$overdueProjects}}</span>
                                 <strong>Overdue Projects</strong>
 
@@ -88,12 +97,12 @@
                             </div>
                         </div>
                         <div class="row justify-content-center" style="margin-top: 2%">
-                            <div class="col-md-3 col-xs-6 b-r"> <span class="btn btn-circle text-white"
+                            <div class="col-md-3 col-xs-6 b-r mb-2"> <span class="btn btn-circle text-white"
                                     style="background-color: #12c4f1">{{$finishedProjects}}</span> <strong>Completed
                                     Projects</strong>
 
                             </div>
-                            <div class="col-md-3 col-xs-6 b-r"><span class="btn btn-circle text-white"
+                            <div class="col-md-3 col-xs-6 b-r mb-2"><span class="btn btn-circle text-white"
                                     style="background-color: #33cea8">{{$inProcessProjects}}</span>
                                 <strong>In Progress Projects</strong>
 

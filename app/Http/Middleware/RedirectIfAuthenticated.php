@@ -34,9 +34,9 @@ class RedirectIfAuthenticated
             default:
                 if (Auth::guard($guard)->check()) {
                     if (Auth::guard('web')->user()->type = "Employee") {
-                        return redirect()->route('user.home');
+                        return redirect()->route('employee.home');
                     } else {
-                        return redirect()->route('user.client.dashboard');
+                        return redirect()->route('client.dashboard');
                     }
                 }
                 break;

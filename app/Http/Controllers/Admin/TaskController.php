@@ -333,4 +333,13 @@ class TaskController extends Controller
         $completeTasks = Task::where('auth_id', '=', Auth::guard('admin')->user()->id)->where('status', '=', 'Completed')->get();
         return view('dashboard.admin.task.kanbanBoard', compact('inCompleteTasks', 'completeTasks'));
     }
+
+    public function fetchMember(Request $request)
+    {
+        if ($request->ajax()) {
+            $members = User::join('project_members', 'project_members.user_id', '=', 'users.id')
+                ->where('project_members.project_id', $request->id)->select('users.id', 'users.name')->get();
+            return response()->json($members);
+        }
+    }
 }

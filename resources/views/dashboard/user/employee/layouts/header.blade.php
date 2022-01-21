@@ -326,7 +326,7 @@
                                                 <h4>{{Auth::guard('web')->user()->name}}</h4>
                                                 <p class="text-muted">
                                                     <a href="https://www.wrappixel.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23554251564d63444e424a4f0d404c4e">{{Auth::guard('web')->user()->email}}</a></p>
-                                                <a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <a href="#" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>

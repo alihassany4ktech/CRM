@@ -50,10 +50,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-info"><i class="ti-wallet"></i></div>
+                                    <div class="round round-sm align-self-center round-info"><i class="mdi mdi-buffer"></i></div>
                                     <div class="m-l-10 align-self-center">
                                         <h3 class="m-b-0 font-light">Total Projects</h3>
-                                        <h5 class="text-muted m-b-0">0</h5></div>
+                                        <h5 class="text-muted m-b-0">{{$totalProjects}}</h5></div>
                                 </div>
                             </div>
                         </div>
@@ -64,9 +64,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
+                                    <div class="round round-sm align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Hours Logged</h3>
+                                        <h3 class="m-b-0 font-light">Hours Logged</h3>
                                         <h5 class="text-muted m-b-0">0 hrs</h5></div>
                                 </div>
                             </div>
@@ -78,9 +78,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-cart-outline"></i></div>
+                                    <div class="round round-sm align-self-center round-primary"><i class="mdi mdi-cart-outline"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Pendind Tasks</h3>
+                                        <h3 class="m-b-0 font-light">Pendind Tasks</h3>
                                         <h5 class="text-muted m-b-0">0</h5></div>
                                 </div>
                             </div>
@@ -92,9 +92,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row">
-                                    <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
+                                    <div class="round round-sm align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
                                     <div class="m-l-10 align-self-center">
-                                        <h3 class="m-b-0 font-lgiht">Completed Taskss</h3>
+                                        <h3 class="m-b-0 font-light">Completed Tasks</h3>
                                         <h5 class="text-muted m-b-0">0</h5></div>
                                 </div>
                             </div>

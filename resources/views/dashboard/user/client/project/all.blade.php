@@ -20,7 +20,7 @@
             <div class="col-md-5 col-8 align-self-center">
                 <h3 class="text-themecolor">Dashboard</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('user.home')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('client.dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Projects</li>
                 </ol>
             </div>
@@ -114,23 +114,9 @@
                                         </td>
 
                                         <td class="">
-                                            <div class="dropdown">
-                                                <a class="btn btn-light" type="button" id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="ti-settings" style="font-size: 10px"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-dark" href=""
-                                                        style="font-size: 12px"><i class="ti-eye"
-                                                            style="font-size: 12px"></i>
-                                                        View Detail</a>
-                                                    <a class="dropdown-item  text-dark" href=""
-                                                        style="font-size: 12px"><i class="mdi mdi-chart-bar"
-                                                            style="font-size: 12px"></i>
-                                                        Gantt Chart</a>
-
-                                                </div>
-                                            </div>
+                                            <a class="btn btn-sm btn-success" href="{{route('client.project.details',['id'=>$value->id])}}" data-toggle="tooltip" title="View Project Details" type="button">
+                                                <i class="ti-eye" style="font-size: 10px"></i>
+                                            </a>
 
                                         </td>
                                     </tr>

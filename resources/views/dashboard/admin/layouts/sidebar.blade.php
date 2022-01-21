@@ -49,9 +49,6 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap">PERSONAL</li>
-                        {{-- <li class="{{ $link == route('admin.dashboard') ? 'active':'' }}"> <a class="" href="{{route('admin.dashboard')}}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard </span></a> --}}
-        
                         </li>
                           <li class="{{ $link == route('admin.dashboard') || $link == route('admin.client.dashboard') ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboards</span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -92,21 +89,9 @@
                                 <li><a href="#">Time Logs</a></li>
                             </ul>
                         </li>
-                        {{-- <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-money-bill-alt" style="font-size: 18px"></i> Fainance</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-cards.html">Cards</a></li>
-                                <li><a href="ui-user-card.html">User Cards</a></li>
-                                <li><a href="ui-buttons.html">Buttons</a></li>
-                            
-                            </ul>
-                        </li> --}}
-                        <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>
                         <li class="{{$link == route('admin.expenses') || $link == route('admin.expense.create') ? 'active':'' }}"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-money-bill-alt" style="font-size: 17px"></i><span class="hide-menu">Fainance</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('admin.expenses')}}" class="{{$link == route('admin.expenses')|| $link == route('admin.expense.create') ? 'active':'' }}">Expenses</a></li>
-                                {{-- <li><a href="form-layout.html">User Cards</a></li>
-                                  <li><a href="ui-buttons.html">Buttons</a></li> --}}
-                               
                             </ul>
                         </li>
                         <li class="{{$link == route('admin.products') || $link == route('admin.product.create') ? 'active':'' }}"> <a class="waves-effect waves-dark" href="{{route('admin.products')}}" aria-expanded="false"><i class="mdi mdi-cart" aria-hidden="true"></i><span class="hide-menu">Products</span></a></li>
@@ -123,7 +108,7 @@
                                 <li><a href="form-layout.html">Attendance Report</a></li>
                             </ul>
                         </li>
-                        <li class="{{$link == route('admin.settings')? 'active':'' }}"><a class="waves-effect waves-dark" href="{{route('admin.settings')}}" aria-expanded="false"><i class="ti-settings" style="font-size: 18px" aria-hidden="true"></i><span class="hide-menu">Settings</span></a></li>
+                        <li class="{{$link == route('admin.settings') ? 'active':'' }}"><a class="waves-effect waves-dark" href="{{route('admin.settings')}}"  aria-expanded="false"><i class="ti-settings" style="font-size: 18px" aria-hidden="true"></i><span class="hide-menu">Settings</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

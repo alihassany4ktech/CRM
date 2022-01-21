@@ -32,7 +32,7 @@ class ExpenseController extends Controller
         return view('dashboard.admin.finance.expense.create', compact('projects', 'members', 'currencies', 'expensesCategories'));
     }
 
-    public function fetchMember(Request $request)
+    public function fetchProject(Request $request)
     {
         $projects = Project::join('project_members', 'project_members.project_id', '=', 'projects.id')
             ->where('project_members.user_id', $request->id)->select('projects.id', 'projects.project_name')->get();
@@ -41,8 +41,6 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
-
-
         if ($request->expense_or_bill == 'add_expense') {
             $request->validate([
                 'itam_name' => 'required',
